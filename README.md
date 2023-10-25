@@ -1,6 +1,6 @@
 # CodeCrafters
 
-Members: 
+Members - Username: 
 
 Encună Miruna - mirunaenc
 
