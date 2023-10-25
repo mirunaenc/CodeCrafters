@@ -10,6 +10,9 @@ int main()
     
     uint16_t x = pilon.getLine();
     std::cout << pilon.getLine();
+    std::cout << pilon.getColumn();
+    pilon.setColumn(26);
+    std::cout << pilon.getColumn();
 
 }
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

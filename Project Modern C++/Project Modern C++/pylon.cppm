@@ -13,8 +13,8 @@ namespace twixt {
 		uint16_t m_column;
 	public:
 		Pylon(uint16_t line, uint16_t column);
-		void setLine();
-		void setColumn();
+		void setLine(const uint16_t& line);
+		void setColumn(const uint16_t& column);
 		uint16_t getLine () const;
 		uint16_t getColumn() const;
 	};
