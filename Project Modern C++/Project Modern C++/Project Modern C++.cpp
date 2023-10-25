@@ -1,13 +1,17 @@
 // Project Modern C++.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
+import pylon;
 #include <iostream>
 
 int main()
 {
-    std::cout << "Hello World!\n";
-}
+    /*uint8_t x = 10, y = 12;*/
+    twixt::Pylon pilon{ 200, 2 };
+    
+    uint16_t x = pilon.getLine();
+    std::cout << pilon.getLine();
 
+}
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
 

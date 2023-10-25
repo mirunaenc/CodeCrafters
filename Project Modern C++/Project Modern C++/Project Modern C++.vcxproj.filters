@@ -18,5 +18,11 @@
     <ClCompile Include="Project Modern C++.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="pylon.cppm">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pylon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
