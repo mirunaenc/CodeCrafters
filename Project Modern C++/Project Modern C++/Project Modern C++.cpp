@@ -6,13 +6,11 @@ import pylon;
 int main()
 {
     /*uint8_t x = 10, y = 12;*/
-    twixt::Pylon pilon{ 200, 2 };
-    
-    uint16_t x = pilon.getLine();
-    std::cout << pilon.getLine();
-    std::cout << pilon.getColumn();
-    pilon.setColumn(26);
-    std::cout << pilon.getColumn();
+    twixt::Pylon pilon1{ 10,10 };
+    twixt::Pylon pilon{};
+    pilon1 = pilon;
+    std::cout << pilon1.getLine();
+   
 
 }
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

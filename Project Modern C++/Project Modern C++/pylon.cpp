@@ -20,3 +20,14 @@ uint16_t twixt::Pylon::getColumn() const {
     return m_column;
 }
 
+twixt::Pylon::Pylon(const Pylon& pylon) : m_line{ pylon.m_line }, m_column{ pylon.m_column }/*, owner{ pylon.owner }*/ {}
+
+twixt::Pylon& twixt::Pylon::operator=(const Pylon& pylon)
+{
+    if (this != &pylon) {
+        m_line = pylon.m_line;
+        m_column = pylon.m_column;
+       
+    }
+    return *this;
+}
