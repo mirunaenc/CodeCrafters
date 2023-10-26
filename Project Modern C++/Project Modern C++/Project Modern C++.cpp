@@ -10,6 +10,7 @@ int main()
     twixt::Pylon pilon{};
     pilon1 = pilon;
     std::cout << pilon1.getLine();
-   
+    std::cout << pilon1.getLine();//test commit
+    pilon = pilon1;
 
 }
