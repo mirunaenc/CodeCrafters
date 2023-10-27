@@ -12,9 +12,11 @@ namespace twixt {
 	export class Board {
 
 	private:
-		const uint16_t m_size;
+		uint16_t m_size;
 		std::vector<Pylon> m_board;
 	public:
-		Board(uint16_t m_size);
+		Board(uint16_t size);
+
+		Board& operator=(const Board& board);
 	};
 }
