@@ -24,10 +24,14 @@ namespace twixt {
 		uint16_t m_nrOfAvailableBridges;
 		EColor m_color;
 		std::vector<Pylon> m_pylons;
-		std::vector<Bridge> m_bridge;
+		std::vector<Bridge> m_bridges;
 
 	public:
 		Player(uint16_t nrPylons, uint16_t nrBridges, EColor color);
+		Player(const Player& player);
+
+		uint16_t getNrOfAvailablePylons() const;
+		void setNrOfAvailablePylons(const uint16_t& nrPylons);
 
 	};	
 }
