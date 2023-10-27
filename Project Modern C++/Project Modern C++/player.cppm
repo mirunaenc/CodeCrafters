@@ -29,9 +29,17 @@ namespace twixt {
 	public:
 		Player(uint16_t nrPylons, uint16_t nrBridges, EColor color);
 		Player(const Player& player);
-
+        Player& operator=(const Player& player);
+		~Player();
+		
 		uint16_t getNrOfAvailablePylons() const;
 		void setNrOfAvailablePylons(const uint16_t& nrPylons);
+		
+		uint16_t getNrOfAvailableBridges() const;
+		void setNrOfAvailableBridges(const uint16_t& nrBridges);
+
+		EColor getColor() const;
+		void setColor(const EColor& color);
 
 	};	
 }
