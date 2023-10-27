@@ -1,9 +1,6 @@
 module;
 
-#include <cstdint>;
-
 export module bridge;
-import <iostream>;
 import pylon;
 
 namespace twixt {
