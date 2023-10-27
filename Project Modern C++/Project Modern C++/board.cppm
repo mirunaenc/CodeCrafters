@@ -18,5 +18,11 @@ namespace twixt {
 		Board(uint16_t size);
 
 		Board& operator=(const Board& board);
+
+		Board(const Board& board);
+
+		uint16_t getSize() const;
+
+		void setSize(const uint16_t& size);
 	};
 }
