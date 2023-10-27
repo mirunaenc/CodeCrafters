@@ -11,6 +11,7 @@ namespace twixt {
 		twixt::Pylon* m_end;
 	public:
 		Bridge(twixt::Pylon* m_start = nullptr, twixt::Pylon* m_end = nullptr);
-
+		Bridge(const Bridge& otherBridge);
+		Bridge& operator=(const Bridge& otherBridge);
 	};
 }
