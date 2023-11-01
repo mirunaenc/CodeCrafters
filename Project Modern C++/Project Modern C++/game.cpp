@@ -26,3 +26,36 @@ twixt::Game::Game(const Game& game)
 	m_player1{ game.m_player1 },
 	m_player2{ game.m_player2 }
 {}
+
+twixt::Board twixt::Game::getGameBoard() const
+{
+	return m_gameBoard;
+}
+
+void twixt::Game::setGameBoard(const Board& gameBoard)
+{
+	m_gameBoard = gameBoard;
+}
+
+twixt::Player twixt::Game::getPlayer1() const
+{
+	return m_player1;
+}
+
+void twixt::Game::setPlayer1(const Player& player1)
+{
+	m_player1 = player1;
+}
+
+twixt::Player twixt::Game::getPlayer2() const
+{
+	return m_player2;
+}
+
+void twixt::Game::setPlayer2(const Player& player2)
+{
+	m_player2 = player2;
+}
+
+
+
