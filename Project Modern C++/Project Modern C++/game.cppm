@@ -15,10 +15,20 @@ namespace twixt {
 
 	public: 
 		Game(Board GameBoard, Player player1, Player player2);
+		~Game();
 
 		Game& operator=(const Game& game);
-
 		Game(const Game& game);
 
+		Board getGameBoard() const;
+		void setGameBoard(const Board& gameBoard);
+
+		Player getPlayer1() const;
+		void setPlayer1(const Player& player1);
+
+		Player getPlayer2() const;
+		void setPlayer2(const Player& player2);
+
 	};
+	
 }
