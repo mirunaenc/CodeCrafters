@@ -134,6 +134,10 @@
     <ClCompile Include="board.cppm" />
     <ClCompile Include="bridge.cpp" />
     <ClCompile Include="bridge.cppm" />
+    <ClCompile Include="game.cpp" />
+    <ClCompile Include="game.cppm" />
+    <ClCompile Include="player.cpp" />
+    <ClCompile Include="player.cppm" />
     <ClCompile Include="Project Modern C++.cpp" />
     <ClCompile Include="pylon.cpp" />
     <ClCompile Include="pylon.cppm" />

@@ -24,7 +24,7 @@ twixt::Pylon::Pylon(const Pylon& pylon) : m_line{ pylon.m_line }, m_column{ pylo
 
 twixt::Pylon& twixt::Pylon::operator=(const Pylon& pylon)
 {
-    if (this != &pylon) {
+    if (this != &pylon) { 
         m_line = pylon.m_line;
         m_column = pylon.m_column;
        
