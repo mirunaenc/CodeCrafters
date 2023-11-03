@@ -1,5 +1,3 @@
-module;
-
 #include <cstdint>
 
 export module board;
@@ -23,6 +21,6 @@ namespace twixt {
 
 		uint16_t getSize() const;
 
-		void setSize(const uint16_t& size);
+		void setSize(uint16_t size);
 	};
 }

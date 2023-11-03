@@ -4,11 +4,11 @@ twixt::Pylon::Pylon(uint16_t line, uint16_t column) : m_line{ line }, m_column{ 
 {
 }
 
-void twixt::Pylon::setLine(const uint16_t& line) {
+void twixt::Pylon::setLine(uint16_t line) {
     m_line = line;
 }
 
-void twixt::Pylon::setColumn(const uint16_t& column) {
+void twixt::Pylon::setColumn(uint16_t column) {
     m_column = column;
 }
 

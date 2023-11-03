@@ -1,5 +1,3 @@
-module;
-
 export module player;
 
 import pylon;
@@ -33,10 +31,10 @@ namespace twixt {
 		~Player();
 		
 		uint16_t getNrOfAvailablePylons() const;
-		void setNrOfAvailablePylons(const uint16_t& nrPylons);
+		void setNrOfAvailablePylons(uint16_t nrPylons);
 		
 		uint16_t getNrOfAvailableBridges() const;
-		void setNrOfAvailableBridges(const uint16_t& nrBridges);
+		void setNrOfAvailableBridges(uint16_t nrBridges);
 
 		EColor getColor() const;
 		void setColor(const EColor& color);

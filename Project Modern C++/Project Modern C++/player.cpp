@@ -29,7 +29,7 @@ uint16_t twixt::Player::getNrOfAvailablePylons() const
 	return m_nrOfAvailablePylons;
 }
 
-void twixt::Player::setNrOfAvailablePylons(const uint16_t& nrPylons)
+void twixt::Player::setNrOfAvailablePylons(uint16_t nrPylons)
 {
 	m_nrOfAvailablePylons = nrPylons;
 }
@@ -39,7 +39,7 @@ uint16_t twixt::Player::getNrOfAvailableBridges() const
 	return m_nrOfAvailableBridges;
 }
 
-void twixt::Player::setNrOfAvailableBridges(const uint16_t& nrBridges)
+void twixt::Player::setNrOfAvailableBridges(uint16_t nrBridges)
 {
 	m_nrOfAvailableBridges = nrBridges;
 }

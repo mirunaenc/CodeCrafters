@@ -1,4 +1,3 @@
-module;
 
 #include <cstdint>;
 
@@ -13,9 +12,9 @@ namespace twixt {
 		uint16_t m_column;
 	public:
 		
-		Pylon(uint16_t line=NULL, uint16_t column=NULL);
-		void setLine(const uint16_t& line);
-		void setColumn(const uint16_t& column);
+		Pylon(uint16_t line=0, uint16_t column=0);
+		void setLine(uint16_t line);
+		void setColumn(uint16_t column);
 		uint16_t getLine () const;
 		uint16_t getColumn() const;
 		Pylon(const Pylon& pylon);

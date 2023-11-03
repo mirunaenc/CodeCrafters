@@ -26,7 +26,7 @@ uint16_t twixt::Board::getSize() const {
     return m_size;
 }
 
-void twixt::Board::setSize(const uint16_t& size) {
+void twixt::Board::setSize(uint16_t size) {
     m_size = size;
     m_board.resize(m_size);
 }

@@ -1,5 +1,3 @@
-module;
-
 export module game;
 
 import player;
