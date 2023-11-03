@@ -11,6 +11,20 @@ twixt::Bridge::Bridge(const Bridge& otherBridge) : m_start{ otherBridge.m_start 
 	
 }
 
+twixt::Bridge::Bridge(Bridge&& otherBridge) noexcept : m_start{ otherBridge.m_start }, m_end{ otherBridge.m_end }
+{
+}
+
+twixt::Bridge& twixt::Bridge::operator=(Bridge&& otherBridge) noexcept
+{
+	if (this != &otherBridge)
+	{
+		m_start = otherBridge.m_start;
+		m_end = otherBridge.m_end;
+	}
+	return *this;
+}
+
 twixt::Bridge& twixt::Bridge::operator=(const Bridge& otherBridge)
 {
 	if (this != &otherBridge)
