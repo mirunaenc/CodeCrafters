@@ -20,5 +20,6 @@ namespace twixt {
 		void setStart(const Pylon& start); 
 		void setEnd(const Pylon& end);
 		~Bridge();
+		bool isConnectedTo(const Pylon& pylon);
 	};
 }

@@ -31,3 +31,9 @@ twixt::Pylon& twixt::Pylon::operator=(const Pylon& pylon)
     }
     return *this;
 }
+
+bool twixt::Pylon::operator==(const Pylon& other) const
+{
+    return this->m_line == other.m_line && this->m_column == other.m_column;
+}
+

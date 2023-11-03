@@ -59,3 +59,11 @@ twixt::Bridge::~Bridge()
 {
 	
 }
+
+bool twixt::Bridge::isConnectedTo(const Pylon& pylon)
+{
+	if (this->m_start == pylon || this->m_end == pylon) {
+		return true;
+	}
+	return false;
+}

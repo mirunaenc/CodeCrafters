@@ -1,5 +1,6 @@
 
 #include <cstdint>;
+#include <set>
 
 export module pylon;
 import <iostream>;
@@ -19,5 +20,6 @@ namespace twixt {
 		uint16_t getColumn() const;
 		Pylon(const Pylon& pylon);
 		Pylon& operator=(const Pylon& pylon);
+		bool operator==(const Pylon& other) const;
 	};
 }
