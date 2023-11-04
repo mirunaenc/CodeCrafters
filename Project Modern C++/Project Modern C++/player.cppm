@@ -52,6 +52,12 @@ namespace twixt {
 		const std::vector<Bridge>& getBridges() const;
 		void setBridges(const std::vector<Bridge>& bridges);
 
+		void placePylon(uint16_t line, uint16_t column);
+	
+		void placeBridge(const Bridge& bridge);
+
+		int getPositionPylonInVector(const Pylon& pylon);
+
 
 
 

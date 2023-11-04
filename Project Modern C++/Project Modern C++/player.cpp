@@ -91,3 +91,28 @@ void twixt::Player::setBridges(const std::vector<Bridge>& bridges)
 {
 	m_bridges = bridges;
 }
+
+void twixt::Player::placePylon(uint16_t line, uint16_t column)
+{
+	Pylon pylon(line, column);
+	m_gameBoard.setPylon(line, column, pylon);
+	m_pylons.push_back(pylon);
+	setNrOfAvailablePylons(m_nrOfAvailablePylons - 1);
+}
+
+void twixt::Player::placeBridge(const Bridge& bridge)
+{
+	m_bridges.push_back(bridge);
+	setNrOfAvailableBridges(m_nrOfAvailableBridges - 1);
+}
+
+
+int twixt::Player::getPositionPylonInVector(const Pylon& pylon)
+{
+	for (int index = 0; index < m_pylons.size();index++)
+	{
+		if (m_pylons[index] == pylon)
+			return index;
+	}
+	return -1;
+}
