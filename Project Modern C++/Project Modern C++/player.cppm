@@ -31,6 +31,8 @@ namespace twixt {
 	public:
 		Player(uint16_t nrPylons, uint16_t nrBridges, EColor color,Board& gameBoard);
 		Player(const Player& otherPlayer);
+		Player(Player&& otherPlayer) noexcept;
+        Player& operator=(Player&& otherPlayer) noexcept;
         Player& operator=(const Player& otherPlayer);
 		~Player();
 		

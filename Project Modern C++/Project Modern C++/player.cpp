@@ -13,6 +13,28 @@ twixt::Player::Player(const Player& otherPlayer)
 	m_gameBoard{ otherPlayer.m_gameBoard}
 {}
 
+twixt::Player::Player(Player&& otherPlayer) noexcept
+	: m_nrOfAvailablePylons{ otherPlayer.m_nrOfAvailablePylons },
+	m_nrOfAvailableBridges{ otherPlayer.m_nrOfAvailableBridges },
+	m_color{ otherPlayer.m_color }, m_pylons{ otherPlayer.m_pylons },
+	m_bridges{ otherPlayer.m_bridges },
+	m_gameBoard{ otherPlayer.m_gameBoard }
+{}
+
+
+twixt::Player& twixt::Player::operator=(Player&& otherPlayer) noexcept
+{
+	if (this != &otherPlayer) {
+		m_nrOfAvailablePylons = otherPlayer.m_nrOfAvailablePylons;
+		m_nrOfAvailableBridges = otherPlayer.m_nrOfAvailableBridges;
+		m_color = otherPlayer.m_color;
+		m_pylons = otherPlayer.m_pylons;
+		m_bridges = otherPlayer.m_bridges;
+		m_gameBoard = otherPlayer.m_gameBoard;
+	}
+	return *this;
+}
+
 twixt::Player& twixt::Player::operator=(const Player& otherPlayer)
 {
 	if (this != &otherPlayer) {
