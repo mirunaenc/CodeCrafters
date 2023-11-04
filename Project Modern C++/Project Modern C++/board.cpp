@@ -1,5 +1,6 @@
 module board;
 
+import <iostream>;
 import <algorithm>;
 import <iterator>;
 import <vector>;
@@ -39,6 +40,16 @@ void twixt::Board::setPylon(uint16_t x, uint16_t y, const Pylon& pylon) {
     }
     else {
         std::cout << "Error at setting a pylon.";
+        exit(0);
+    }
+}
+
+const twixt::Pylon& twixt::Board::getPylon(uint16_t x, uint16_t y) const {
+    if (x < m_size && y < m_size) {
+        return m_board[y * m_size + x];
+    }
+    else {
+        std::cout << "Error at method getPylon.";
         exit(0);
     }
 }
