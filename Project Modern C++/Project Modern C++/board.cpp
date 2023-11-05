@@ -34,9 +34,9 @@ void twixt::Board::setSize(uint16_t size) {
     m_board.resize(m_size);
 }
 
-void twixt::Board::setPylon(uint16_t x, uint16_t y, const Pylon& pylon) {
-    if (x < m_size && y < m_size) {
-        m_board[y * m_size + x] = pylon;
+void twixt::Board::setPylon(uint16_t line, uint16_t column, const Pylon& pylon) {
+    if (line < m_size && column < m_size) {
+        m_board[line * m_size + column] = pylon;
     }
     else {
         std::cout << "Error at setting a pylon.";
@@ -44,13 +44,19 @@ void twixt::Board::setPylon(uint16_t x, uint16_t y, const Pylon& pylon) {
     }
 }
 
-const twixt::Pylon& twixt::Board::getPylon(uint16_t x, uint16_t y) const {
-    if (x < m_size && y < m_size) {
-        return m_board[y * m_size + x];
+const twixt::Pylon& twixt::Board::getPylon(uint16_t line, uint16_t column) const {
+    if (line < m_size && column < m_size) {
+        return m_board[line * m_size + column];
     }
     else {
         std::cout << "Error at method getPylon.";
         exit(0);
+    }
+}
+
+void twixt::Board::resetPosition(uint16_t line, uint16_t column) {
+    if (line < m_size && column < m_size) {
+        m_board[line * m_size + column] = null;
     }
 }
 

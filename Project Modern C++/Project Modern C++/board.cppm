@@ -23,8 +23,10 @@ namespace twixt {
 
 		void setSize(uint16_t size);
 
-		void setPylon(uint16_t x, uint16_t y, const Pylon& pylon);
+		void setPylon(uint16_t line, uint16_t column, const Pylon& pylon);
 
-		const Pylon& getPylon(uint16_t x, uint16_t y) const;
+		const Pylon& getPylon(uint16_t line, uint16_t column) const;
+
+		void resetPosition(uint16_t line, uint16_t column);
 	};
 }
