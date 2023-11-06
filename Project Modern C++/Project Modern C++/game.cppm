@@ -30,6 +30,7 @@ namespace twixt {
 
 
 		void startGame();
+		bool isGameOver();
 
 	};
 	

@@ -1,5 +1,6 @@
 module game;
 import player;
+import pylon;
 
 twixt::Game::Game(Board GameBoard, Player player1, Player player2) 
 	: m_gameBoard{ GameBoard },
@@ -63,15 +64,57 @@ void twixt::Game::setPlayer2(const Player& player2)
 	m_player2 = player2;
 }
 
-void twixt::Game::startGame()
+bool twixt::Game::isGameOver()
 {
-	std::cout << "Please give the size of the game board: " << std::endl;
-	m_gameBoard = Board{ 22 };
+	const Board& board = m_gameBoard;
+	const std::vector<Pylon>& pylons1 = m_player1.getPylons();
+	const std::vector<Pylon>& pylons2 = m_player2.getPylons();
 
-	m_player1 = Player{ 20, 40, Player::EColor::Red, m_gameBoard };
-	m_player2 = Player{ 20, 40, Player::EColor::Black, m_gameBoard };
+	auto isPathAvailable = [&](const Pylon& start, const Pylon& end) {
+		return true; // incomplet , implementarea se face in clasa player?
+	};
+
+	for (const Pylon& pylonStart : pylons1) {
+		if (pylonStart.getLine() == 0 || pylonStart.getLine() == 1) { 
+			for (const Pylon& pylonFinish : pylons1) {
+				if (pylonFinish.getLine() == board.getSize() - 1 || pylonFinish.getLine() == board.getSize() - 2) {  
+					
+					if (isPathAvailable(pylonStart, pylonFinish)) {
+						
+						return true;
+					}
+				}
+			}
+		}
+	}
+
+	for (const Pylon& pylonStart : pylons2) {
+		if (pylonStart.getColumn() == 0 || pylonStart.getLine() == 1) {  
+			for (const Pylon& pylonFinish : pylons2) {
+				if (pylonFinish.getColumn() == board.getSize() - 1 || pylonFinish.getColumn() == board.getSize() - 2) {
+					
+					if (isPathAvailable(pylonStart, pylonFinish)) {
+						
+						return true;
+					}
+				}
+			}
+		}
+	}
+
+	return false;
 
 }
+
+//void twixt::Game::startGame()
+//{
+//	std::cout << "Please give the size of the game board: " << std::endl;
+//	m_gameBoard = Board{ 22 };
+//
+//	m_player1 = Player{ 20, 40, Player::EColor::Red, m_gameBoard };
+//	m_player2 = Player{ 20, 40, Player::EColor::Black, m_gameBoard };
+//
+//}
 
 
 
