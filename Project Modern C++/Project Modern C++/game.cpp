@@ -106,6 +106,13 @@ bool twixt::Game::isGameOver()
 
 }
 
+void twixt::Game::modifySizeofBoard(uint16_t size)
+{
+	m_gameBoard.setSize(size);
+}
+
+
+
 //void twixt::Game::startGame()
 //{
 //	std::cout << "Please give the size of the game board: " << std::endl;

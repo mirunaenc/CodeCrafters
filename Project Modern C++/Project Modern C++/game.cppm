@@ -32,6 +32,8 @@ namespace twixt {
 		void startGame();
 		bool isGameOver();
 
+		void modifySizeofBoard(uint16_t size);
+
 	};
 	
 }
