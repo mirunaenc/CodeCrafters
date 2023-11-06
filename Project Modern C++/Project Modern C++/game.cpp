@@ -7,6 +7,12 @@ twixt::Game::Game(Board GameBoard, Player player1, Player player2)
 	m_player2{ player2 }
 {}
 
+twixt::Game::Game() 
+	: m_gameBoard{ 10 },
+	m_player1{ 20, 40, Player::EColor::Red, m_gameBoard },
+	m_player2{20, 40, Player::EColor::Black, m_gameBoard}
+{}
+
 twixt::Game::~Game()
 {
 }
@@ -55,6 +61,16 @@ twixt::Player twixt::Game::getPlayer2() const
 void twixt::Game::setPlayer2(const Player& player2)
 {
 	m_player2 = player2;
+}
+
+void twixt::Game::startGame()
+{
+	std::cout << "Please give the size of the game board: " << std::endl;
+	m_gameBoard = Board{ 22 };
+
+	m_player1 = Player{ 20, 40, Player::EColor::Red, m_gameBoard };
+	m_player2 = Player{ 20, 40, Player::EColor::Black, m_gameBoard };
+
 }
 
 

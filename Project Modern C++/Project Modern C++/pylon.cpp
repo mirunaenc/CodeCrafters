@@ -1,3 +1,4 @@
+#include <cstdint>
 module pylon;
 
 twixt::Pylon::Pylon(uint16_t line, uint16_t column) : m_line{ line }, m_column{ column }

@@ -13,6 +13,7 @@ namespace twixt {
 
 	public: 
 		Game(Board GameBoard, Player player1, Player player2);
+		Game();
 		~Game();
 
 		Game& operator=(const Game& game);
@@ -26,6 +27,9 @@ namespace twixt {
 
 		Player getPlayer2() const;
 		void setPlayer2(const Player& player2);
+
+
+		void startGame();
 
 	};
 	
