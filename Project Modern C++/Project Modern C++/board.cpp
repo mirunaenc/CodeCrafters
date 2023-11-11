@@ -75,3 +75,14 @@ void twixt::Board::resetPosition(uint16_t line, uint16_t column) {
         m_board[line * m_size + column] = std::nullopt;
     }
 }
+
+bool twixt::Board::isPositionInsideBoard(const twixt::Pylon& pylon) const
+{
+    uint16_t line = pylon.getLine();
+    uint16_t column = pylon.getColumn();
+
+    if (line >= 0 && line < m_size && column >= 0 && column < m_size) {
+        return true;
+    }
+    return false;
+}

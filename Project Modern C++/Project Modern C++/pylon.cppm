@@ -24,5 +24,6 @@ namespace twixt {
 		bool operator==(const Pylon& other) const;
 		Pylon(Pylon&& other) noexcept;
 		Pylon& operator=(Pylon&& other) noexcept;
+		~Pylon();
 	};
 }
