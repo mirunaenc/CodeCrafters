@@ -17,8 +17,8 @@ namespace twixt {
 	public:
 		enum class EColor : uint8_t
 		{
-			Red,
-			Black
+			RED,
+			BLACK
 		};
 	private:
 		uint16_t m_nrOfAvailablePylons;

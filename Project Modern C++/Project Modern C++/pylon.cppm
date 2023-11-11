@@ -7,10 +7,11 @@ import <iostream>;
 
 namespace twixt {
 	export class Pylon {
-
+		
 	private:
 		uint16_t m_line;
 		uint16_t m_column;
+
 	public:
 		
 		Pylon(uint16_t line=0, uint16_t column=0);

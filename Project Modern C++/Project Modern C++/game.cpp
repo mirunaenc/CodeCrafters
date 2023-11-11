@@ -10,8 +10,8 @@ twixt::Game::Game(Board GameBoard, Player player1, Player player2)
 
 twixt::Game::Game() 
 	: m_gameBoard{ 10 },
-	m_player1{ 20, 40, Player::EColor::Red, m_gameBoard },
-	m_player2{20, 40, Player::EColor::Black, m_gameBoard}
+	m_player1{ 20, 40, Player::EColor::RED, m_gameBoard },
+	m_player2{20, 40, Player::EColor::BLACK, m_gameBoard}
 {}
 
 twixt::Game::~Game()

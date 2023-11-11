@@ -1,6 +1,8 @@
 ﻿
 import pylon;
 import bridge;
+import board;
+
 #include <iostream>
 
 int main()
@@ -22,6 +24,19 @@ int main()
 	else {
 		std::cout << "Podul nu este conectat la pilon1.\n";
 	}
+
+    
+    twixt::Board board(10);
+    twixt::Board board2;
+    board2 = board;
+board2.setPylon(1, 1, twixt::Pylon(1, 1));
+board2.setPylon(3, 0, twixt::Pylon(3, 0));
+board2.setPylon(2, 0, twixt::Pylon(2, 0));
+board2.setPylon(2, 1, twixt::Pylon(2, 1));
+board2.resetPosition(2, 1);
+board2.resetPosition(2, 0);
+  board = board2;
+
 
 	return 0;
 }
