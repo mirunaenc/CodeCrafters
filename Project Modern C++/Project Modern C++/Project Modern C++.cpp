@@ -4,6 +4,7 @@ import bridge;
 import board;
 
 #include <iostream>
+#include"bulldozer.h"
 
 int main()
 {
@@ -26,7 +27,7 @@ int main()
 	}
 
     
-    twixt::Board board(10);
+ /*   twixt::Board board(10);
     twixt::Board board2;
     board2 = board;
 board2.setPylon(1, 1, twixt::Pylon(1, 1));
@@ -37,6 +38,9 @@ board2.resetPosition(2, 1);
 board2.resetPosition(2, 0);
   board = board2;
 
+  twixt::Bulldozer bulldozer(board,4,2);
+  twixt::Bulldozer bulldozer2(bulldozer);
+  bulldozer.setLinePosition(1);*/
 
 	return 0;
 }

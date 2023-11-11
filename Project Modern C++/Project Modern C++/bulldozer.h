@@ -12,7 +12,6 @@ namespace twixt {
         Board& m_board;
 
     public:
- 
         Bulldozer(Board& board, size_t initialLinePosition, size_t initialColumnPosition);
         Bulldozer(const Bulldozer& other);  
         Bulldozer(Bulldozer&& other) noexcept; 
