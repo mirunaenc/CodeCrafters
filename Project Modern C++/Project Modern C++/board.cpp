@@ -11,17 +11,27 @@ twixt::Board::Board(uint16_t size) : m_size{ size } {
     m_board = std::vector<Pylon>(size * size);
 }
 
-twixt::Board& twixt::Board::operator=(const Board& board)
+twixt::Board::Board(const Board& board) : m_size{ board.m_size }, m_board{ board.m_board } 
+{}
+
+twixt::Board::Board(Board&& board) noexcept : m_size{ board.m_size }, m_board{ board.m_board }
+{}
+
+twixt::Board& twixt::Board::operator=(const Board & board)
 {
-    if (this != &board) {
+    if (m_board != board.m_board) {
         m_size = board.m_size;
         m_board = board.m_board;
     }
-    return *this;
 }
 
-twixt::Board::Board(const Board& board) : m_size{ board.m_size }, m_board{ board.m_board } 
-{}
+twixt::Board& twixt::Board::operator=(Board&& board) noexcept
+{
+    if (m_board != board.m_board) {
+        m_size = board.m_size;
+        m_board = board.m_board;
+    }
+}
 
 uint16_t twixt::Board::getSize() const {
     return m_size;
@@ -57,9 +67,3 @@ void twixt::Board::resetPosition(uint16_t line, uint16_t column) {
         m_board.value()[line * m_size + column] = Pylon{};
     }
 }
-
-
-
-
-
-

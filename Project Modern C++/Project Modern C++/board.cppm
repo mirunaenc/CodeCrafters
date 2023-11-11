@@ -15,7 +15,9 @@ namespace twixt {
 	public:
 		Board(uint16_t size);
 		Board(const Board& board);
+		Board(Board&& board) noexcept;
 		Board& operator=(const Board& board);
+		Board& operator=(Board&& board) noexcept;
 		uint16_t getSize() const;
 		void setSize(uint16_t size);
 		void setPylon(uint16_t line, uint16_t column, const Pylon& pylon);
