@@ -6,13 +6,15 @@ import <optional>;
 import <algorithm>;
 import <iostream>;
 import pylon;
+import bridge;
 
 namespace twixt {
 	export class Board {
 
 	private:
 		uint16_t m_size;
-		std::vector<std::optional<Pylon>> m_board;
+		std::vector<std::optional<Pylon>> m_boardPylons;
+		std::vector<std::optional<Bridge>> m_boardBridges;
 	public:
 		Board();
 		Board(uint16_t size);
@@ -26,5 +28,7 @@ namespace twixt {
 		const std::optional<Pylon>& getPylon(uint16_t line, uint16_t column) const;
 		void resetPosition(uint16_t line, uint16_t column);
 		bool isPositionInsideBoard(const Pylon& pylon) const;
+		void removeBridge(const Bridge& bridge);
+
 	};
 }
