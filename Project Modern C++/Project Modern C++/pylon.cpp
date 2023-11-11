@@ -38,3 +38,15 @@ bool twixt::Pylon::operator==(const Pylon& other) const
     return this->m_line == other.m_line && this->m_column == other.m_column;
 }
 
+twixt::Pylon::Pylon(Pylon&& other) noexcept : m_line(other.m_line), m_column(other.m_column) {}
+
+twixt::Pylon& twixt::Pylon::operator=(Pylon&& other) noexcept
+{
+    if (this != &other)
+    {
+        m_line = other.m_line;
+        m_column = other.m_column;
+    }
+    return *this;
+}
+

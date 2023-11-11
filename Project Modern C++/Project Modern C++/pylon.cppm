@@ -22,5 +22,7 @@ namespace twixt {
 		Pylon(const Pylon& pylon);
 		Pylon& operator=(const Pylon& pylon);
 		bool operator==(const Pylon& other) const;
+		Pylon(Pylon&& other) noexcept;
+		Pylon& operator=(Pylon&& other) noexcept;
 	};
 }
