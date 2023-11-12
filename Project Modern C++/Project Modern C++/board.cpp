@@ -1,13 +1,12 @@
 module board;
 
-
 twixt::Board::Board()
 {
 }
 
 twixt::Board::Board(uint16_t size) : m_size{ size } {
-    m_boardPylons.resize(m_size * m_size);
-    m_boardBridges.resize(m_size * m_size);
+    m_boardPylons.resize(m_size * m_size, std::nullopt);
+    m_boardBridges.resize(m_size * m_size, std::nullopt);
 }
 
 twixt::Board::Board(const Board& board) : m_size{ board.m_size } {
@@ -36,7 +35,6 @@ twixt::Board& twixt::Board::operator=(const Board& board)
     return *this;
 }
 
-
 twixt::Board& twixt::Board::operator=(Board&& board) noexcept
 {
     if (this != &board) {
@@ -55,8 +53,8 @@ uint16_t twixt::Board::getSize() const {
 
 void twixt::Board::setSize(uint16_t size) {
     m_size = size;
-    m_boardPylons.resize(m_size * m_size);
-    m_boardBridges.resize(m_size * m_size);
+    m_boardPylons.resize(m_size * m_size, std::nullopt);
+    m_boardBridges.resize(m_size * m_size, std::nullopt);
 }
 
 void twixt::Board::setPylon(uint16_t line, uint16_t column, const std::optional<Pylon>& pylon) {
@@ -104,3 +102,18 @@ void twixt::Board::removeBridge(const twixt::Bridge& bridge)
         m_boardBridges.erase(it);
     }
 }
+
+void twixt::Board::provisionalPrint()
+{
+    for (int line = 0; line < m_size; line++) {
+        for (int column = 0; column < m_size; column++) {
+            if (m_boardPylons[line * m_size + column].has_value())
+                std::cout << "1 ";
+            else
+                std::cout << "0 ";
+        }
+        std::cout << '\n';
+    }
+}
+
+

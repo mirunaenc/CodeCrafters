@@ -29,6 +29,6 @@ namespace twixt {
 		void resetPosition(uint16_t line, uint16_t column);
 		bool isPositionInsideBoard(const Pylon& pylon) const;
 		void removeBridge(const Bridge& bridge);
-
+		void provisionalPrint();
 	};
 }
