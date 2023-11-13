@@ -46,6 +46,12 @@ namespace twixt {
 		m_player2{ game.m_player2 }
 	{}
 
+	Game::Game(Game && game) noexcept
+		: m_gameBoard{ game.m_gameBoard },
+		m_player1{ game.m_player1 },
+		m_player2{ game.m_player2 }
+	{}
+
 	Board Game::getGameBoard() const
 	{
 		return m_gameBoard;

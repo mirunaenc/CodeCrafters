@@ -18,6 +18,7 @@ namespace twixt {
 		Game& operator=(const Game& game);
 		Game& operator=(Game&& game) noexcept;
 		Game(const Game& game);
+		Game(Game&& game) noexcept;
 
 		Board getGameBoard() const;
 		void setGameBoard(const Board& gameBoard);
