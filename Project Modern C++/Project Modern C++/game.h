@@ -16,6 +16,7 @@ namespace twixt {
 		~Game();
 
 		Game& operator=(const Game& game);
+		Game& operator=(Game&& game) noexcept;
 		Game(const Game& game);
 
 		Board getGameBoard() const;

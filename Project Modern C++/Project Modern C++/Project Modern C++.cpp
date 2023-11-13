@@ -2,9 +2,11 @@
 import pylon;
 import bridge;
 import board;
+import player;
 
 #include <iostream>
 #include"bulldozer.h"
+#include"game.h"
 
 int main()
 {
@@ -45,6 +47,13 @@ board2.resetPosition(2, 0);
   twixt::Bulldozer bulldozer(board,4,2);
   twixt::Bulldozer bulldozer2(bulldozer);
   bulldozer.setLinePosition(1);*/
+	twixt::Game newGame;
+	std::cout << newGame.getPlayer1().getNrOfAvailableBridges();
+	newGame.modifySizeofBoard(12);
+	twixt:: Player player1 =  newGame.getPlayer1();
 
+	if (player1.getColor() == twixt::Player::EColor::RED) {
+		std::cout << "red";
+	}
 	return 0;
 }

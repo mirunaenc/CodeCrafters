@@ -28,6 +28,18 @@ namespace twixt {
 		return *this;
 	}
 
+	Game& Game::operator=(Game&& game) noexcept
+	{
+		if (this != &game) {
+			m_gameBoard = game.m_gameBoard;
+			m_player1 = game.m_player1;
+			m_player2 = game.m_player2;
+		}
+		return *this;
+	}
+
+	
+
 	Game::Game(const Game& game)
 		: m_gameBoard{ game.m_gameBoard },
 		m_player1{ game.m_player1 },
