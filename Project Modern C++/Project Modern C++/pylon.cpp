@@ -50,3 +50,7 @@ twixt::Pylon& twixt::Pylon::operator=(Pylon&& other) noexcept
     return *this;
 }
 
+twixt::Pylon::~Pylon()
+{
+}
+

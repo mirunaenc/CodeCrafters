@@ -1,17 +1,16 @@
-export module game;
-
-import player;
+#pragma once
 import board;
+import player;
 
 namespace twixt {
-	export class Game {
+	class Game {
 
-	private: 
+	private:
 		Board m_gameBoard;
 		Player m_player1;
 		Player m_player2;
 
-	public: 
+	public:
 		Game(Board GameBoard, Player player1, Player player2);
 		Game();
 		~Game();
@@ -35,5 +34,7 @@ namespace twixt {
 		void modifySizeofBoard(uint16_t size);
 
 	};
-	
+
 }
+
+
