@@ -1,7 +1,7 @@
 #pragma once
 import board;
 import pylon;
-
+#include <random>;
 
 namespace twixt {
 
@@ -10,9 +10,12 @@ namespace twixt {
         size_t m_linePosition;
         size_t m_columnPosition;
         Board& m_board;
+        std::random_device m_rd;
+        std::mt19937 m_rng;
+        float m_biasedCoinProbability;
 
     public:
-        Bulldozer(Board& board, size_t initialLinePosition, size_t initialColumnPosition);
+        Bulldozer(Board& board, size_t initialLinePosition, size_t initialColumnPosition, float biasedCoinProbability);
         Bulldozer(const Bulldozer& other);  
         Bulldozer(Bulldozer&& other) noexcept; 
         Bulldozer& operator=(const Bulldozer& other); 
@@ -23,6 +26,10 @@ namespace twixt {
         size_t getColumnPosition() const;
         void setLinePosition(size_t linePosition);
         void setColumnPosition(size_t columnPosition);
+
+        bool tossCoin();
+        const float getBiasedCoinProbability() const;
+        void setBiasedCoinProbability(float biasedCoinProbability);
     };
 
 }

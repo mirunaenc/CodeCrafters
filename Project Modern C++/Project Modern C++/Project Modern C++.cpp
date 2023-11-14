@@ -1,5 +1,4 @@
-﻿
-import pylon;
+﻿import pylon;
 import bridge;
 import board;
 import player;
@@ -33,7 +32,7 @@ int main()
 	//}
 
     
- /*   twixt::Board board(10);
+    twixt::Board board(10);
     twixt::Board board2;
     board2 = board;
 board2.setPylon(1, 1, twixt::Pylon(1, 1));
@@ -44,16 +43,30 @@ board2.resetPosition(2, 1);
 board2.resetPosition(2, 0);
   board = board2;
 
-  twixt::Bulldozer bulldozer(board,4,2);
+  twixt::Bulldozer bulldozer(board,4,2,0.3f);
   twixt::Bulldozer bulldozer2(bulldozer);
-  bulldozer.setLinePosition(1);*/
-	twixt::Game newGame;
-	std::cout << newGame.getPlayer1().getNrOfAvailableBridges();
-	newGame.modifySizeofBoard(12);
-	twixt:: Player player1 =  newGame.getPlayer1();
+  bulldozer.setLinePosition(1);
+  twixt::Bulldozer bulldozer3(board, 4, 2, 0.3f);
+  bulldozer3 = bulldozer2;
+  bulldozer3.setBiasedCoinProbability(0.7f);
 
-	if (player1.getColor() == twixt::Player::EColor::RED) {
-		std::cout << "red";
-	}
+  for (int i = 0; i < 10; ++i) {
+	  if (bulldozer3.tossCoin()) {
+		  std::cout << "destroy" << std::endl;
+	  }
+	  else {
+		  std::cout << "do not destroy" << std::endl;
+	  }
+  }
+
+
+	//twixt::Game newGame;
+	//std::cout << newGame.getPlayer1().getNrOfAvailableBridges();
+	//newGame.modifySizeofBoard(12);
+	//twixt:: Player player1 =  newGame.getPlayer1();
+
+	//if (player1.getColor() == twixt::Player::EColor::RED) {
+	//	std::cout << "red";
+	//}
 	return 0;
 }
