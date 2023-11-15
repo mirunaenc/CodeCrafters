@@ -2,10 +2,14 @@
 import board;
 import pylon;
 #include <random>;
+#include <vector>;
 
 namespace twixt {
 
+    using Position = std::pair<size_t, size_t>;
+
     class Bulldozer {
+    
     private:
         size_t m_linePosition;
         size_t m_columnPosition;
@@ -30,6 +34,7 @@ namespace twixt {
         bool tossCoin();
         const float getBiasedCoinProbability() const;
         void setBiasedCoinProbability(float biasedCoinProbability);
+        void moveToEmptyPosition();
     };
 
 }

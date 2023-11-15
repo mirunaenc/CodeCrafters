@@ -73,4 +73,23 @@ namespace twixt {
         m_biasedCoinProbability = biasedCoinProbability;
     }
 
+    void Bulldozer::moveToEmptyPosition()
+    {
+        std::vector<twixt::Position> emptyPositions;
+        
+          for (size_t line = 0; line < m_board.getSize(); ++line) 
+          {
+			for (size_t column = 0; column < m_board.getSize(); ++column)
+            {
+				 if (!m_board.getPylons()[line * m_board.getSize() + column].has_value())
+		        	emptyPositions.push_back(twixt::Position{ line, column });			    
+			}
+		  }
+        std::uniform_int_distribution<size_t> distribution(0, emptyPositions.size() - 1);
+		size_t randomIndex = distribution(m_rng);
+
+        setLinePosition(emptyPositions[randomIndex].first);
+        setColumnPosition(emptyPositions[randomIndex].second);
+    }
+
 }

@@ -30,5 +30,7 @@ namespace twixt {
 		bool isPositionInsideBoard(const Pylon& pylon) const;
 		void removeBridge(const Bridge& bridge);
 		void provisionalPrint();
+
+		const std::vector<std::optional<Pylon>>& getPylons() const;
 	};
 }

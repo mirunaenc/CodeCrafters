@@ -116,4 +116,9 @@ void twixt::Board::provisionalPrint()
     }
 }
 
+const std::vector<std::optional<twixt::Pylon>>& twixt::Board::getPylons() const
+{
+    return m_boardPylons;
+}
+
 
