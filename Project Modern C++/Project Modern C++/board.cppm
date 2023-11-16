@@ -34,5 +34,7 @@ namespace twixt {
 		const std::vector<std::optional<Pylon>>& getPylons() const;
 
 		bool isValidBridge(const Pylon& start, const Pylon& end);
+
+		void resetBoard();
 	};
 }

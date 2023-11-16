@@ -138,3 +138,10 @@ bool twixt::Board::isValidBridge(const Pylon& start, const Pylon& end) {
 
     return true;
 }
+
+void twixt::Board::resetBoard() {
+    m_boardPylons.clear();
+    m_boardBridges.clear();
+    m_boardPylons.resize(m_size * m_size);
+    m_boardBridges.resize(m_size * m_size);
+}
