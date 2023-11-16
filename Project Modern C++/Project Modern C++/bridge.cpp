@@ -73,3 +73,6 @@ bool twixt::Bridge::operator==(const Bridge& other) const
 	return this->m_start == other.m_start && this->m_end == other.m_end;
 }
 
+
+
+

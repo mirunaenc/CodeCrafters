@@ -121,4 +121,20 @@ const std::vector<std::optional<twixt::Pylon>>& twixt::Board::getPylons() const
     return m_boardPylons;
 }
 
+bool twixt::Board::isValidBridge(const Pylon& start, const Pylon& end) {
+    if (abs(start.getLine() - end.getLine()) != 1 || abs(start.getColumn() - end.getColumn()) != 2) {
+        return false;
+    }
 
+    for (const std::optional<Bridge>& optBridge : m_boardBridges) {
+        if (optBridge.has_value()) {
+            const Bridge& bridge = optBridge.value();
+            if ((bridge.getStart() == start && bridge.getEnd() == end) ||
+                (bridge.getStart() == end && bridge.getEnd() == start)) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
