@@ -1,12 +1,13 @@
 #pragma once
 import board;
 import pylon;
+import player;
 #include <random>;
 #include <vector>;
 
 namespace twixt {
 
-    using Position = std::pair<size_t, size_t>;
+    using Position = std::pair<uint16_t, uint16_t>;
 
     class Bulldozer {
     
@@ -17,9 +18,12 @@ namespace twixt {
         std::random_device m_rd;
         std::mt19937 m_rng;
         float m_biasedCoinProbability;
+        Player& m_player1;
+        Player& m_player2;
 
     public:
-        Bulldozer(Board& board, size_t initialLinePosition, size_t initialColumnPosition, float biasedCoinProbability);
+        Bulldozer(Board& board, size_t initialLinePosition, size_t initialColumnPosition, float biasedCoinProbability,
+       Player& player1, Player& player2);
         Bulldozer(const Bulldozer& other);  
         Bulldozer(Bulldozer&& other) noexcept; 
         Bulldozer& operator=(const Bulldozer& other); 
@@ -35,6 +39,8 @@ namespace twixt {
         const float getBiasedCoinProbability() const;
         void setBiasedCoinProbability(float biasedCoinProbability);
         void moveToEmptyPosition();
+        void destroyPylon();
+        void playTurn();
     };
 
 }

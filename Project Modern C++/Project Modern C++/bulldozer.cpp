@@ -3,18 +3,19 @@
 
 namespace twixt {
 
-    Bulldozer::Bulldozer(Board& board, size_t initialLinePosition, size_t initialColumnPosition, float biasedCoinProbability)
+    Bulldozer::Bulldozer(Board& board, size_t initialLinePosition, size_t initialColumnPosition, float biasedCoinProbability,
+        Player& player1, Player& player2)
         : m_board{ board }, m_linePosition{ initialLinePosition }, m_columnPosition{ initialColumnPosition },
-        m_biasedCoinProbability{ biasedCoinProbability }, m_rng(m_rd()) {}
+        m_biasedCoinProbability{ biasedCoinProbability }, m_rng(m_rd()), m_player1{ player1 }, m_player2{player2} {}
 
     Bulldozer::Bulldozer(const Bulldozer& other)
         : m_board{ other.m_board }, m_linePosition{ other.m_linePosition }, m_columnPosition{ other.m_columnPosition },
-        m_biasedCoinProbability{ other.m_biasedCoinProbability }, m_rng(m_rd()) {}
+        m_biasedCoinProbability{ other.m_biasedCoinProbability }, m_rng(m_rd()), m_player1{ other.m_player1 }, m_player2{ other.m_player2 } {}
 
 
     Bulldozer::Bulldozer(Bulldozer&& other) noexcept
         : m_board{other.m_board}, m_linePosition{ other.m_linePosition }, m_columnPosition{ other.m_columnPosition },
-        m_biasedCoinProbability{ other.m_biasedCoinProbability },m_rng(m_rd()) {
+        m_biasedCoinProbability{ other.m_biasedCoinProbability },m_rng(m_rd()), m_player1{ other.m_player1 }, m_player2{ other.m_player2 } {
    }
 
     Bulldozer& Bulldozer::operator=(const Bulldozer& other) {
@@ -23,6 +24,8 @@ namespace twixt {
             m_linePosition = other.m_linePosition;
             m_columnPosition = other.m_columnPosition;
             m_biasedCoinProbability = other.m_biasedCoinProbability;
+            m_player1 = other.m_player1;
+            m_player2 = other.m_player2;
         }
         return *this;
     }
@@ -32,6 +35,8 @@ namespace twixt {
             m_linePosition = other.m_linePosition;
             m_columnPosition = other.m_columnPosition;
   		  m_biasedCoinProbability = other.m_biasedCoinProbability;
+			m_player1 = other.m_player1;
+			m_player2 = other.m_player2;
         }
         return *this;
     }
@@ -77,9 +82,9 @@ namespace twixt {
     {
         std::vector<twixt::Position> emptyPositions;
         
-          for (size_t line = 0; line < m_board.getSize(); ++line) 
+          for (uint16_t line = 0; line < m_board.getSize(); ++line)
           {
-			for (size_t column = 0; column < m_board.getSize(); ++column)
+			for (uint16_t column = 0; column < m_board.getSize(); ++column)
             {
 				 if (!m_board.getPylons()[line * m_board.getSize() + column].has_value())
 		        	emptyPositions.push_back(twixt::Position{ line, column });			    
@@ -90,6 +95,46 @@ namespace twixt {
 
         setLinePosition(emptyPositions[randomIndex].first);
         setColumnPosition(emptyPositions[randomIndex].second);
+    }
+
+    void Bulldozer::destroyPylon()
+    {
+        std::vector<twixt::Position> occupiedPositions;
+
+        for (uint16_t line = 0; line < m_board.getSize(); ++line)
+        {
+            for (uint16_t column = 0; column < m_board.getSize(); ++column)
+            {
+                if (m_board.getPylons()[line * m_board.getSize() + column].has_value())
+                    occupiedPositions.push_back(twixt::Position{ line, column });
+            }
+        }
+
+        if(occupiedPositions.size() == 0)
+			return;
+
+        std::uniform_int_distribution<size_t> distribution(0, occupiedPositions.size() - 1);
+        size_t randomIndex = distribution(m_rng);
+
+        Pylon pylon = m_board.getPylon(occupiedPositions[randomIndex].first, occupiedPositions[randomIndex].second).value();     
+      
+        if(m_player1.hasPylon(pylon))
+			m_player1.removePylon(pylon);
+		else
+			m_player2.removePylon(pylon);
+
+        m_board.resetPosition(occupiedPositions[randomIndex].first, occupiedPositions[randomIndex].second);
+
+        setLinePosition(occupiedPositions[randomIndex].first);
+        setColumnPosition(occupiedPositions[randomIndex].second);
+    }
+
+    void Bulldozer::playTurn()
+    {
+		if (tossCoin())
+			destroyPylon();
+		else
+			moveToEmptyPosition();
     }
 
 }

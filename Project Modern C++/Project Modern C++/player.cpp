@@ -138,3 +138,20 @@ int twixt::Player::getPositionPylonInVector(const Pylon& pylon)
 	}
 	return -1;
 }
+
+bool twixt::Player::hasPylon(const Pylon& pylon) const
+{
+	for(auto pyl : m_pylons)
+		if (pyl == pylon)
+			return true;
+	return false;
+}
+
+void twixt::Player::removePylon(const Pylon& pylon)
+{
+	int index = getPositionPylonInVector(pylon);
+	if (index != -1)
+	{
+		m_pylons.erase(m_pylons.begin() + index);
+	}
+}

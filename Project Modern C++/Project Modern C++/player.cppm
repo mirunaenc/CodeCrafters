@@ -61,9 +61,10 @@ namespace twixt {
 		int getPositionPylonInVector(const Pylon& pylon);
 
 
+		bool hasPylon(const Pylon& pylon) const;
 
-
-
+	   
+		void removePylon(const Pylon& pylon);
 
 
 	};	
