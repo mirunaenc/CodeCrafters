@@ -24,17 +24,15 @@ namespace twixt {
 		Board& operator=(Board&& board) noexcept;
 		uint16_t getSize() const;
 		void setSize(uint16_t size);
-		void setPylon(uint16_t line, uint16_t column, const std::optional<Pylon>& pylon);
+		void addPylon(uint16_t line, uint16_t column, const std::optional<Pylon>& pylon);
+		void addBridge(Pylon& start, Pylon& end);
 		const std::optional<Pylon>& getPylon(uint16_t line, uint16_t column) const;
 		void resetPosition(uint16_t line, uint16_t column);
 		bool isPositionInsideBoard(const Pylon& pylon) const;
 		void removeBridge(const Bridge& bridge);
 		void provisionalPrint();
-
 		const std::vector<std::optional<Pylon>>& getPylons() const;
-
 		bool isValidBridge(const Pylon& start, const Pylon& end);
-
 		void resetBoard();
 	};
 }

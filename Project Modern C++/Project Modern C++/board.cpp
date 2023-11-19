@@ -57,7 +57,7 @@ void twixt::Board::setSize(uint16_t size) {
     m_boardBridges.resize(m_size * m_size, std::nullopt);
 }
 
-void twixt::Board::setPylon(uint16_t line, uint16_t column, const std::optional<Pylon>& pylon) {
+void twixt::Board::addPylon(uint16_t line, uint16_t column, const std::optional<Pylon>& pylon) {
     if (line < m_size && column < m_size) {
         m_boardPylons[line * m_size + column] = pylon;
     }
@@ -92,6 +92,17 @@ bool twixt::Board::isPositionInsideBoard(const twixt::Pylon& pylon) const
         return true;
     }
     return false;
+}
+
+void twixt::Board::addBridge(twixt::Pylon& start, twixt::Pylon& end)
+{
+    if (twixt::Board::isValidBridge(start, end)) {
+        const twixt::Bridge newBridge = Bridge(start, end);
+        m_boardBridges.push_back(newBridge);
+    }
+    else {
+        std::cout << "Bridge is not valid. \n";
+    }
 }
 
 
@@ -129,8 +140,8 @@ bool twixt::Board::isValidBridge(const Pylon& start, const Pylon& end) {
     for (const std::optional<Bridge>& optBridge : m_boardBridges) {
         if (optBridge.has_value()) {
             const Bridge& bridge = optBridge.value();
-            if ((bridge.getStart() == start && bridge.getEnd() == end) ||
-                (bridge.getStart() == end && bridge.getEnd() == start)) {
+            if ((bridge.getStart().first == start && bridge.getEnd().second == end) ||
+                (bridge.getStart().first == end && bridge.getEnd().second == start)) {
                 return false;
             }
         }
