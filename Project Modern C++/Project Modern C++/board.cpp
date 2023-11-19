@@ -132,6 +132,11 @@ const std::vector<std::optional<twixt::Pylon>>& twixt::Board::getPylons() const
     return m_boardPylons;
 }
 
+const std::vector<std::optional<twixt::Bridge>>& twixt::Board::getBridges() const
+{
+    return m_boardBridges;
+}
+
 bool twixt::Board::isValidBridge(const Pylon& start, const Pylon& end) {
     if (abs(start.getLine() - end.getLine()) != 1 || abs(start.getColumn() - end.getColumn()) != 2) {
         return false;

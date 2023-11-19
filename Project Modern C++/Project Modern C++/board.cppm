@@ -32,6 +32,7 @@ namespace twixt {
 		void removeBridge(const Bridge& bridge);
 		void provisionalPrint();
 		const std::vector<std::optional<Pylon>>& getPylons() const;
+		const std::vector<std::optional<Bridge>>& getBridges() const;
 		bool isValidBridge(const Pylon& start, const Pylon& end);
 		void resetBoard();
 	};
