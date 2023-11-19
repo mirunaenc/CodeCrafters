@@ -35,12 +35,22 @@ twixt::Bridge& twixt::Bridge::operator=(const Bridge& otherBridge)
 	return *this;
 }
 
-std::pair<uint16_t, uint16_t> twixt::Bridge::getStart() const
+twixt::Pylon& twixt::Bridge::getStart() const
+{
+	return m_start;
+}
+
+twixt::Pylon& twixt::Bridge::getEnd() const
+{
+	return m_end;
+}
+
+std::pair<uint16_t, uint16_t> twixt::Bridge::getCoordStart() const
 {
 	return std::make_pair(m_start.getLine(), m_start.getColumn());
 }
 
-std::pair<uint16_t, uint16_t> twixt::Bridge::getEnd() const
+std::pair<uint16_t, uint16_t> twixt::Bridge::getCoordEnd() const
 {
 	return std::make_pair(m_end.getLine(), m_end.getColumn());
 }

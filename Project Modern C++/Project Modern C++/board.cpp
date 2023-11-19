@@ -94,17 +94,15 @@ bool twixt::Board::isPositionInsideBoard(const twixt::Pylon& pylon) const
     return false;
 }
 
-void twixt::Board::addBridge(twixt::Pylon& start, twixt::Pylon& end)
+void twixt::Board::addBridge(twixt::Bridge &bridge)
 {
-    if (twixt::Board::isValidBridge(start, end)) {
-        const twixt::Bridge newBridge = Bridge(start, end);
-        m_boardBridges.push_back(newBridge);
+    if (twixt::Board::isValidBridge(bridge.getStart(), bridge.getEnd())) {
+        m_boardBridges.push_back(bridge);
     }
     else {
         std::cout << "Bridge is not valid. \n";
     }
 }
-
 
 void twixt::Board::removeBridge(const twixt::Bridge& bridge)
 {
@@ -145,8 +143,8 @@ bool twixt::Board::isValidBridge(const Pylon& start, const Pylon& end) {
     for (const std::optional<Bridge>& optBridge : m_boardBridges) {
         if (optBridge.has_value()) {
             const Bridge& bridge = optBridge.value();
-            if ((bridge.getStart().first == start && bridge.getEnd().second == end) ||
-                (bridge.getStart().first == end && bridge.getEnd().second == start)) {
+            if ((bridge.getStart() == start && bridge.getEnd() == end) ||
+                (bridge.getStart() == end && bridge.getEnd() == start)) {
                 return false;
             }
         }

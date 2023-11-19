@@ -15,8 +15,10 @@ namespace twixt {
 		Bridge(Bridge&& otherBridge) noexcept;
 		Bridge& operator=(Bridge&& otherBridge) noexcept;
 		Bridge& operator=(const Bridge& otherBridge);
-		std::pair<uint16_t, uint16_t>  getStart() const;
-		std::pair<uint16_t, uint16_t> getEnd() const;
+		Pylon& getStart() const;
+		Pylon& getEnd() const;
+		std::pair<uint16_t, uint16_t>  getCoordStart() const;
+		std::pair<uint16_t, uint16_t> getCoordEnd() const;
 		void setStart(const Pylon& start); 
 		void setEnd(const Pylon& end);
 		~Bridge();

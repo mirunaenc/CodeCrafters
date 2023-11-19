@@ -25,7 +25,7 @@ namespace twixt {
 		uint16_t getSize() const;
 		void setSize(uint16_t size);
 		void addPylon(uint16_t line, uint16_t column, const std::optional<Pylon>& pylon);
-		void addBridge(Pylon& start, Pylon& end);
+		void addBridge(Bridge& bridge);
 		const std::optional<Pylon>& getPylon(uint16_t line, uint16_t column) const;
 		void resetPosition(uint16_t line, uint16_t column);
 		bool isPositionInsideBoard(const Pylon& pylon) const;
