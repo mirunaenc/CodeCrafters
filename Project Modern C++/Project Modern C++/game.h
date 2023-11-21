@@ -36,6 +36,7 @@ namespace twixt {
 		void run();
 
 		void swapPlayers();
+		void DisplayCurrentPlayer();
 		
 		void modifySizeofBoard(uint16_t size);
 

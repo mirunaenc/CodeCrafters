@@ -100,13 +100,17 @@ namespace twixt {
 	{
 		if (checkWinCondition()) {
 			std::cout << "The game has ended. We have a winner!" << std::endl;
+			std::cout << "The winner is: " << std::endl;
+			DisplayCurrentPlayer();
 			return;
 		}
 
-		//currentPlayer.makeMove(); 
+		//currentPlayer->makeMove(); //the method is not implement in Player class yet.
 
 		if (checkWinCondition()) {
 			std::cout << "Congratulations! The current player has won!" << std::endl;
+			std::cout << "The winner is: " << std::endl;
+			DisplayCurrentPlayer();
 			return;
 		}
 
@@ -140,6 +144,17 @@ namespace twixt {
 		m_currentPlayer = m_opponentPlayer;
 		m_opponentPlayer = temp;
 
+	}
+
+	void Game::DisplayCurrentPlayer() {
+		if (m_currentPlayer == &m_player1) {
+			std::cout << "m_currentPlayer is referring to m_player1\n";
+			/*std::cout << m_player1;*/
+		}
+		else if (m_currentPlayer == &m_player2) {
+			std::cout << "m_currentPlayer is referring to m_player2\n";
+			/*std::cout << m_player2;*/
+		}
 	}
 
 
