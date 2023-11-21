@@ -9,6 +9,8 @@ namespace twixt {
 		Board m_gameBoard;
 		Player m_player1;
 		Player m_player2;
+		Player& m_currentPlayer;
+		Player& m_opponentPlayer;
 
 	public:
 		Game(Board GameBoard, Player player1, Player player2);
@@ -29,10 +31,9 @@ namespace twixt {
 		Player getPlayer2() const;
 		void setPlayer2(const Player& player2);
 
-
-		void startGame();
-		bool isGameOver();
-
+		void playTurn();
+		bool checkWinCondition();
+		
 		void modifySizeofBoard(uint16_t size);
 
 	};

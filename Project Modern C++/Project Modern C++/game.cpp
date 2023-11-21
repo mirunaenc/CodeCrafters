@@ -5,13 +5,17 @@ namespace twixt {
 	Game::Game(Board GameBoard, Player player1, Player player2)
 		: m_gameBoard{ GameBoard },
 		m_player1{ player1 },
-		m_player2{ player2 }
+		m_player2{ player2 },
+		m_currentPlayer { player1 },
+		m_opponentPlayer{ player2 }
 	{}
 
 	Game::Game()
 		: m_gameBoard{ 10 },
 		m_player1{ 20, 40, Player::EColor::RED, m_gameBoard },
-		m_player2{ 20, 40, Player::EColor::BLACK, m_gameBoard }
+		m_player2{ 20, 40, Player::EColor::BLACK, m_gameBoard },
+		m_currentPlayer{ player1 },
+		m_opponentPlayer{ player2 }
 	{}
 
 	Game::~Game()
@@ -82,47 +86,16 @@ namespace twixt {
 		m_player2 = player2;
 	}
 
-	bool Game::isGameOver()
+	void Game::playTurn()
 	{
-		const Board& board = m_gameBoard;
-		const std::vector<Pylon>& pylons1 = m_player1.getPylons();
-		const std::vector<Pylon>& pylons2 = m_player2.getPylons();
-
-		auto isPathAvailable = [&](const Pylon& start, const Pylon& end) {
-			return true; // incomplet , implementarea se face in clasa player?
-			};
-
-		for (const Pylon& pylonStart : pylons1) {
-			if (pylonStart.getLine() == 0 || pylonStart.getLine() == 1) {
-				for (const Pylon& pylonFinish : pylons1) {
-					if (pylonFinish.getLine() == board.getSize() - 1 || pylonFinish.getLine() == board.getSize() - 2) {
-
-						if (isPathAvailable(pylonStart, pylonFinish)) {
-
-							return true;
-						}
-					}
-				}
-			}
-		}
-
-		for (const Pylon& pylonStart : pylons2) {
-			if (pylonStart.getColumn() == 0 || pylonStart.getLine() == 1) {
-				for (const Pylon& pylonFinish : pylons2) {
-					if (pylonFinish.getColumn() == board.getSize() - 1 || pylonFinish.getColumn() == board.getSize() - 2) {
-
-						if (isPathAvailable(pylonStart, pylonFinish)) {
-
-							return true;
-						}
-					}
-				}
-			}
-		}
-
-		return false;
-
 	}
+
+	bool Game::checkWinCondition()
+	{
+		return false;
+	}
+
+
 
 	void Game::modifySizeofBoard(uint16_t size)
 	{
