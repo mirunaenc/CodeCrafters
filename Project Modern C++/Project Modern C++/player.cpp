@@ -147,6 +147,11 @@ bool twixt::Player::hasPylon(const Pylon& pylon) const
 	return false;
 }
 
+bool twixt::Player::isWinner()
+{
+	return false;
+}
+
 void twixt::Player::removePylon(const Pylon& pylon)
 {
 	int index = getPositionPylonInVector(pylon);

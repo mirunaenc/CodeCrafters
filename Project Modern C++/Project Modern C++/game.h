@@ -9,8 +9,8 @@ namespace twixt {
 		Board m_gameBoard;
 		Player m_player1;
 		Player m_player2;
-		Player& m_currentPlayer;
-		Player& m_opponentPlayer;
+		Player* m_currentPlayer = nullptr;
+		Player* m_opponentPlayer = nullptr;
 
 	public:
 		Game(Board GameBoard, Player player1, Player player2);
@@ -33,6 +33,9 @@ namespace twixt {
 
 		void playTurn();
 		bool checkWinCondition();
+		void run();
+
+		void swapPlayers();
 		
 		void modifySizeofBoard(uint16_t size);
 

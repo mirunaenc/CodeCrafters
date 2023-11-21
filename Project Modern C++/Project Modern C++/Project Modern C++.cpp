@@ -9,15 +9,7 @@ import player;
 
 int main()
 {
-    twixt::Board gameBoard;
-    twixt::Player player1;
-    twixt::Player player2;
-    twixt::Game twixtGame(gameBoard, player1, player2);
-
-  
-    while (!twixtGame.checkWinCondition()) {
-        twixtGame.playTurn();
-    }
+ 
 
 	return 0;
 }

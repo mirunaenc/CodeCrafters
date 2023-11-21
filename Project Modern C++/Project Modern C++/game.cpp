@@ -6,16 +6,16 @@ namespace twixt {
 		: m_gameBoard{ GameBoard },
 		m_player1{ player1 },
 		m_player2{ player2 },
-		m_currentPlayer { player1 },
-		m_opponentPlayer{ player2 }
+		m_currentPlayer { &m_player1 },
+		m_opponentPlayer{ &m_player2 }
 	{}
 
 	Game::Game()
 		: m_gameBoard{ 10 },
 		m_player1{ 20, 40, Player::EColor::RED, m_gameBoard },
 		m_player2{ 20, 40, Player::EColor::BLACK, m_gameBoard },
-		m_currentPlayer{ player1 },
-		m_opponentPlayer{ player2 }
+		m_currentPlayer{ &m_player1 },
+		m_opponentPlayer{ &m_player2 }
 	{}
 
 	Game::~Game()
@@ -28,6 +28,9 @@ namespace twixt {
 			m_gameBoard = game.m_gameBoard;
 			m_player1 = game.m_player1;
 			m_player2 = game.m_player2;
+			m_currentPlayer = &m_player1 ;
+			m_opponentPlayer = &m_player2 ;
+			
 		}
 		return *this;
 	}
@@ -38,6 +41,9 @@ namespace twixt {
 			m_gameBoard = game.m_gameBoard;
 			m_player1 = game.m_player1;
 			m_player2 = game.m_player2;
+			m_currentPlayer = &m_player1;
+			m_opponentPlayer = &m_player2;
+			
 		}
 		return *this;
 	}
@@ -47,13 +53,17 @@ namespace twixt {
 	Game::Game(const Game& game)
 		: m_gameBoard{ game.m_gameBoard },
 		m_player1{ game.m_player1 },
-		m_player2{ game.m_player2 }
+		m_player2{ game.m_player2 },
+		m_currentPlayer{ &m_player1 },
+		m_opponentPlayer{ &m_player2 }
 	{}
 
 	Game::Game(Game && game) noexcept
 		: m_gameBoard{ game.m_gameBoard },
 		m_player1{ game.m_player1 },
-		m_player2{ game.m_player2 }
+		m_player2{ game.m_player2 },
+		m_currentPlayer{ &m_player1 },
+		m_opponentPlayer{ &m_player2 }
 	{}
 
 	Board Game::getGameBoard() const
@@ -88,11 +98,48 @@ namespace twixt {
 
 	void Game::playTurn()
 	{
+		if (checkWinCondition()) {
+			std::cout << "The game has ended. We have a winner!" << std::endl;
+			return;
+		}
+
+		//currentPlayer.makeMove(); 
+
+		if (checkWinCondition()) {
+			std::cout << "Congratulations! The current player has won!" << std::endl;
+			return;
+		}
+
+		std::swap(m_currentPlayer, m_opponentPlayer);
 	}
 
 	bool Game::checkWinCondition()
 	{
+		if (m_currentPlayer->isWinner()) {
+			return true;
+		}
 		return false;
+	}
+
+	
+
+
+	void Game::run()
+	{
+		while (!checkWinCondition()) {
+			playTurn();
+		}
+		std::cout << "The game ends.";
+		return ;
+	}
+
+	void Game::swapPlayers()
+	{
+	
+		Player* temp = m_currentPlayer;
+		m_currentPlayer = m_opponentPlayer;
+		m_opponentPlayer = temp;
+
 	}
 
 

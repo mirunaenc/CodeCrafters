@@ -63,6 +63,8 @@ namespace twixt {
 
 		bool hasPylon(const Pylon& pylon) const;
 
+		bool isWinner();
+
 	   
 		void removePylon(const Pylon& pylon);
 
