@@ -7,9 +7,13 @@ namespace twixt {
 	{
 	private:
 		std::vector<std::pair<uint16_t, uint16_t>> m_shape;
+		std::vector<std::pair<uint16_t, uint16_t>> m_vertices;
+
 	public:
-		LargePylon(uint16_t line = 0, uint16_t column = 0, const std::vector<std::pair<uint16_t, uint16_t>>& shape);
+		LargePylon(uint16_t line, uint16_t column, const std::vector<std::pair<uint16_t, 
+			uint16_t>>& shape, const std::vector<std::pair<uint16_t, uint16_t>>& vertices);
 		const std::vector<std::pair<uint16_t, uint16_t>>& getShape() const;
+		bool isSymmetric();
 	};
 
 }
