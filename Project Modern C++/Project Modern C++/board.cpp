@@ -83,11 +83,8 @@ void twixt::Board::resetPosition(uint16_t line, uint16_t column) {
     }
 }
 
-bool twixt::Board::isPositionInsideBoard(const twixt::Pylon& pylon) const
+bool twixt::Board::isPositionInsideBoard(uint16_t line, uint16_t column) const
 {
-    uint16_t line = pylon.getLine();
-    uint16_t column = pylon.getColumn();
-
     if (line >= 0 && line < m_size && column >= 0 && column < m_size) {
         return true;
     }
@@ -158,4 +155,16 @@ void twixt::Board::resetBoard() {
     m_boardBridges.clear();
     m_boardPylons.resize(m_size * m_size);
     m_boardBridges.resize(m_size * m_size);
+}
+
+bool twixt::Board::canPlaceLargePylon(const LargePylon& pylon)
+{
+    for (const auto& offset : pylon.getShape()) {
+        uint16_t line = pylon.getLine() + offset.first;
+        uint16_t column = pylon.getColumn() + offset.second;
+        if (!isPositionInsideBoard(line, column) || getPylon(line, column).has_value()) {
+            return false;
+        }
+    }
+    return true;
 }
