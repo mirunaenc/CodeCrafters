@@ -166,5 +166,18 @@ bool twixt::Board::canPlaceLargePylon(const LargePylon& pylon)
             return false;
         }
     }
+
+    size_t countLargePylons = 0;
+
+    for (const auto& optPylon : m_boardPylons) {
+        if (optPylon.has_value() && dynamic_cast<LargePylon*>(&optPylon.value())) {
+            countLargePylons++;
+        }
+    }
+    if (countLargePylons > 5) {
+
+        return false;
+    }
+
     return true;
 }
