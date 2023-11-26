@@ -117,7 +117,7 @@ void twixt::Player::setBridges(const std::vector<Bridge>& bridges)
 void twixt::Player::placePylon(uint16_t line, uint16_t column)
 {
 	Pylon pylon(line, column);
-	m_gameBoard.setPylon(line, column, pylon);
+	m_gameBoard.addPylon(line, column, pylon);
 	m_pylons.push_back(pylon);
 	setNrOfAvailablePylons(m_nrOfAvailablePylons - 1);
 }
@@ -149,6 +149,8 @@ bool twixt::Player::hasPylon(const Pylon& pylon) const
 
 bool twixt::Player::isWinner()
 {
+      if (hasWinningRoad())
+		return true;
 	return false;
 }
 
@@ -206,7 +208,7 @@ bool twixt::Player::hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std
 
 bool twixt::Player::hasWinningRoad()
 {
-	std::vector<bool> visited(m_gameBoard.getSize() * m_gameBoard.getSize(), false));
+	std::vector<bool> visited(m_gameBoard.getSize() * m_gameBoard.getSize(), false);
 
 	// Check for horizontal winning road
 	if (m_color == EColor::BLACK) {
@@ -230,4 +232,12 @@ bool twixt::Player::hasWinningRoad()
 		}
 	}
 	return false;
+}
+
+void twixt::Player::makeMove()
+{
+	uint16_t line, column;
+    std::cout << "Enter the line and column of the pylon you want to place: ";
+	std::cin >> line >> column;
+	placePylon(line, column);
 }

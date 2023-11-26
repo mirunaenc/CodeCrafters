@@ -6,6 +6,7 @@ import board;
 import <vector>;
 import <optional>;
 import <array>;
+import <iostream>;
 
 
 
@@ -70,5 +71,7 @@ namespace twixt {
 		bool hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std::vector<bool>& visited);
 
 		bool hasWinningRoad();
+
+		void makeMove();
 	};	
 }

@@ -2,8 +2,8 @@
 import board;
 import pylon;
 import player;
-#include <random>;
-#include <vector>;
+#include <random>
+#include <vector>
 
 namespace twixt {
 
