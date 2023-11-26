@@ -195,3 +195,27 @@ bool twixt::Board::existsBridgeBetweenPylons(const twixt::Pylon& p1, const twixt
     }
     return false;
 }
+
+bool twixt::Board::canPlaceBridge(const twixt::Pylon& p1, const twixt::Pylon& p2)
+{
+    uint16_t lineDif = abs(p1.getLine() - p2.getLine());
+    uint16_t colDif = abs(p1.getColumn() - p2.getColumn());
+
+    if (lineDif > 1 || colDif > 1) {
+        return false;
+    }
+
+    //to be continued;
+    return true;
+}
+
+void twixt::Board::createBridge(twixt::Pylon& p1, twixt::Pylon& p2)
+{
+    if (existsBridgeBetweenPylons(p1, p2)) {
+        return;
+
+        if (canPlaceBridge(p1, p2)) {
+            Bridge newBridge = twixt::Bridge(p1, p2);
+            addBridge(newBridge);
+        }
+}
