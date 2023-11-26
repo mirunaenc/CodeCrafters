@@ -161,7 +161,7 @@ void twixt::Player::removePylon(const Pylon& pylon)
 	}
 }
 
-bool twixt::Player::hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std::vector<std::vector<bool>>& visited)
+bool twixt::Player::hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std::vector<bool>& visited)
 {
 	if (m_color == EColor::RED) 
 			if (currentLine == m_gameBoard.getSize() - 1) 
@@ -178,9 +178,9 @@ bool twixt::Player::hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std
 			return true; 
 
 
-	visited[currentLine][currentColumn] = true;
+	visited[currentLine * m_gameBoard.getSize() + currentColumn] = true;
 
-	// Check all adjacent pylons
+	// Check all adjacent positions
 	for (int i = -2; i <= 2; ++i) {
 		for (int j = -2; j <= 2; ++j) {
 			if (std::abs(i) + std::abs(j) == 3) { // Check only diagonally connected pylons
@@ -188,7 +188,7 @@ bool twixt::Player::hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std
 				uint16_t nextColumn = currentColumn + j;
 
 				if (m_gameBoard.isPositionInsideBoard(nextLine, nextColumn) &&
-					!visited[nextLine][nextColumn] &&
+					!visited[nextLine * m_gameBoard.getSize() + nextColumn] &&
 					m_gameBoard.getPylon(currentLine, currentColumn).has_value() &&
 						m_gameBoard.getPylon(nextLine, nextColumn).has_value() 
 					//&& m_gameBoard.existsBridgeBetweenPylons(m_gameBoard.getPylon(currentLine, currentColumn).value(), m_gameBoard.getPylon(nextLine, nextColumn).value())
@@ -201,5 +201,33 @@ bool twixt::Player::hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std
 		}
 	}
 
+	return false;
+}
+
+bool twixt::Player::hasWinningRoad()
+{
+	std::vector<bool> visited(m_gameBoard.getSize() * m_gameBoard.getSize(), false));
+
+	// Check for horizontal winning road
+	if (m_color == EColor::BLACK) {
+		for (uint16_t i = 0; i < m_gameBoard.getSize(); ++i) {
+			if (visited[i * m_gameBoard.getSize() + 0] == false && hasRoadDFS(i, 0, visited))
+				return true;
+			
+			if(visited[i * m_gameBoard.getSize() + 1] == false && hasRoadDFS(i, 1, visited))
+				return true;
+		}
+	}
+
+	// Check for vertical winning road
+	if (m_color == EColor::RED) {
+		for (uint16_t j = 0; j < m_gameBoard.getSize(); ++j) {
+			if (visited[0 * m_gameBoard.getSize() + j] == false && hasRoadDFS(0, j, visited))
+				return true;
+			
+			if(visited[1 * m_gameBoard.getSize() + j] == false && hasRoadDFS(1, j, visited))
+				return true;
+		}
+	}
 	return false;
 }
