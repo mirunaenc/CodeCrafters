@@ -181,3 +181,17 @@ bool twixt::Board::canPlaceLargePylon(const LargePylon& pylon)
 
     return true;
 }
+
+bool twixt::Board::existsBridgeBetweenPylons(const twixt::Pylon& p1, const twixt::Pylon& p2)
+{
+    for (const auto& optBridge : m_boardBridges) {
+        if (optBridge.has_value()) {
+            const twixt::Bridge& bridge = optBridge.value();
+            if ((bridge.getStart() == p1 && bridge.getEnd() == p2) ||
+                (bridge.getStart() == p2 && bridge.getEnd() == p1)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
