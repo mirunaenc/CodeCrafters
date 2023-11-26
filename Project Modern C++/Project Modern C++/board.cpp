@@ -209,6 +209,18 @@ bool twixt::Board::canPlaceBridge(const twixt::Pylon& p1, const twixt::Pylon& p2
     return true;
 }
 
+bool twixt::Board::isPylonOccupied(const Pylon& p)
+{
+    for (const auto& optBridge : m_boardBridges) {
+        const twixt::Bridge& bridge = optBridge.value();
+        if (bridge.getStart() == p || bridge.getEnd() == p) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void twixt::Board::createBridge(twixt::Pylon& p1, twixt::Pylon& p2)
 {
     if (existsBridgeBetweenPylons(p1, p2)) {
