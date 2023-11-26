@@ -37,6 +37,6 @@ namespace twixt {
 		bool isValidBridge(const Pylon& start, const Pylon& end);
 		void resetBoard();
 		bool canPlaceLargePylon(const LargePylon& pylon);
-		
+        
 	};
 }

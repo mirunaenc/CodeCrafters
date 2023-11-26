@@ -160,3 +160,46 @@ void twixt::Player::removePylon(const Pylon& pylon)
 		m_pylons.erase(m_pylons.begin() + index);
 	}
 }
+
+bool twixt::Player::hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std::vector<std::vector<bool>>& visited)
+{
+	if (m_color == EColor::RED) 
+			if (currentLine == m_gameBoard.getSize() - 1) 
+			return true; 
+	else 	
+		if (currentLine == m_gameBoard.getSize() - 2) 
+			return true; 	
+
+	if(m_color == EColor::BLACK)
+		if (currentColumn == m_gameBoard.getSize() - 1)
+			return true; 
+	else
+		if (currentColumn == m_gameBoard.getSize() - 2)
+			return true; 
+
+
+	visited[currentLine][currentColumn] = true;
+
+	// Check all adjacent pylons
+	for (int i = -2; i <= 2; ++i) {
+		for (int j = -2; j <= 2; ++j) {
+			if (std::abs(i) + std::abs(j) == 3) { // Check only diagonally connected pylons
+				uint16_t nextLine = currentLine + i;
+				uint16_t nextColumn = currentColumn + j;
+
+				if (m_gameBoard.isPositionInsideBoard(nextLine, nextColumn) &&
+					!visited[nextLine][nextColumn] &&
+					m_gameBoard.getPylon(currentLine, currentColumn).has_value() &&
+						m_gameBoard.getPylon(nextLine, nextColumn).has_value() 
+					//&& m_gameBoard.existsBridgeBetweenPylons(m_gameBoard.getPylon(currentLine, currentColumn).value(), m_gameBoard.getPylon(nextLine, nextColumn).value())
+					)				
+				{
+					if (hasRoadDFS(nextLine, nextColumn, visited)) 
+						return true;
+				}
+			}
+		}
+	}
+
+	return false;
+}

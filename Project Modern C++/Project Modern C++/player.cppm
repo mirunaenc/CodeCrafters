@@ -65,9 +65,9 @@ namespace twixt {
 
 		bool isWinner();
 
-	   
 		void removePylon(const Pylon& pylon);
 
+		bool hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std::vector<std::vector<bool>>& visited);
 
 	};	
 }
