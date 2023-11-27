@@ -2,6 +2,8 @@
 import board;
 import player;
 import utility;
+import <cstdlib>;
+import <ctime>;
 
 namespace twixt {
 	class Game {
@@ -35,6 +37,7 @@ namespace twixt {
 		void playTurn();
 		bool checkWinCondition();
 		void run();
+		void randomStarter();
 
 		void swapPlayers();
 		

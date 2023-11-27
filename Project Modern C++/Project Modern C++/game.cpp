@@ -1,4 +1,5 @@
 #include "game.h"
+#include <cstdlib>
 
 
 namespace twixt {
@@ -105,7 +106,7 @@ namespace twixt {
 			return;
 		}
 
-		currentPlayer->makeMove(); 
+		m_currentPlayer->makeMove(); 
 
 		if (checkWinCondition()) {
 			std::cout << "Congratulations! The current player has won!" << std::endl;
@@ -130,12 +131,28 @@ namespace twixt {
 
 	void Game::run()
 	{
+		randomStarter();
 		while (!checkWinCondition()) {
 			displayGameBoard();
 			playTurn();
 		}
 		std::cout << "The game ends.";
 		return ;
+	}
+
+	void Game::randomStarter()
+	{
+		std::srand(static_cast<unsigned int>(std::time(nullptr)));
+		uint32_t randomNumber = (std::rand() % 10) + 1;
+
+		if (randomNumber % 2 == 0) {
+			m_currentPlayer = &m_player1;
+			m_opponentPlayer = &m_player2;
+		}
+		else {
+			m_currentPlayer = &m_player2;
+			m_opponentPlayer = &m_player1;
+		}
 	}
 
 	void Game::swapPlayers()
@@ -175,7 +192,7 @@ namespace twixt {
 				for (const auto& pylon : pylons) {
 					if (pylon.has_value() && pylon->getLine() == i && pylon->getColumn() == j) {
 						pylonExists = true;
-						if (pylon->getPlayer().getColor() == Player::EColor::RED) { /// must to resolve this
+						if (pylon->getColor() == Player::EColor::RED) { /// must to resolve this
 							displayChar = 'R'; 
 						}
 						else {
