@@ -101,16 +101,16 @@ namespace twixt {
 		if (checkWinCondition()) {
 			std::cout << "The game has ended. We have a winner!" << std::endl;
 			std::cout << "The winner is: " << std::endl;
-			DisplayCurrentPlayer();
+			displayCurrentPlayer();
 			return;
 		}
 
-		//currentPlayer->makeMove(); //the method is not implement in Player class yet.
+		currentPlayer->makeMove(); 
 
 		if (checkWinCondition()) {
 			std::cout << "Congratulations! The current player has won!" << std::endl;
 			std::cout << "The winner is: " << std::endl;
-			DisplayCurrentPlayer();
+			displayCurrentPlayer();
 			return;
 		}
 
@@ -131,22 +131,23 @@ namespace twixt {
 	void Game::run()
 	{
 		while (!checkWinCondition()) {
+			displayGameBoard();
 			playTurn();
 		}
 		std::cout << "The game ends.";
 		return ;
 	}
 
-	/*void Game::swapPlayers()
+	void Game::swapPlayers()
 	{
 	
 		Player* temp = m_currentPlayer;
 		m_currentPlayer = m_opponentPlayer;
 		m_opponentPlayer = temp;
 
-	}*/
+	}
 
-	void Game::DisplayCurrentPlayer() {
+	void Game::displayCurrentPlayer() {
 		if (m_currentPlayer == &m_player1) {
 			std::cout << "m_currentPlayer is referring to m_player1\n";
 			/*std::cout << m_player1;*/
@@ -154,6 +155,52 @@ namespace twixt {
 		else if (m_currentPlayer == &m_player2) {
 			std::cout << "m_currentPlayer is referring to m_player2\n";
 			/*std::cout << m_player2;*/
+		}
+	}
+
+	void Game::displayGameBoard() const /// still in process
+	{
+		
+		std::system("cls"); 
+
+		const auto& pylons = m_gameBoard.getPylons();
+		const auto& bridges = m_gameBoard.getBridges();
+		const uint16_t size = m_gameBoard.getSize();
+
+		for (uint16_t i = 0; i < size; ++i) {
+			for (uint16_t j = 0; j < size; ++j) {
+				bool pylonExists = false;
+				char displayChar = '-'; 
+
+				for (const auto& pylon : pylons) {
+					if (pylon.has_value() && pylon->getLine() == i && pylon->getColumn() == j) {
+						pylonExists = true;
+						if (pylon->getPlayer().getColor() == Player::EColor::RED) { /// must to resolve this
+							displayChar = 'R'; 
+						}
+						else {
+							displayChar = 'B';
+						}
+						break;
+					}
+				}
+
+				std::cout << displayChar << ' ';
+			}
+			std::cout << '\n';
+		}
+
+		if (m_currentPlayer != nullptr) {
+			std::cout << "Player 1's turn: ";
+			if (m_currentPlayer == &m_player1) {
+				std::cout << "Player 1\n";
+			}
+			else {
+				std::cout << "Player 2\n";
+			}
+		}
+		else {
+			std::cout << "No player's turn!\n";
 		}
 	}
 

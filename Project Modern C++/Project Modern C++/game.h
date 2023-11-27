@@ -1,6 +1,7 @@
 #pragma once
 import board;
 import player;
+import utility;
 
 namespace twixt {
 	class Game {
@@ -36,9 +37,13 @@ namespace twixt {
 		void run();
 
 		void swapPlayers();
-		void DisplayCurrentPlayer();
+		
+		void displayCurrentPlayer();
+		void displayGameBoard() const;
 		
 		void modifySizeofBoard(uint16_t size);
+
+
 
 	};
 
