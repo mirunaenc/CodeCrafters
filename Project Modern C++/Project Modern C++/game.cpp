@@ -137,14 +137,14 @@ namespace twixt {
 		return ;
 	}
 
-	void Game::swapPlayers()
+	/*void Game::swapPlayers()
 	{
 	
 		Player* temp = m_currentPlayer;
 		m_currentPlayer = m_opponentPlayer;
 		m_opponentPlayer = temp;
 
-	}
+	}*/
 
 	void Game::DisplayCurrentPlayer() {
 		if (m_currentPlayer == &m_player1) {

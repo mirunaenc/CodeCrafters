@@ -142,6 +142,8 @@
     <ClCompile Include="Project Modern C++.cpp" />
     <ClCompile Include="pylon.cpp" />
     <ClCompile Include="pylon.cppm" />
+    <ClCompile Include="utility.cpp" />
+    <ClCompile Include="utility.cppm" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bulldozer.h" />
