@@ -1,11 +1,12 @@
 export module utility;
 import <iostream>;
+import player;
 
 namespace twixt {
 	export class Utility{
 	public:
 		template <typename T>
-		void swap(T* &current , T* &opponent);
+		static void swap(T* &current , T* &opponent);
 	};
 
 }

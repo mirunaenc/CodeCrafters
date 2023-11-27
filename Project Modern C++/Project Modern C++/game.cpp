@@ -115,7 +115,7 @@ namespace twixt {
 			return;
 		}
 
-		std::swap(m_currentPlayer, m_opponentPlayer);
+		Utility::swap(m_currentPlayer, m_opponentPlayer);
 	}
 
 	bool Game::checkWinCondition()
