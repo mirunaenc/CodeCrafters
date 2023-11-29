@@ -7,7 +7,7 @@ import <vector>;
 import <optional>;
 import <array>;
 import <iostream>;
-
+import utility;
 
 
 namespace twixt {
@@ -16,11 +16,11 @@ namespace twixt {
 	export class Player {
 
 	public:
-		enum class EColor : uint8_t
+		/*enum class EColor : uint8_t
 		{
 			RED,
 			BLACK
-		};
+		};*/
 	private:
 		uint16_t m_nrOfAvailablePylons;
 		uint16_t m_nrOfAvailableBridges;
