@@ -53,3 +53,10 @@ bool twixt::LargePylon::isValidShape() const
     }
     return false;
 }
+
+void twixt::LargePylon::setShape(const std::vector<std::pair<uint16_t, uint16_t>>& shape) {
+    m_shape = shape;
+    if (!isValidShape()) {
+        throw std::invalid_argument("Forma furnizata nu este valida!");
+    }
+}
