@@ -1,9 +1,9 @@
 #pragma once
+import <random>;
+import <vector>;
 import board;
 import pylon;
 import player;
-#include <random>
-#include <vector>
 
 namespace twixt {
 

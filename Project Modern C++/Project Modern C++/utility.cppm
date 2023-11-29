@@ -1,7 +1,6 @@
 export module utility;
 import <iostream>;
 
-
 namespace twixt {
 	export class Utility{
 	public:

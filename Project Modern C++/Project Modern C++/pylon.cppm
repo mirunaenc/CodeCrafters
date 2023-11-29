@@ -1,9 +1,7 @@
 export module pylon;
 import <set>;
-import utility;
 import <iostream>;
-
-
+import utility;
 
 namespace twixt {
 	export class Pylon {

@@ -1,10 +1,10 @@
 #pragma once
-import board;
-import player;
-import utility;
 import <cstdlib>;
 import <ctime>;
 import <time.h>;
+import board;
+import player;
+import utility;
 
 namespace twixt {
 	class Game {

@@ -1,11 +1,10 @@
-﻿import pylon;
+﻿import <iostream>;
+import "bulldozer.h";
+import "game.h";
+import pylon;
 import bridge;
 import board;
 import player;
-
-#include <iostream>
-#include"bulldozer.h"
-#include"game.h"
 
 int main()
 {

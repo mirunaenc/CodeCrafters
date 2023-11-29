@@ -1,6 +1,4 @@
 module bridge;
-import pylon;
-import <regex>;
 
 twixt::Bridge::Bridge(Pylon& start, Pylon& end) : m_start{ start }, m_end{ end }
 {

@@ -1,5 +1,5 @@
-#include "game.h"
-#include <cstdlib>
+import <cstdlib>;
+import "game.h";
 
 
 namespace twixt {

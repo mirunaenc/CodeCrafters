@@ -1,7 +1,6 @@
-
 export module bridge;
-import pylon;
 import <regex>;
+import pylon;
 
 namespace twixt {
 	export class Bridge {

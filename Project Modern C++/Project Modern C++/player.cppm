@@ -1,14 +1,12 @@
 export module player;
-
-import pylon;
-import bridge;
-import board;
 import <vector>;
 import <optional>;
 import <array>;
 import <iostream>;
+import pylon;
+import bridge;
+import board;
 import utility;
-
 
 namespace twixt {
 	

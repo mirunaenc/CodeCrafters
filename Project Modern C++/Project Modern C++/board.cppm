@@ -1,12 +1,9 @@
-
 export module board;
-import <cstdint>;
-import "LargePylon.h";
-
 import <vector>;
 import <optional>;
 import <algorithm>;
 import <iostream>;
+import "LargePylon.h";
 import pylon;
 import bridge;
 
