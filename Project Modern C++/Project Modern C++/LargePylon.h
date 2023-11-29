@@ -14,6 +14,7 @@ namespace twixt {
 			uint16_t>>& shape, const std::vector<std::pair<uint16_t, uint16_t>>& vertices);
 		const std::vector<std::pair<uint16_t, uint16_t>>& getShape() const;
 		bool isSymmetric();
+		bool isValidShape() const;
 	};
 
 }

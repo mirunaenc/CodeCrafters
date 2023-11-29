@@ -1,4 +1,4 @@
-#include "LargePylon.h"
+import <algorithm>;
 import "LargePylon.h";
 
 twixt::LargePylon::LargePylon(uint16_t line, uint16_t column, const std::vector<std::pair<uint16_t, uint16_t>>& shape,
@@ -25,4 +25,31 @@ bool twixt::LargePylon::isSymmetric()
         }
     }
     return true; 
+}
+
+bool twixt::LargePylon::isValidShape() const
+{
+    if (m_shape.size() == 4) {
+
+        std::vector<std::pair<uint16_t, uint16_t>> sortedShape = m_shape;
+        std::sort(sortedShape.begin(), sortedShape.end());
+
+        if (sortedShape[0].first == sortedShape[1].first && sortedShape[0].second + 1 == sortedShape[1].second &&
+            sortedShape[0].first + 1 == sortedShape[2].first && sortedShape[0].second == sortedShape[2].second &&
+            sortedShape[2].first == sortedShape[3].first && sortedShape[2].second + 1 == sortedShape[3].second) {
+            return true;
+        }
+    }
+    else if (m_shape.size() == 5) {
+        std::vector<std::pair<uint16_t, uint16_t>> sortedShape = m_shape;
+        std::sort(sortedShape.begin(), sortedShape.end());
+
+        if (sortedShape[1].first == sortedShape[2].first && sortedShape[1].second + 1 == sortedShape[2].second &&
+            sortedShape[2].second + 1 == sortedShape[3].second &&
+            sortedShape[0].first + 1 == sortedShape[2].first && sortedShape[0].second == sortedShape[2].second &&
+            sortedShape[2].first + 1 == sortedShape[4].first && sortedShape[2].second == sortedShape[4].second) {
+            return true;
+        }
+    }
+    return false;
 }

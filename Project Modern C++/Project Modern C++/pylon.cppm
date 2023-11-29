@@ -9,7 +9,7 @@ namespace twixt {
 	private:
 		uint16_t m_line;
 		uint16_t m_column;
-		EColor m_color ;
+		EColor m_color;
 
 	public:
 		
@@ -20,11 +20,7 @@ namespace twixt {
 		uint16_t getLine () const;
 		uint16_t getColumn() const;
 		EColor getColor() const;
-		Pylon(const Pylon& pylon);
-		Pylon& operator=(const Pylon& pylon);
 		bool operator==(const Pylon& other) const;
-		Pylon(Pylon&& other) noexcept;
-		Pylon& operator=(Pylon&& other) noexcept;
 		virtual ~Pylon();
 	};
 }
