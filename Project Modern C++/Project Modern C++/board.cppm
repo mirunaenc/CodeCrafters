@@ -1,7 +1,8 @@
-#include <cstdint>
-#include "LargePylon.h"
 
 export module board;
+import <cstdint>;
+import "LargePylon.h";
+
 import <vector>;
 import <optional>;
 import <algorithm>;

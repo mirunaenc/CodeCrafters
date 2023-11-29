@@ -13,8 +13,8 @@ namespace twixt {
 
 	Game::Game()
 		: m_gameBoard{ 10 },
-		m_player1{ 20, 40, Player::EColor::RED, m_gameBoard },
-		m_player2{ 20, 40, Player::EColor::BLACK, m_gameBoard },
+		m_player1{ 20, 40, EColor::RED, m_gameBoard },
+		m_player2{ 20, 40, EColor::BLACK, m_gameBoard },
 		m_currentPlayer{ &m_player1 },
 		m_opponentPlayer{ &m_player2 }
 	{}
@@ -142,8 +142,9 @@ namespace twixt {
 
 	void Game::randomStarter()
 	{
-		std::srand(static_cast<unsigned int>(std::time(nullptr)));
-		uint32_t randomNumber = (std::rand() % 10) + 1;
+		/*std::srand(static_cast<unsigned int>(std::time(nullptr)));
+		uint32_t randomNumber = (std::rand() % 10) + 1;*/
+		uint32_t randomNumber=0;
 
 		if (randomNumber % 2 == 0) {
 			m_currentPlayer = &m_player1;
@@ -192,7 +193,7 @@ namespace twixt {
 				for (const auto& pylon : pylons) {
 					if (pylon.has_value() && pylon->getLine() == i && pylon->getColumn() == j) {
 						pylonExists = true;
-						if (pylon->getColor() == Player::EColor::RED) { /// must to resolve this
+						if (pylon->getColor() == EColor::RED) { /// must to resolve this
 							displayChar = 'R'; 
 						}
 						else {

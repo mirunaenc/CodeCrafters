@@ -69,7 +69,8 @@ void twixt::Player::setNrOfAvailableBridges(uint16_t nrBridges)
 	m_nrOfAvailableBridges = nrBridges;
 }
 
-twixt::Player::EColor twixt::Player::getColor() const
+
+twixt::EColor twixt::Player::getColor() const
 {
 	return m_color;
 }

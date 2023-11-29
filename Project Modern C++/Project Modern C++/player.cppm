@@ -12,7 +12,6 @@ import utility;
 
 namespace twixt {
 	
-
 	export class Player {
 
 	public:

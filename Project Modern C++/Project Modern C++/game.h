@@ -4,6 +4,7 @@ import player;
 import utility;
 import <cstdlib>;
 import <ctime>;
+import <time.h>;
 
 namespace twixt {
 	class Game {

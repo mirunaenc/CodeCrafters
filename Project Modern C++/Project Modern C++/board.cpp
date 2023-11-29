@@ -230,4 +230,5 @@ void twixt::Board::createBridge(twixt::Pylon& p1, twixt::Pylon& p2)
             Bridge newBridge = twixt::Bridge(p1, p2);
             addBridge(newBridge);
         }
+    }
 }
