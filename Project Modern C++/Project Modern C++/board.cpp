@@ -259,6 +259,25 @@ int twixt::Board::getBridgePosition(const twixt::Pylon& p1, const twixt::Pylon& 
             else
                 return 2;
         }
+        else {
+            if (line2 < line1)
+                return 1;
+            else
+                return 2;
+        }
+    }
+
+    if (colDif == 2) {
+        if (line1 < line2)
+            return 3;
+        else
+            return 4;
+    }
+    else {
+        if (line2 < line1)
+            return 3;
+        else
+            return 4;
     }
     return 0;
 }
