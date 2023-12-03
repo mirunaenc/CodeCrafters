@@ -221,14 +221,28 @@ bool twixt::Board::isPylonOccupied(const Pylon& p)
     return false;
 }
 
-void twixt::Board::createBridge(twixt::Pylon& p1, twixt::Pylon& p2)
+void twixt::Board::createBridge(const twixt::Pylon& pilon)
 {
-    if (existsBridgeBetweenPylons(p1, p2)) {
+    /*if (existsBridgeBetweenPylons(p1, p2)) {
         return;
 
         if (canPlaceBridge(p1, p2)) {
             Bridge newBridge = twixt::Bridge(p1, p2);
             addBridge(newBridge);
         }
+    }*/
+
+    for(const auto& p : m_boardPylons) {
+        if (p.has_value()) {
+            const twixt::Pylon actualPylon = p.value();
+            if(existsBridgeBetweenPylons(pilon, actualPylon))
+                return;
+
+            if (canPlaceBridge(pilon, actualPylon)) {
+                Bridge newBridge = twixt::Bridge(pilon, actualPylon);
+                addBridge(newBridge);
+            }
+        }
+        
     }
 }
