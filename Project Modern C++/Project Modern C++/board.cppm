@@ -39,6 +39,7 @@ namespace twixt {
 		bool isPylonOccupied(const Pylon& p);
 		bool canPlaceBridge(const Pylon& p1, const Pylon& p2);
 		void createBridge(Pylon& pilon);
+		int getBridgePosition(const Pylon& p1, const Pylon& p2);
         
 	};
 }

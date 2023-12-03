@@ -201,9 +201,12 @@ bool twixt::Board::canPlaceBridge(const twixt::Pylon& p1, const twixt::Pylon& p2
     uint16_t lineDif = abs(p1.getLine() - p2.getLine());
     uint16_t colDif = abs(p1.getColumn() - p2.getColumn());
 
-    if (lineDif > 1 || colDif > 1) {
+    if (!(lineDif == 1 && colDif == 2))
         return false;
-    }
+    if (!(lineDif == 2 && colDif == 1))
+        return false;
+
+
 
     //to be continued;
     return true;
@@ -221,20 +224,11 @@ bool twixt::Board::isPylonOccupied(const Pylon& p)
     return false;
 }
 
-void twixt::Board::createBridge(const twixt::Pylon& pilon)
+void twixt::Board::createBridge(twixt::Pylon& pilon)
 {
-    /*if (existsBridgeBetweenPylons(p1, p2)) {
-        return;
-
-        if (canPlaceBridge(p1, p2)) {
-            Bridge newBridge = twixt::Bridge(p1, p2);
-            addBridge(newBridge);
-        }
-    }*/
-
     for(const auto& p : m_boardPylons) {
         if (p.has_value()) {
-            const twixt::Pylon actualPylon = p.value();
+            twixt::Pylon actualPylon = p.value();
             if(existsBridgeBetweenPylons(pilon, actualPylon))
                 return;
 
@@ -245,4 +239,26 @@ void twixt::Board::createBridge(const twixt::Pylon& pilon)
         }
         
     }
+}
+
+//important
+//pozitie 1 -> \ 
+//pozitie 2 -> /
+//pozitie 3 -> -  _
+//pozitie 4 -> _  -
+
+int twixt::Board::getBridgePosition(const twixt::Pylon& p1, const twixt::Pylon& p2)
+{
+    uint16_t line1 = p1.getLine(), col1 = p1.getColumn(), line2 = p2.getLine(), col2 = p2.getColumn();
+    uint16_t lineDif = abs(line1 - line2), colDif = abs(col1 - col2);
+    
+    if (lineDif == 2) {
+        if (col1 < col2) {
+            if (line1 < line2)
+                return 1;
+            else
+                return 2;
+        }
+    }
+    return 0;
 }
