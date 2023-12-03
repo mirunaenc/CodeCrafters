@@ -15,7 +15,6 @@ namespace twixt {
         size_t m_linePosition;
         size_t m_columnPosition;
         Board& m_board;
-        std::random_device m_rd;
         std::mt19937 m_rng;
         float m_biasedCoinProbability;
         Player& m_player1;
