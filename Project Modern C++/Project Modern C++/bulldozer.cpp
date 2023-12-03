@@ -128,10 +128,10 @@ namespace twixt {
 
         Pylon pylon = m_board.getPylon(occupiedPositions[randomIndex].first, occupiedPositions[randomIndex].second).value();     
       
-        if(m_player1.hasPylon(pylon))
-			m_player1.removePylon(pylon);
+        if(m_player1.hasPylon(&pylon))
+			m_player1.removePylon(&pylon);
 		else
-			m_player2.removePylon(pylon);
+			m_player2.removePylon(&pylon);
 
         m_board.resetPosition(occupiedPositions[randomIndex].first, occupiedPositions[randomIndex].second);
 

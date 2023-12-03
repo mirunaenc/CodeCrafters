@@ -41,4 +41,10 @@ twixt::Pylon::~Pylon()
 {
 }
 
+bool twixt::Pylon::operator==( const Pylon* pylonPtr2)
+{
+    // Check if either both pointers are null or the objects they point to are equal
+    return (this == nullptr && pylonPtr2 == nullptr) || (*this == *pylonPtr2);
+}
+
 

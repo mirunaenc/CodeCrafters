@@ -95,22 +95,22 @@ void twixt::Player::setGameBoard(const Board& gameBoard)
 	m_gameBoard = gameBoard;
 }
 
-const std::vector<twixt::Pylon>& twixt::Player::getPylons() const
+const std::vector<twixt::Pylon*>& twixt::Player::getPylons() const
 {
 	return m_pylons;
 }
 
-void twixt::Player::setPylons(const std::vector<Pylon>& pylons)
+void twixt::Player::setPylons(const std::vector<Pylon*>& pylons)
 {
 	m_pylons = pylons;
 }
 
-const std::vector<twixt::Bridge>& twixt::Player::getBridges() const
+const std::vector<twixt::Bridge*>& twixt::Player::getBridges() const
 {
 	return m_bridges;
 }
 
-void twixt::Player::setBridges(const std::vector<Bridge>& bridges)
+void twixt::Player::setBridges(const std::vector<Bridge*>& bridges)
 {
 	m_bridges = bridges;
 }
@@ -119,33 +119,35 @@ void twixt::Player::placePylon(uint16_t line, uint16_t column)
 {
 	Pylon pylon(line, column);
 	m_gameBoard.addPylon(line, column, pylon);
-	m_pylons.push_back(pylon);
+	m_pylons.push_back(&pylon);
 	setNrOfAvailablePylons(m_nrOfAvailablePylons - 1);
 }
 
-void twixt::Player::placeBridge(const Bridge& bridge)
+void twixt::Player::placeBridge(const Pylon& start,const Pylon& end)
 {
-	m_bridges.push_back(bridge);
+	//Bridge bridge(start,end);
+	//m_gameBoard.addBridge(bridge);
+	//m_bridges.push_back(&bridge);  
 	setNrOfAvailableBridges(m_nrOfAvailableBridges - 1);
 }
 
 
-int twixt::Player::getPositionPylonInVector(const Pylon& pylon)
+int twixt::Player::getPositionPylonInVector(const Pylon* pylonPtr)
 {
-	for (int index = 0; index < m_pylons.size();index++)
-	{
-		if (m_pylons[index] == pylon)
-			return index;
-	}
-	return -1;
+	auto it = std::find(m_pylons.begin(), m_pylons.end(), pylonPtr);
+
+	if (it != m_pylons.end())
+		return static_cast<int>(std::distance(m_pylons.begin(), it));
+	else
+		return -1;
 }
 
-bool twixt::Player::hasPylon(const Pylon& pylon) const
+bool twixt::Player::hasPylon(const Pylon* pylonPtr) const
 {
-	for(auto pyl : m_pylons)
-		if (pyl == pylon)
-			return true;
-	return false;
+	auto it = std::find(m_pylons.begin(), m_pylons.end(), pylonPtr);
+	if(it != m_pylons.end())
+		return true;
+    return false;
 }
 
 bool twixt::Player::isWinner()
@@ -155,7 +157,7 @@ bool twixt::Player::isWinner()
 	return false;
 }
 
-void twixt::Player::removePylon(const Pylon& pylon)
+void twixt::Player::removePylon(const Pylon* pylon)
 {
 	int index = getPositionPylonInVector(pylon);
 	if (index != -1)

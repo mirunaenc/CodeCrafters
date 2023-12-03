@@ -22,5 +22,6 @@ namespace twixt {
 		EColor getColor() const;
 		bool operator==(const Pylon& other) const;
 		virtual ~Pylon();
+		bool operator==(const Pylon* pylonPtr2);
 	};
 }
