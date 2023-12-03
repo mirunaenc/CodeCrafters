@@ -1,9 +1,12 @@
 module player;
 
 
-twixt::Player::Player(uint16_t nrPylons, uint16_t nrBridges, EColor color, Board& gameBoard) 
-	: m_nrOfAvailablePylons{ nrPylons }, m_nrOfAvailableBridges{ nrBridges }, m_color{ color }, m_gameBoard(gameBoard)
-{}
+twixt::Player::Player(uint16_t nrPylons, uint16_t nrBridges, EColor color, Board gameBoard)
+	: m_nrOfAvailablePylons{ nrPylons }, m_nrOfAvailableBridges{ nrBridges }, m_color{ color }
+{
+	m_gameBoard = std::make_shared<Board>(gameBoard);
+}
+
 
 twixt::Player::Player(const Player& otherPlayer)
 	: m_nrOfAvailablePylons{ otherPlayer.m_nrOfAvailablePylons},
@@ -85,12 +88,12 @@ twixt::Player::~Player()
 
 }
 
-const twixt::Board& twixt::Player::getGameBoard() const
+const std::shared_ptr<twixt::Board> twixt::Player::getGameBoard() const
 {
 	return m_gameBoard;
 }
 
-void twixt::Player::setGameBoard(const Board& gameBoard)
+void twixt::Player::setGameBoard(std::shared_ptr<Board> gameBoard)
 {
 	m_gameBoard = gameBoard;
 }
@@ -118,7 +121,7 @@ void twixt::Player::setBridges(const std::vector<Bridge*>& bridges)
 void twixt::Player::placePylon(uint16_t line, uint16_t column)
 {
 	Pylon pylon(line, column);
-	m_gameBoard.addPylon(line, column, pylon);
+	m_gameBoard->addPylon(line, column, pylon);
 	m_pylons.push_back(&pylon);
 	setNrOfAvailablePylons(m_nrOfAvailablePylons - 1);
 }
@@ -126,7 +129,7 @@ void twixt::Player::placePylon(uint16_t line, uint16_t column)
 void twixt::Player::placeBridge(const Pylon& start,const Pylon& end)
 {
 	//Bridge bridge(start,end);
-	//m_gameBoard.addBridge(bridge);
+	//m_gameBoard->addBridge(bridge);
 	//m_bridges.push_back(&bridge);  
 	setNrOfAvailableBridges(m_nrOfAvailableBridges - 1);
 }
@@ -169,21 +172,21 @@ void twixt::Player::removePylon(const Pylon* pylon)
 bool twixt::Player::hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std::vector<bool>& visited)
 {
 	if (m_color == EColor::RED) 
-			if (currentLine == m_gameBoard.getSize() - 1) 
+			if (currentLine == m_gameBoard->getSize() - 1)
 			return true; 
 	else 	
-		if (currentLine == m_gameBoard.getSize() - 2) 
+		if (currentLine == m_gameBoard->getSize() - 2)
 			return true; 	
 
 	if(m_color == EColor::BLACK)
-		if (currentColumn == m_gameBoard.getSize() - 1)
+		if (currentColumn == m_gameBoard->getSize() - 1)
 			return true; 
 	else
-		if (currentColumn == m_gameBoard.getSize() - 2)
+		if (currentColumn == m_gameBoard->getSize() - 2)
 			return true; 
 
 
-	visited[currentLine * m_gameBoard.getSize() + currentColumn] = true;
+	visited[currentLine * m_gameBoard->getSize() + currentColumn] = true;
 
 	// Check all adjacent positions
 	for (int i = -2; i <= 2; ++i) {
@@ -192,11 +195,11 @@ bool twixt::Player::hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std
 				uint16_t nextLine = currentLine + i;
 				uint16_t nextColumn = currentColumn + j;
 
-				if (m_gameBoard.isPositionInsideBoard(nextLine, nextColumn) &&
-					!visited[nextLine * m_gameBoard.getSize() + nextColumn] &&
-					m_gameBoard.getPylon(currentLine, currentColumn).has_value() &&
-						m_gameBoard.getPylon(nextLine, nextColumn).has_value() 
-					//&& m_gameBoard.existsBridgeBetweenPylons(m_gameBoard.getPylon(currentLine, currentColumn).value(), m_gameBoard.getPylon(nextLine, nextColumn).value())
+				if (m_gameBoard->isPositionInsideBoard(nextLine, nextColumn) &&
+					!visited[nextLine * m_gameBoard->getSize() + nextColumn] &&
+					m_gameBoard->getPylon(currentLine, currentColumn).has_value() &&
+						m_gameBoard->getPylon(nextLine, nextColumn).has_value()
+					&& m_gameBoard->existsBridgeBetweenPylons(m_gameBoard->getPylon(currentLine, currentColumn).value(), m_gameBoard->getPylon(nextLine, nextColumn).value())
 					)				
 				{
 					if (hasRoadDFS(nextLine, nextColumn, visited)) 
@@ -211,26 +214,26 @@ bool twixt::Player::hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std
 
 bool twixt::Player::hasWinningRoad()
 {
-	std::vector<bool> visited(m_gameBoard.getSize() * m_gameBoard.getSize(), false);
+	std::vector<bool> visited(m_gameBoard->getSize() * m_gameBoard->getSize(), false);
 
 	// Check for horizontal winning road
 	if (m_color == EColor::BLACK) {
-		for (uint16_t i = 0; i < m_gameBoard.getSize(); ++i) {
-			if (visited[i * m_gameBoard.getSize() + 0] == false && hasRoadDFS(i, 0, visited))
+		for (uint16_t i = 0; i < m_gameBoard->getSize(); ++i) {
+			if (visited[i * m_gameBoard->getSize() + 0] == false && hasRoadDFS(i, 0, visited))
 				return true;
 			
-			if(visited[i * m_gameBoard.getSize() + 1] == false && hasRoadDFS(i, 1, visited))
+			if(visited[i * m_gameBoard->getSize() + 1] == false && hasRoadDFS(i, 1, visited))
 				return true;
 		}
 	}
 
 	// Check for vertical winning road
 	if (m_color == EColor::RED) {
-		for (uint16_t j = 0; j < m_gameBoard.getSize(); ++j) {
-			if (visited[0 * m_gameBoard.getSize() + j] == false && hasRoadDFS(0, j, visited))
+		for (uint16_t j = 0; j < m_gameBoard->getSize(); ++j) {
+			if (visited[0 * m_gameBoard->getSize() + j] == false && hasRoadDFS(0, j, visited))
 				return true;
 			
-			if(visited[1 * m_gameBoard.getSize() + j] == false && hasRoadDFS(1, j, visited))
+			if(visited[1 * m_gameBoard->getSize() + j] == false && hasRoadDFS(1, j, visited))
 				return true;
 		}
 	}

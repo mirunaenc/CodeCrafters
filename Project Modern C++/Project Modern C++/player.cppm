@@ -24,10 +24,10 @@ namespace twixt {
 		EColor m_color;
 		std::vector<Pylon*> m_pylons;
 		std::vector<Bridge*> m_bridges;
-		Board& m_gameBoard;
+		std::shared_ptr<Board> m_gameBoard;
 
 	public:
-		Player(uint16_t nrPylons, uint16_t nrBridges, EColor color,Board& gameBoard);
+		Player(uint16_t nrPylons, uint16_t nrBridges, EColor color, Board gameBoard);
 		Player(const Player& otherPlayer);
 		Player(Player&& otherPlayer) noexcept;
         Player& operator=(Player&& otherPlayer) noexcept;
@@ -43,8 +43,8 @@ namespace twixt {
 		EColor getColor() const;
 		void setColor(const EColor& color);
 
-		const Board& getGameBoard() const;
-		void setGameBoard(const Board& gameBoard);
+		const std::shared_ptr<Board> getGameBoard() const;
+		void setGameBoard(std::shared_ptr<Board> gameBoard);
 
 		const std::vector<Pylon*>& getPylons() const;
 		void setPylons(const std::vector<Pylon*>& pylons);
