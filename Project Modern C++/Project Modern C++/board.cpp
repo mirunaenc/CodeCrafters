@@ -125,6 +125,21 @@ void twixt::Board::removeBridge(const twixt::Bridge& bridge)
     }
 }
 
+bool twixt::Board::isPositionOccupied(uint16_t i, uint16_t j)
+{
+    if (!isPositionInsideBoard(i, j))
+        return false;
+
+    for (const auto& pilon : m_boardPylons) {
+        if (pilon.has_value()) {
+            twixt::Pylon actualPylon = pilon.value();
+            if (actualPylon.getLine() == i && actualPylon.getColumn() == j)
+                return false;
+        }
+    }
+    return true;
+}
+
 void twixt::Board::provisionalPrint()
 {
     for (int line = 0; line < m_size; line++) {

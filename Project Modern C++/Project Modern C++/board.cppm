@@ -28,6 +28,7 @@ namespace twixt {
 		const std::optional<Pylon>& getPylon(uint16_t line, uint16_t column) const;
 		void resetPosition(uint16_t line, uint16_t column);
 		bool isPositionInsideBoard(uint16_t line, uint16_t column) const;
+		bool isPositionOccupied(uint16_t i, uint16_t j);
 		void removeBridge(const Bridge& bridge);
 		void provisionalPrint();
 		const std::vector<std::optional<Pylon>>& getPylons() const;
