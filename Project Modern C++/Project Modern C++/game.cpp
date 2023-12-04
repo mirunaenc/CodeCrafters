@@ -1,5 +1,5 @@
-import <cstdlib>;
 import "game.h";
+import <random>;
 
 
 namespace twixt {
@@ -115,7 +115,7 @@ namespace twixt {
 			return;
 		}
 
-		Utility::swap(m_currentPlayer, m_opponentPlayer);
+		swapPlayers();
 	}
 
 	bool Game::checkWinCondition()
@@ -142,10 +142,11 @@ namespace twixt {
 
 	void Game::randomStarter()
 	{
-		/*std::srand(static_cast<unsigned int>(std::time(nullptr)));
-		uint32_t randomNumber = (std::rand() % 10) + 1;*/
-		uint32_t randomNumber=0;
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<> dis(1, 10);
 
+		int randomNumber = dis(gen);
 		if (randomNumber % 2 == 0) {
 			m_currentPlayer = &m_player1;
 			m_opponentPlayer = &m_player2;
@@ -209,7 +210,7 @@ namespace twixt {
 		}
 
 		if (m_currentPlayer != nullptr) {
-			std::cout << "Player 1's turn: ";
+			std::cout << "Turn of : ";
 			if (m_currentPlayer == &m_player1) {
 				std::cout << "Player 1\n";
 			}

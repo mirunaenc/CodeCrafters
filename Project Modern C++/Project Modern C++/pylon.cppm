@@ -17,7 +17,7 @@ namespace twixt {
 		void setLine(uint16_t line);
 		void setColumn(uint16_t column);
 		void setColor(EColor color);
-		uint16_t getLine () const;
+		uint16_t getLine() const;
 		uint16_t getColumn() const;
 		EColor getColor() const;
 		bool operator==(const Pylon& other) const;

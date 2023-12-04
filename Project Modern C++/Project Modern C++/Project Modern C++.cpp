@@ -10,12 +10,12 @@ int main()
 {
    /* twixt::Board gameBoard{ 10 };
     twixt::Player player1;
-    twixt::Player player2;
+    twixt::Player player2;*/
 
-    twixt::Game twixtGame(gameBoard, player1, player2);
+    twixt::Game twixtGame;
 
   
-    twixtGame.run();*/
+    twixtGame.run();
 
 	return 0;
 }

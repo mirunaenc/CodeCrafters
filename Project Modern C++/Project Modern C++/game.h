@@ -1,7 +1,6 @@
 #pragma once
-import <cstdlib>;
 import <ctime>;
-import <time.h>;
+import <cstdlib>;
 import board;
 import player;
 import utility;
