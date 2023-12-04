@@ -18,5 +18,24 @@ int main()
   
     twixtGame.run();
 
+   /* twixt::Board board2(3);
+
+    twixt::Player player1(10, 10, twixt::EColor::RED, board2);
+    twixt::Player player2(10, 10, twixt::EColor::BLACK, board2);
+
+    twixt::Bulldozer bulldozer(board2, 0, 0, 0.5, player1, player2);
+
+    player1.placePylon(0, 1);
+    player1.placePylon(1, 0);
+    player1.placePylon(1, 1);
+    player2.placePylon(1, 2);
+    player2.placePylon(2, 1);
+
+    for(int i = 0; i < 20; i++)	
+       player1.makeMove();
+
+    for (int i = 0; i < 20; i++)
+        bulldozer.playTurn();*/
+
 	return 0;
 }

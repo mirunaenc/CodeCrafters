@@ -13,7 +13,7 @@ namespace twixt {
 
 	public:
 		
-		Pylon(uint16_t line=0, uint16_t column=0);
+		Pylon(uint16_t line, uint16_t column);
 		void setLine(uint16_t line);
 		void setColumn(uint16_t column);
 		void setColor(EColor color);
