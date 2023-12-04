@@ -1,4 +1,4 @@
-module board;
+﻿module board;
 
 twixt::Board::Board()
 {
@@ -57,15 +57,31 @@ void twixt::Board::setSize(uint16_t size) {
     m_boardBridges.resize(m_size * m_size, std::nullopt);
 }
 
+//void twixt::Board::addPylon(uint16_t line, uint16_t column, const std::optional<Pylon>& pylon) {
+//    if (line < m_size && column < m_size) {
+//        m_boardPylons[line * m_size + column] = pylon;
+//    }
+//    else {
+//        std::cout << "Error at setting a pylon.";
+//        exit(0);
+//    }
+//}
+
 void twixt::Board::addPylon(uint16_t line, uint16_t column, const std::optional<Pylon>& pylon) {
+    if (!pylon.has_value()) {
+        std::cout << "Error: Trying to set an empty pylon." << std::endl;
+        return; // Înlocuiește exit(0) cu un comportament mai sigur în caz de eroare
+    }
+
     if (line < m_size && column < m_size) {
-        m_boardPylons[line * m_size + column] = pylon;
+        m_boardPylons[line * m_size + column] = pylon.value(); // Accesează valoarea din std::optional folosind .value()
     }
     else {
-        std::cout << "Error at setting a pylon.";
-        exit(0);
+        std::cout << "Error: Trying to set a pylon outside the board boundaries." << std::endl;
+        return; // Înlocuiește exit(0) cu un comportament mai sigur în caz de eroare
     }
 }
+
 
 const std::optional<twixt::Pylon>& twixt::Board::getPylon(uint16_t line, uint16_t column) const {
     if (line < m_size && column < m_size) {

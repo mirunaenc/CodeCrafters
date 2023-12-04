@@ -1,9 +1,10 @@
-﻿import "game.h";
+﻿#include "game.h"
+import "game.h";
 import <random>;
 
 
 namespace twixt {
-	Game::Game(Board GameBoard, Player player1, Player player2)
+	Game::Game(Board& GameBoard, Player player1, Player player2)
 		: m_gameBoard{ GameBoard },
 		m_player1{ player1 },
 		m_player2{ player2 },
@@ -22,6 +23,7 @@ namespace twixt {
 	Game::~Game()
 	{
 	}
+
 
 	Game& twixt::Game::operator=(const Game& game)
 	{

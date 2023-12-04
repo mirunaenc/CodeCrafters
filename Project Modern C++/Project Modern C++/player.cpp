@@ -1,4 +1,4 @@
-module player;
+﻿module player;
 
 
 twixt::Player::Player(uint16_t nrPylons, uint16_t nrBridges, EColor color, Board& gameBoard)
@@ -118,10 +118,17 @@ void twixt::Player::setBridges(const std::vector<Bridge*>& bridges)
 
 void twixt::Player::placePylon(uint16_t line, uint16_t column)
 {
+	/*Pylon pylon(line, column);
+	pylon.setColor(m_color);
+	m_gameBoard.addPylon(line, column, pylon);*/
+	//m_pylons.push_back(&pylon);
 	Pylon pylon(line, column);
 	pylon.setColor(m_color);
-	m_gameBoard.addPylon(line, column, pylon);
-	//m_pylons.push_back(&pylon);
+
+	std::optional<Pylon> optionalPylon = pylon; // Convertim obiectul Pylon într-un std::optional<Pylon>
+
+	m_gameBoard.addPylon(line, column, optionalPylon);
+
 	setNrOfAvailablePylons(m_nrOfAvailablePylons - 1);
 }
 

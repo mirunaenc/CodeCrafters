@@ -16,7 +16,7 @@ namespace twixt {
 		Player* m_opponentPlayer = nullptr;
 
 	public:
-		Game(Board GameBoard, Player player1, Player player2);
+		Game(Board& GameBoard, Player player1, Player player2);
 		Game();
 		~Game();
 
