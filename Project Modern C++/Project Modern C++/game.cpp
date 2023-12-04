@@ -1,4 +1,4 @@
-import "game.h";
+﻿import "game.h";
 import <random>;
 
 
@@ -131,7 +131,7 @@ namespace twixt {
 
 	void Game::run()
 	{
-		randomStarter();
+	
 		while (!checkWinCondition()) {
 			displayGameBoard();
 			playTurn();

@@ -47,7 +47,6 @@ namespace twixt {
 		void modifySizeofBoard(uint16_t size);
 
 
-
 	};
 
 }

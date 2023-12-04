@@ -121,6 +121,7 @@ void twixt::Player::setBridges(const std::vector<Bridge*>& bridges)
 void twixt::Player::placePylon(uint16_t line, uint16_t column)
 {
 	Pylon pylon(line, column);
+	pylon.setColor(m_color);
 	m_gameBoard->addPylon(line, column, pylon);
 	m_pylons.push_back(&pylon);
 	setNrOfAvailablePylons(m_nrOfAvailablePylons - 1);
