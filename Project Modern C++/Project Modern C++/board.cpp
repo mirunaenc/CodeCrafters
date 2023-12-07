@@ -282,33 +282,17 @@ int twixt::Board::getBridgePosition(const twixt::Pylon& p1, const twixt::Pylon& 
 {
     uint16_t line1 = p1.getLine(), col1 = p1.getColumn(), line2 = p2.getLine(), col2 = p2.getColumn();
     uint16_t lineDif = abs(line1 - line2), colDif = abs(col1 - col2);
-    
-    if (lineDif == 2) {
-        if (col1 < col2) {
-            if (line1 < line2)
-                return 1;
-            else
-                return 2;
-        }
-        else {
-            if (line2 < line1)
-                return 1;
-            else
-                return 2;
-        }
-    }
 
-    if (colDif == 2) {
-        if (line1 < line2)
-            return 3;
+    if (lineDif == 2 && colDif == 1) {
+        if (col1 < col2) { return 1; }
+        else
+            return 2;
+    }
+    if (lineDif == 1 && colDif == 2) {
+        if (line1 < line2) { return 3; }
         else
             return 4;
     }
-    else {
-        if (line2 < line1)
-            return 3;
-        else
-            return 4;
-    }
-    return 0;
+    
+    return -1;
 }
