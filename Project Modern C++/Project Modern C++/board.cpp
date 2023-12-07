@@ -6,21 +6,21 @@ twixt::Board::Board()
 
 twixt::Board::Board(uint16_t size) : m_size{ size } {
     m_boardPylons.resize(m_size * m_size, std::nullopt);
-    m_boardBridges.resize(m_size * m_size, std::nullopt);
+    //m_boardBridges.resize(m_size * m_size, std::nullopt);
 }
 
 twixt::Board::Board(const Board& board) : m_size{ board.m_size } {
     m_boardPylons.resize(m_size * m_size);
-    m_boardBridges.resize(m_size * m_size);
+    //m_boardBridges.resize(m_size * m_size);
     std::copy(board.m_boardPylons.begin(), board.m_boardPylons.end(), m_boardPylons.begin());
     std::copy(board.m_boardBridges.begin(), board.m_boardBridges.end(), m_boardBridges.begin());
 }
 
 twixt::Board::Board(Board&& board) noexcept : m_size{ board.m_size } {
     m_boardPylons.resize(m_size * m_size);
-    m_boardBridges.resize(m_size * m_size);
+    //m_boardBridges.resize(m_size * m_size);
     m_boardPylons = std::move(board.m_boardPylons);
-    m_boardBridges = std::move(board.m_boardBridges);
+    m_boardBridges = board.m_boardBridges;
 }
 
 twixt::Board& twixt::Board::operator=(const Board& board)
@@ -28,7 +28,7 @@ twixt::Board& twixt::Board::operator=(const Board& board)
     if (this != &board) {
         m_size = board.m_size;
         m_boardPylons.resize(m_size * m_size);
-        m_boardBridges.resize(m_size * m_size);
+        //m_boardBridges.resize(m_size * m_size);
         std::copy(board.m_boardPylons.begin(), board.m_boardPylons.end(), m_boardPylons.begin());
         std::copy(board.m_boardBridges.begin(), board.m_boardBridges.end(), m_boardBridges.begin());
     }
@@ -40,9 +40,9 @@ twixt::Board& twixt::Board::operator=(Board&& board) noexcept
     if (this != &board) {
         m_size = board.m_size;
         m_boardPylons.resize(m_size * m_size);
-        m_boardBridges.resize(m_size * m_size);
+        //m_boardBridges.resize(m_size * m_size);
         m_boardPylons = std::move(board.m_boardPylons);
-        m_boardBridges = std::move(board.m_boardBridges);
+        m_boardBridges = board.m_boardBridges;
     }
     return *this;
 }
@@ -54,7 +54,7 @@ uint16_t twixt::Board::getSize() const {
 void twixt::Board::setSize(uint16_t size) {
     m_size = size;
     m_boardPylons.resize(m_size * m_size, std::nullopt);
-    m_boardBridges.resize(m_size * m_size, std::nullopt);
+    //m_boardBridges.resize(m_size * m_size, std::nullopt);
 }
 
 //void twixt::Board::addPylon(uint16_t line, uint16_t column, const std::optional<Pylon>& pylon) {
@@ -158,7 +158,7 @@ const std::vector<std::optional<twixt::Pylon>>& twixt::Board::getPylons() const
     return m_boardPylons;
 }
 
-const std::vector<std::optional<twixt::Bridge>>& twixt::Board::getBridges() const
+const std::vector<twixt::Bridge>& twixt::Board::getBridges() const
 {
     return m_boardBridges;
 }
@@ -168,13 +168,20 @@ bool twixt::Board::isValidBridge(const Pylon& start, const Pylon& end) {
         return false;
     }
 
-    for (const std::optional<Bridge>& optBridge : m_boardBridges) {
-        if (optBridge.has_value()) {
-            const Bridge& bridge = optBridge.value();
+    /*for (const std::optional<Bridge>& optBridge : m_boardBridges) {
+        if (optBridge != null) {
+            const Bridge& bridge = optBridge;
             if ((bridge.getStart() == start && bridge.getEnd() == end) ||
                 (bridge.getStart() == end && bridge.getEnd() == start)) {
                 return false;
             }
+        }
+    }*/
+
+    for (const Bridge& bridge : m_boardBridges) {
+        if ((bridge.getStart() == start && bridge.getEnd() == end) ||
+            (bridge.getStart() == end && bridge.getEnd() == start)) {
+            return false;
         }
     }
 
@@ -185,7 +192,7 @@ void twixt::Board::resetBoard() {
     m_boardPylons.clear();
     m_boardBridges.clear();
     m_boardPylons.resize(m_size * m_size);
-    m_boardBridges.resize(m_size * m_size);
+    //m_boardBridges.resize(m_size * m_size);
 }
 
 bool twixt::Board::canPlaceLargePylon(const LargePylon& pylon)
@@ -215,7 +222,7 @@ bool twixt::Board::canPlaceLargePylon(const LargePylon& pylon)
 
 bool twixt::Board::existsBridgeBetweenPylons(const twixt::Pylon& p1, const twixt::Pylon& p2)
 {
-    for (const auto& optBridge : m_boardBridges) {
+    /*for (const auto& optBridge : m_boardBridges) {
         if (optBridge.has_value()) {
             const twixt::Bridge& bridge = optBridge.value();
             if ((bridge.getStart() == p1 && bridge.getEnd() == p2) ||
@@ -223,7 +230,15 @@ bool twixt::Board::existsBridgeBetweenPylons(const twixt::Pylon& p1, const twixt
                 return true;
             }
         }
+    }*/
+
+    for (const Bridge& bridge : m_boardBridges) {
+        if ((bridge.getStart() == p1 && bridge.getEnd() == p2) ||
+            (bridge.getStart() == p2 && bridge.getEnd() == p1)) {
+            return true;
+        }
     }
+
     return false;
 }
 
@@ -237,7 +252,11 @@ bool twixt::Board::canPlaceBridge(const twixt::Pylon& p1, const twixt::Pylon& p2
     if (!(lineDif == 2 && colDif == 1))
         return false;
 
-
+    uint16_t bridgePosition = getBridgePosition(p1, p2);
+    
+    if (bridgePosition == 1) {
+        
+    }
 
     //to be continued;
     return true;
@@ -245,8 +264,14 @@ bool twixt::Board::canPlaceBridge(const twixt::Pylon& p1, const twixt::Pylon& p2
 
 bool twixt::Board::isPylonOccupied(const Pylon& p)
 {
-    for (const auto& optBridge : m_boardBridges) {
+    /*for (const auto& optBridge : m_boardBridges) {
         const twixt::Bridge& bridge = optBridge.value();
+        if (bridge.getStart() == p || bridge.getEnd() == p) {
+            return true;
+        }
+    }*/
+
+    for (const Bridge& bridge : m_boardBridges) {
         if (bridge.getStart() == p || bridge.getEnd() == p) {
             return true;
         }
@@ -267,8 +292,7 @@ void twixt::Board::createBridge(twixt::Pylon& pilon)
                 Bridge newBridge = twixt::Bridge(pilon, actualPylon);
                 addBridge(newBridge);
             }
-        }
-        
+        }   
     }
 }
 
@@ -278,7 +302,7 @@ void twixt::Board::createBridge(twixt::Pylon& pilon)
 //pozitie 3 -> -  _
 //pozitie 4 -> _  -
 
-int twixt::Board::getBridgePosition(const twixt::Pylon& p1, const twixt::Pylon& p2)
+uint16_t twixt::Board::getBridgePosition(const twixt::Pylon& p1, const twixt::Pylon& p2)
 {
     uint16_t line1 = p1.getLine(), col1 = p1.getColumn(), line2 = p2.getLine(), col2 = p2.getColumn();
     uint16_t lineDif = abs(line1 - line2), colDif = abs(col1 - col2);

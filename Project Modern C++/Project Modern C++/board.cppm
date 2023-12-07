@@ -13,7 +13,7 @@ namespace twixt {
 	private:
 		uint16_t m_size;
 		std::vector<std::optional<Pylon>> m_boardPylons;
-		std::vector<std::optional<Bridge>> m_boardBridges;
+		std::vector<Bridge> m_boardBridges;
 	public:
 		Board();
 		Board(uint16_t size);
@@ -32,7 +32,7 @@ namespace twixt {
 		void removeBridge(const Bridge& bridge);
 		void provisionalPrint();
 		const std::vector<std::optional<Pylon>>& getPylons() const;
-		const std::vector<std::optional<Bridge>>& getBridges() const;
+		const std::vector<Bridge>& getBridges() const;
 		bool isValidBridge(const Pylon& start, const Pylon& end);
 		void resetBoard();
 		bool canPlaceLargePylon(const LargePylon& pylon);
@@ -40,7 +40,6 @@ namespace twixt {
 		bool isPylonOccupied(const Pylon& p);
 		bool canPlaceBridge(const Pylon& p1, const Pylon& p2);
 		void createBridge(Pylon& pilon);
-		int getBridgePosition(const Pylon& p1, const Pylon& p2);
-        
+		uint16_t getBridgePosition(const Pylon& p1, const Pylon& p2);
 	};
 }
