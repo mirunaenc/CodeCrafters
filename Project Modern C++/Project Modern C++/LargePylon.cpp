@@ -13,18 +13,13 @@ const std::vector<std::pair<uint16_t, uint16_t>>& twixt::LargePylon::getShape() 
 	return m_shape;
 }
 
-bool twixt::LargePylon::isSymmetric()
-{
-    for (size_t i = 0; i < m_vertices.size(); ++i) {
-        uint16_t oppositeX = m_shape[i].first - (m_vertices[i].first - m_shape[i].first);
-        uint16_t oppositeY = m_shape[i].second - (m_vertices[i].second - m_shape[i].second);
-
+bool twixt::LargePylon::isSymmetric() {
+    return std::all_of(m_vertices.begin(), m_vertices.end(), [&](const auto& vertex) {
+        uint16_t oppositeX = m_shape[0].first - (vertex.first - m_shape[0].first);
+        uint16_t oppositeY = m_shape[0].second - (vertex.second - m_shape[0].second);
         auto oppositePair = std::make_pair(oppositeX, oppositeY);
-        if (std::find(m_vertices.begin(), m_vertices.end(), oppositePair) == m_vertices.end()) {
-            return false; 
-        }
-    }
-    return true; 
+        return std::find(m_vertices.begin(), m_vertices.end(), oppositePair) != m_vertices.end();
+        });
 }
 
 bool twixt::LargePylon::isValidShape() const
@@ -66,13 +61,8 @@ bool twixt::LargePylon::hasTwoVerticesOnOneSide() const {
     int verticesTop = 0, verticesBottom = 0, verticesLeft = 0, verticesRight = 0;
 
     // determinam limitele formei pilonului
-    auto [minX, maxX, minY, maxY] = std::tuple{ m_shape[0].first, m_shape[0].first, m_shape[0].second, m_shape[0].second };
-    for (const auto& point : m_shape) {
-        minX = std::min(minX, point.first);
-        maxX = std::max(maxX, point.first);
-        minY = std::min(minY, point.second);
-        maxY = std::max(maxY, point.second);
-    }
+    uint16_t minX, maxX, minY, maxY;
+    std::tie(minX, maxX, minY, maxY) = std::make_tuple(m_shape[0].first, m_shape[0].first, m_shape[0].second, m_shape[0].second);
 
     // verif fiecare varf pentru a determina pe ce latura se afla
     for (const auto& vertice : m_vertices) {
