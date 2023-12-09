@@ -28,11 +28,11 @@ namespace twixt {
 
 	public:
 		Player(uint16_t nrPylons, uint16_t nrBridges, EColor color, Board& gameBoard);
-		Player(const Player& otherPlayer);
-		Player(Player&& otherPlayer) noexcept;
+		Player(const Player& otherPlayer) = default;
+		Player(Player&& otherPlayer) noexcept = default;
         Player& operator=(Player&& otherPlayer) noexcept;
         Player& operator=(const Player& otherPlayer);
-		~Player();
+		~Player() = default;
 		
 		uint16_t getNrOfAvailablePylons() const;
 		void setNrOfAvailablePylons(uint16_t nrPylons);

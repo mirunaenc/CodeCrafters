@@ -5,24 +5,6 @@ twixt::Player::Player(uint16_t nrPylons, uint16_t nrBridges, EColor color, Board
 	: m_nrOfAvailablePylons{ nrPylons }, m_nrOfAvailableBridges{ nrBridges }, m_color{ color }, m_gameBoard(gameBoard)
 {}
 
-
-twixt::Player::Player(const Player& otherPlayer)
-	: m_nrOfAvailablePylons{ otherPlayer.m_nrOfAvailablePylons},
-	m_nrOfAvailableBridges{ otherPlayer.m_nrOfAvailableBridges},
-	m_color{ otherPlayer.m_color},m_pylons{ otherPlayer.m_pylons},
-	m_bridges{ otherPlayer.m_bridges},
-	m_gameBoard{ otherPlayer.m_gameBoard}
-{}
-
-twixt::Player::Player(Player&& otherPlayer) noexcept
-	: m_nrOfAvailablePylons{ otherPlayer.m_nrOfAvailablePylons },
-	m_nrOfAvailableBridges{ otherPlayer.m_nrOfAvailableBridges },
-	m_color{ otherPlayer.m_color }, m_pylons{ otherPlayer.m_pylons },
-	m_bridges{ otherPlayer.m_bridges },
-	m_gameBoard{ otherPlayer.m_gameBoard }
-{}
-
-
 twixt::Player& twixt::Player::operator=(Player&& otherPlayer) noexcept
 {
 	if (this != &otherPlayer) {
@@ -81,11 +63,6 @@ void twixt::Player::setColor(const EColor& color)
 	m_color = color;
 }
 
-twixt::Player::~Player()
-{
-
-}
-
 const twixt::Board& twixt::Player::getGameBoard() const 
 {
 	return m_gameBoard;
@@ -125,6 +102,8 @@ void twixt::Player::placePylon(uint16_t line, uint16_t column)
 
 	m_pylons.push_back(pylon);
 	m_gameBoard.addPylon(line, column, optionalPylon);
+	if (optionalPylon.has_value())
+		m_gameBoard.createBridge(optionalPylon.value());
 
 	setNrOfAvailablePylons(m_nrOfAvailablePylons - 1);
 }

@@ -247,9 +247,7 @@ bool twixt::Board::canPlaceBridge(const twixt::Pylon& p1, const twixt::Pylon& p2
     uint16_t lineDif = abs(p1.getLine() - p2.getLine());
     uint16_t colDif = abs(p1.getColumn() - p2.getColumn());
 
-    if (!(lineDif == 1 && colDif == 2))
-        return false;
-    if (!(lineDif == 2 && colDif == 1))
+    if (!(lineDif == 1 && colDif == 2) && !(lineDif == 2 && colDif == 1))
         return false;
 
     uint16_t bridgePosition = getBridgePosition(p1, p2);
