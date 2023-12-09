@@ -1,4 +1,6 @@
+#include "LargePylon.h"
 import <algorithm>;
+import <ranges>;
 import "LargePylon.h";
 
 twixt::LargePylon::LargePylon(uint16_t line, uint16_t column, const std::vector<std::pair<uint16_t, uint16_t>>& shape,
@@ -6,6 +8,18 @@ twixt::LargePylon::LargePylon(uint16_t line, uint16_t column, const std::vector<
     if (!isSymmetric()) {
         throw std::invalid_argument("Peaks are not symmetric!");
     }
+}
+
+twixt::LargePylon::LargePylon(uint16_t line, uint16_t column, std::vector<std::pair<uint16_t, uint16_t>>&& shape,
+    std::vector<std::pair<uint16_t, uint16_t>>&& vertices) noexcept : Pylon{ line, column }, m_shape{ std::move(shape) }, m_vertices{ std::move(vertices) } {}
+
+twixt::LargePylon& twixt::LargePylon::operator=(LargePylon&& other) noexcept {
+    if (this != &other) {
+        Pylon::operator=(std::move(other)); 
+        m_shape = std::move(other.m_shape);
+        m_vertices = std::move(other.m_vertices);
+    }
+    return *this;
 }
 
 const std::vector<std::pair<uint16_t, uint16_t>>& twixt::LargePylon::getShape() const
@@ -78,3 +92,4 @@ bool twixt::LargePylon::hasTwoVerticesOnOneSide() const {
         (verticesTop == 0 && verticesBottom == 0 && verticesLeft == 2 && verticesRight == 0) ||
         (verticesTop == 0 && verticesBottom == 0 && verticesLeft == 0 && verticesRight == 2);
 }
+
