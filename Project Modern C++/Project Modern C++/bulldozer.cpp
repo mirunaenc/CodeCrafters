@@ -2,10 +2,9 @@ import "bulldozer.h";
 
 namespace twixt {
 
-    Bulldozer::Bulldozer(Board& board, size_t initialLinePosition, size_t initialColumnPosition, float biasedCoinProbability,
-        Player& player1, Player& player2)
+    Bulldozer::Bulldozer(Board& board, size_t initialLinePosition, size_t initialColumnPosition, float biasedCoinProbability)
         : m_board{ board }, m_linePosition{ initialLinePosition }, m_columnPosition{ initialColumnPosition },
-        m_biasedCoinProbability{ biasedCoinProbability },  m_player1{ player1 }, m_player2{player2} 
+        m_biasedCoinProbability{ biasedCoinProbability } 
     {
         std::random_device m_rd;
         m_rng.seed(m_rd());
@@ -13,7 +12,7 @@ namespace twixt {
 
     Bulldozer::Bulldozer(const Bulldozer& other)
         : m_board{ other.m_board }, m_linePosition{ other.m_linePosition }, m_columnPosition{ other.m_columnPosition },
-        m_biasedCoinProbability{ other.m_biasedCoinProbability },  m_player1{ other.m_player1 }, m_player2{ other.m_player2 } 
+        m_biasedCoinProbability{ other.m_biasedCoinProbability } 
     {
         std::random_device m_rd;
         m_rng.seed(m_rd());
@@ -22,7 +21,7 @@ namespace twixt {
 
     Bulldozer::Bulldozer(Bulldozer&& other) noexcept
         : m_board{other.m_board}, m_linePosition{ other.m_linePosition }, m_columnPosition{ other.m_columnPosition },
-        m_biasedCoinProbability{ other.m_biasedCoinProbability }, m_player1{ other.m_player1 }, m_player2{ other.m_player2 } 
+        m_biasedCoinProbability{ other.m_biasedCoinProbability } 
     {
 		std::random_device m_rd;
         m_rng.seed(m_rd());
@@ -34,8 +33,6 @@ namespace twixt {
             m_linePosition = other.m_linePosition;
             m_columnPosition = other.m_columnPosition;
             m_biasedCoinProbability = other.m_biasedCoinProbability;
-            m_player1 = other.m_player1;
-            m_player2 = other.m_player2;
         }
         return *this;
     }
@@ -45,8 +42,7 @@ namespace twixt {
             m_linePosition = other.m_linePosition;
             m_columnPosition = other.m_columnPosition;
   		  m_biasedCoinProbability = other.m_biasedCoinProbability;
-			m_player1 = other.m_player1;
-			m_player2 = other.m_player2;
+		
         }
         return *this;
     }
@@ -128,11 +124,6 @@ namespace twixt {
 
         Pylon pylon = m_board.getPylon(occupiedPositions[randomIndex].first, occupiedPositions[randomIndex].second).value();     
       
-        if(m_player1.hasPylon(&pylon))
-			m_player1.removePylon(&pylon);
-		else
-			m_player2.removePylon(&pylon);
-
         m_board.resetPosition(occupiedPositions[randomIndex].first, occupiedPositions[randomIndex].second);
 
         setLinePosition(occupiedPositions[randomIndex].first);

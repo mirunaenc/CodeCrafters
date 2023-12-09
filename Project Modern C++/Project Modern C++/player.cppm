@@ -22,8 +22,6 @@ namespace twixt {
 		uint16_t m_nrOfAvailablePylons;
 		uint16_t m_nrOfAvailableBridges;
 		EColor m_color;
-		std::vector<Pylon*> m_pylons;
-		std::vector<Bridge*> m_bridges;
 		Board& m_gameBoard;
 
 	public:
@@ -46,24 +44,11 @@ namespace twixt {
 		const Board& getGameBoard() const;
 		void setGameBoard(const Board& gameBoard);
 
-		const std::vector<Pylon*>& getPylons() const;
-		void setPylons(const std::vector<Pylon*>& pylons);
-
-		const std::vector<Bridge*>& getBridges() const;
-		void setBridges(const std::vector<Bridge*>& bridges);
-
 		void placePylon(uint16_t line, uint16_t column);
 	
 		void placeBridge(const Pylon& start, const Pylon& end);
 
-		int getPositionPylonInVector(const Pylon* pylonPtr);
-
-
-		bool hasPylon(const Pylon* pylonPtr) const;
-
 		bool isWinner();
-
-		void removePylon(const Pylon* pylon);
 
 		bool hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std::vector<bool>& visited);
 

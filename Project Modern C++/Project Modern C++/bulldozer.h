@@ -17,12 +17,9 @@ namespace twixt {
         Board& m_board;
         std::mt19937 m_rng;
         float m_biasedCoinProbability;
-        Player& m_player1;
-        Player& m_player2;
 
     public:
-        Bulldozer(Board& board, size_t initialLinePosition, size_t initialColumnPosition, float biasedCoinProbability,
-       Player& player1, Player& player2);
+        Bulldozer(Board& board, size_t initialLinePosition, size_t initialColumnPosition, float biasedCoinProbability);
         Bulldozer(const Bulldozer& other);  
         Bulldozer(Bulldozer&& other) noexcept; 
         Bulldozer& operator=(const Bulldozer& other); 

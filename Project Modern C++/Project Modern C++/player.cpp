@@ -11,8 +11,6 @@ twixt::Player& twixt::Player::operator=(Player&& otherPlayer) noexcept
 		m_nrOfAvailablePylons = otherPlayer.m_nrOfAvailablePylons;
 		m_nrOfAvailableBridges = otherPlayer.m_nrOfAvailableBridges;
 		m_color = otherPlayer.m_color;
-		m_pylons = otherPlayer.m_pylons;
-		m_bridges = otherPlayer.m_bridges;
 		m_gameBoard = otherPlayer.m_gameBoard;
 	}
 	return *this;
@@ -24,8 +22,6 @@ twixt::Player& twixt::Player::operator=(const Player& otherPlayer)
 		m_nrOfAvailablePylons = otherPlayer.m_nrOfAvailablePylons;
 		m_nrOfAvailableBridges = otherPlayer.m_nrOfAvailableBridges;
 		m_color = otherPlayer.m_color;
-		m_pylons = otherPlayer.m_pylons;
-		m_bridges = otherPlayer.m_bridges;
 		m_gameBoard = otherPlayer.m_gameBoard;
 	}
 	return *this;
@@ -73,25 +69,6 @@ void twixt::Player::setGameBoard(const Board& gameBoard)
 	m_gameBoard = gameBoard;
 }
 
-const std::vector<twixt::Pylon*>& twixt::Player::getPylons() const
-{
-	return m_pylons;
-}
-
-void twixt::Player::setPylons(const std::vector<Pylon*>& pylons)
-{
-	m_pylons = pylons;
-}
-
-const std::vector<twixt::Bridge*>& twixt::Player::getBridges() const
-{
-	return m_bridges;
-}
-
-void twixt::Player::setBridges(const std::vector<Bridge*>& bridges)
-{
-	m_bridges = bridges;
-}
 
 void twixt::Player::placePylon(uint16_t line, uint16_t column)
 {
@@ -100,10 +77,9 @@ void twixt::Player::placePylon(uint16_t line, uint16_t column)
 
 	std::optional<Pylon> optionalPylon = *pylon;
 
-	m_pylons.push_back(pylon);
 	m_gameBoard.addPylon(line, column, optionalPylon);
-	if (optionalPylon.has_value())
-		m_gameBoard.createBridge(optionalPylon.value());
+	if(optionalPylon.has_value())
+		m_gameBoard.createBridge(optionalPylon);
 
 	setNrOfAvailablePylons(m_nrOfAvailablePylons - 1);
 }
@@ -112,28 +88,9 @@ void twixt::Player::placeBridge(const Pylon& start,const Pylon& end)
 {
 	//Bridge bridge(start,end);
 	//m_gameBoard.addBridge(bridge);
-	//m_bridges.push_back(&bridge);  
 	setNrOfAvailableBridges(m_nrOfAvailableBridges - 1);
 }
 
-
-int twixt::Player::getPositionPylonInVector(const Pylon* pylonPtr)
-{
-	auto it = std::find(m_pylons.begin(), m_pylons.end(), pylonPtr);
-
-	if (it != m_pylons.end())
-		return static_cast<int>(std::distance(m_pylons.begin(), it));
-	else
-		return -1;
-}
-
-bool twixt::Player::hasPylon(const Pylon* pylonPtr) const
-{
-	auto it = std::find(m_pylons.begin(), m_pylons.end(), pylonPtr);
-	if(it != m_pylons.end())
-		return true;
-    return false;
-}
 
 bool twixt::Player::isWinner()
 {
@@ -142,14 +99,6 @@ bool twixt::Player::isWinner()
 	return false;
 }
 
-void twixt::Player::removePylon(const Pylon* pylon)
-{
-	int index = getPositionPylonInVector(pylon);
-	if (index != -1)
-	{
-		m_pylons.erase(m_pylons.begin() + index);
-	}
-}
 
 bool twixt::Player::hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std::vector<bool>& visited)
 {
@@ -228,4 +177,31 @@ void twixt::Player::makeMove()
     std::cout << "Enter the line and column of the pylon you want to place: ";
 	std::cin >> line >> column;
 	placePylon(line, column);
+	std::cout<<"Do you want to update the bridges? (y/n)";
+	char answer;
+	std::cin>>answer;
+	while (answer == 'y')
+	{
+		std::cout << "Enter the line and column of the start pylon: ";
+		size_t line, column;
+		std::cin >>line>>column;
+std::cout << "Enter the line and column of the end pylon: ";
+		size_t line2, column2;
+		std::cin >>line2>>column2;
+
+		if (m_gameBoard.getPylon(line, column).has_value() && m_gameBoard.getPylon(line2, column2).has_value())
+		{
+			if(m_gameBoard.existsBridgeBetweenPylons(m_gameBoard.getPylon(line, column).value(),
+				m_gameBoard.getPylon(line2, column2).value()))
+				
+				placeBridge(m_gameBoard.getPylon(line, column).value(), m_gameBoard.getPylon(line2, column2).value())
+		}
+		
+		m_gameBoard.getPylon(line, column).value();
+		
+	   
+
+		std::cout<<"Do you still want to update the bridges? (y/n)";
+		std::cin>>answer;
+	}
 }
