@@ -16,6 +16,7 @@ namespace twixt {
 		bool isSymmetric();
 		bool isValidShape() const;
 		void setShape(const std::vector<std::pair<uint16_t, uint16_t>>& shape);
+		bool hasTwoVerticesOnOneSide() const;
 	};
 
 }
