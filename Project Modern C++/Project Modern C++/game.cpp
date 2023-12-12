@@ -194,7 +194,7 @@ namespace twixt {
 		/*const auto& bridges = m_gameBoard.getBridges();*/
 		const uint16_t size = m_gameBoard.getSize();
 
-		/*for (uint16_t i = 0; i < size; ++i) {
+		for (uint16_t i = 0; i < size; ++i) {
 			for (uint16_t j = 0; j < size; ++j) {
 				bool pylonExists = false;
 				char displayChar = '-'; 
@@ -215,15 +215,15 @@ namespace twixt {
 				std::cout << displayChar << ' ';
 			}
 			std::cout << '\n';
-		}*/
-		std::for_each(pylons.cbegin(), pylons.cend(), [size](const auto& pylon) {
+		}
+		/*std::for_each(pylons.cbegin(), pylons.cend(), [size](const auto& pylon) {
 			std::for_each(pylon.cbegin(), pylon.cend(), [size](const auto& p) {
 				bool pylonExists = p.has_value();
 				char displayChar = (pylonExists && p->getColor() == EColor::RED) ? 'R' : (pylonExists ? 'B' : '-');
 				std::cout << displayChar << ' ';
 				});
 			std::cout << '\n';
-			});
+			});*/
 
 		if (m_currentPlayer != nullptr) {
 			std::cout << "Turn of : ";
@@ -236,6 +236,21 @@ namespace twixt {
 		}
 		else {
 			std::cout << "No player's turn!\n";
+		}
+	}
+
+	void Game::displayCurrentPlayer() const
+	{
+		if (m_currentPlayer != nullptr) {
+			if (m_currentPlayer == &m_player1) {
+				std::cout << "Player RED\n";
+			}
+			else {
+				std::cout << "Player BLACK\n";
+			}
+		}
+		else {
+			std::cout << "No color!\n";
 		}
 	}
 

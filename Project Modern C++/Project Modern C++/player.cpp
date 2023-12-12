@@ -205,3 +205,10 @@ std::cout << "Enter the line and column of the end pylon: ";
 		std::cin>>answer;
 	}
 }
+
+void twixt::Player::savePlayerState(std::ofstream& file) const
+{
+	file << m_nrOfAvailablePylons << "\n";
+	file << m_nrOfAvailableBridges << "\n";
+	file << static_cast<int>(m_color) << "\n";
+}

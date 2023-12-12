@@ -4,6 +4,7 @@ import <optional>;
 import <algorithm>;
 import <iostream>;
 import "LargePylon.h";
+import <fstream>;
 import pylon;
 import bridge;
 
@@ -41,5 +42,6 @@ namespace twixt {
 		bool canPlaceBridge(const Pylon& p1, const Pylon& p2);
 		void createBridge(Pylon& pilon);
 		uint16_t getBridgePosition(const Pylon& p1, const Pylon& p2);
+		void saveBoardState(std::ofstream& file) const;
 	};
 }

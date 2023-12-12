@@ -47,6 +47,7 @@ namespace twixt {
 		void swapPlayers();
 		
 		void displayGameBoard() const;
+		void displayCurrentPlayer() const;
 
 		
 	};

@@ -318,3 +318,21 @@ uint16_t twixt::Board::getBridgePosition(const twixt::Pylon& p1, const twixt::Py
     
     return -1;
 }
+
+void twixt::Board::saveBoardState(std::ofstream& file) const
+{
+    file << m_size << "\n";
+    // Salvarea informațiilor despre piloni și poduri în fișier
+    // Iterați prin m_boardPylons și m_boardBridges și scrieți detaliile acestora în fișier
+    // Exemplu:
+    file << m_boardPylons.size();
+    for (const auto& pylon : m_boardPylons) {
+        if (pylon.has_value()) {
+            file << pylon->getLine() << " " << pylon->getColumn() << " " << static_cast<int>(pylon->getColor()) << "\n";
+        }
+    }
+    for (const auto& bridge : m_boardBridges) {
+        file <<bridge.getStart().getLine() << " " << bridge.getStart().getColumn()
+            << " " << bridge.getEnd().getLine() << " " << bridge.getEnd().getColumn() << "\n";
+    }
+}

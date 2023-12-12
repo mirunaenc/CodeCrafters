@@ -1,6 +1,7 @@
 export module player;
 import <vector>;
 import <optional>;
+import <fstream>;
 import <array>;
 import <iostream>;
 import pylon;
@@ -55,5 +56,7 @@ namespace twixt {
 		bool hasWinningRoad();
 
 		void makeMove();
+
+		void savePlayerState(std::ofstream& file) const;
 	};	
 }
