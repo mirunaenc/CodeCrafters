@@ -57,6 +57,9 @@
     <ClCompile Include="utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameFileManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bulldozer.h">
@@ -68,5 +71,11 @@
     <ClInclude Include="LargePylon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameFileManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="savedGame.txt" />
   </ItemGroup>
 </Project>

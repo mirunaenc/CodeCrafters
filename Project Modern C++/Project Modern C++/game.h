@@ -1,9 +1,11 @@
 #pragma once
 import <ctime>;
 import <cstdlib>;
+import <fstream>;
 import board;
 import player;
 import utility;
+
 
 namespace twixt {
 	class Game {
@@ -14,6 +16,8 @@ namespace twixt {
 		Player m_player2;
 		Player* m_currentPlayer = nullptr;
 		Player* m_opponentPlayer = nullptr;
+
+		friend class GameFileManager;
 
 	public:
 		Game(Board& GameBoard, Player player1, Player player2);
@@ -38,15 +42,13 @@ namespace twixt {
 		bool checkWinCondition();
 		void run();
 		void randomStarter();
+		void offerPieRule();
 
 		void swapPlayers();
 		
-		void displayCurrentPlayer();
 		void displayGameBoard() const;
+
 		
-		void modifySizeofBoard(uint16_t size);
-
-
 	};
 
 }

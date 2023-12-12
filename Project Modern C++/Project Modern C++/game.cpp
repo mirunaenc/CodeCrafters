@@ -159,6 +159,22 @@ namespace twixt {
 		}
 	}
 
+	void Game::offerPieRule()
+	{
+		std::cout << "The pie rule is in effect. Do you want to swap sides? (Y/N): ";
+		char choice;
+		std::cin >> choice;
+
+		if (choice == 'Y' || choice == 'y') {
+			swapPlayers(); // Schimbă jucătorii
+			std::cout << "Players have swapped sides.\n";
+			displayGameBoard(); // Afișează tabla actualizată după schimbarea părților
+		}
+		else {
+			std::cout << "No changes made.\n";
+		}
+	}
+
 	void Game::swapPlayers()
 	{
 	
@@ -168,16 +184,6 @@ namespace twixt {
 
 	}
 
-	void Game::displayCurrentPlayer() {
-		if (m_currentPlayer == &m_player1) {
-			std::cout << "m_currentPlayer is referring to m_player1\n";
-			/*std::cout << m_player1;*/
-		}
-		else if (m_currentPlayer == &m_player2) {
-			std::cout << "m_currentPlayer is referring to m_player2\n";
-			/*std::cout << m_player2;*/
-		}
-	}
 
 	void Game::displayGameBoard() const /// still in process
 	{
@@ -222,22 +228,15 @@ namespace twixt {
 		if (m_currentPlayer != nullptr) {
 			std::cout << "Turn of : ";
 			if (m_currentPlayer == &m_player1) {
-				std::cout << "Player 1\n";
+				std::cout << "Player RED\n";
 			}
 			else {
-				std::cout << "Player 2\n";
+				std::cout << "Player BLACK\n";
 			}
 		}
 		else {
 			std::cout << "No player's turn!\n";
 		}
-	}
-
-
-
-	void Game::modifySizeofBoard(uint16_t size)
-	{
-		m_gameBoard.setSize(size);
 	}
 
 }
