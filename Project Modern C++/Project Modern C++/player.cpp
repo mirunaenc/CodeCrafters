@@ -99,29 +99,6 @@ bool twixt::Player::isWinner()
 	return false;
 }
 
-bool twixt::Player::hasWinningRoad()
-{
-	std::vector<bool> visited(m_gameBoard.getSize() * m_gameBoard.getSize(), false);
-
-	// Check for horizontal winning road
-	if (m_color == EColor::BLACK) {
-		for (uint16_t i = 0; i < m_gameBoard.getSize(); ++i) {
-			if (visited[i * m_gameBoard.getSize() + 0] == false && m_gameBoard.hasRoadDFS(i, 0, visited))
-				return true;
-		}
-	}
-
-	// Check for vertical winning road
-	if (m_color == EColor::RED) {
-		for (uint16_t j = 0; j < m_gameBoard.getSize(); ++j) {
-			if (visited[0 * m_gameBoard.getSize() + j] == false && m_gameBoard.hasRoadDFS(0, j, visited))
-				return true;
-			
-		}
-	}
-	return false;
-}
-
 void twixt::Player::makeMove()
 {
 	uint16_t line, column;

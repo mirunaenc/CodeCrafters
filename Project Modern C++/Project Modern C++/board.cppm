@@ -45,5 +45,6 @@ namespace twixt {
 		uint16_t getBridgePosition(const Pylon& p1, const Pylon& p2);
 		void saveBoardState(std::ofstream& file) const;
 		bool hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std::vector<bool>& visited);
+		EColor hasWinningRoad();
 	};
 }

@@ -51,10 +51,6 @@ namespace twixt {
 
 		bool isWinner();
 
-		bool hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std::vector<bool>& visited);
-
-		bool hasWinningRoad();
-
 		void makeMove();
 
 		void savePlayerState(std::ofstream& file) const;

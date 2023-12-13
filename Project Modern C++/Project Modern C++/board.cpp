@@ -379,3 +379,25 @@ bool twixt::Board::hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std:
 
     return false;
 }
+
+twixt::EColor twixt::Board::hasWinningRoad()
+{
+
+    std::vector<bool> visited(this->getSize() * this->getSize(), false);
+
+    // Check for horizontal winning road
+        for (uint16_t i = 0; i < this->getSize(); ++i) {
+            if(this->getPylon(i,0).has_value())
+            if (visited[i * this->getSize() + 0] == false && this->getPylon(i,0).value().getColor() == EColor::BLACK && this->hasRoadDFS(i, 0, visited))
+                return EColor::BLACK;
+        }
+    
+
+    // Check for vertical winning road
+        for (uint16_t j = 0; j < this->getSize(); ++j) {
+            if (this->getPylon(0, j).has_value())
+            if (visited[0 * this->getSize() + j] == false && this->getPylon(0,j).value().getColor() == EColor::RED && this->hasRoadDFS(0, j, visited))
+                return EColor::RED;
+        }  
+    return EColor::NONE;
+}
