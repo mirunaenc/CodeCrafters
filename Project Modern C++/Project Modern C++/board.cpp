@@ -336,3 +336,46 @@ void twixt::Board::saveBoardState(std::ofstream& file) const
             << " " << bridge.getEnd().getLine() << " " << bridge.getEnd().getColumn() << "\n";
     }
 }
+
+bool twixt::Board::hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std::vector<bool>& visited)
+{
+    EColor pylonColor = EColor::NONE;
+
+    if(this->getPylon(currentLine, currentColumn).has_value())
+        pylonColor = this->getPylon(currentLine, currentColumn).value().getColor();
+
+
+    if (pylonColor == EColor::RED)
+        if (currentLine == this->getSize() - 1)
+            return true;    
+
+    if (pylonColor == EColor::BLACK)
+        if (currentColumn == this->getSize() - 1)
+            return true;
+  
+    visited[currentLine * this->getSize() + currentColumn] = true;
+
+    // Check all adjacent positions
+    for (int i = -2; i <= 2; ++i) {
+        for (int j = -2; j <= 2; ++j) { 
+            if (std::abs(i) + std::abs(j) == 3) { // Check only diagonally connected pylons
+                uint16_t nextLine = currentLine + i;
+                uint16_t nextColumn = currentColumn + j;
+
+                if (this->isPositionInsideBoard(nextLine, nextColumn) &&
+                    !visited[nextLine * this->getSize() + nextColumn] &&
+                    this->getPylon(currentLine, currentColumn).has_value() &&
+                    this->getPylon(nextLine, nextColumn).has_value()
+                    && this->getPylon(nextLine, nextColumn).value().getColor() == this->getPylon(currentLine, currentColumn).value().getColor()
+                    //&& this->existsBridgeBetweenPylons(m_gameBoard.getPylon(currentLine, currentColumn).value(), m_gameBoard.getPylon(nextLine, nextColumn).value())
+                    )
+                {
+                    if (hasRoadDFS(nextLine, nextColumn, visited))
+                        return true;
+                }
+            }
+        }
+    }
+
+    return false;
+}

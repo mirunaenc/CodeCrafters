@@ -79,7 +79,7 @@ void twixt::Player::placePylon(uint16_t line, uint16_t column)
 
 	m_gameBoard.addPylon(line, column, optionalPylon);
 	if(optionalPylon.has_value())
-		m_gameBoard.createBridge(optionalPylon);
+		m_gameBoard.createBridge(optionalPylon.value());
 
 	setNrOfAvailablePylons(m_nrOfAvailablePylons - 1);
 }
@@ -94,52 +94,8 @@ void twixt::Player::placeBridge(const Pylon& start,const Pylon& end)
 
 bool twixt::Player::isWinner()
 {
-      if (hasWinningRoad())
+      if (m_gameBoard.hasWinningRoad() == this->getColor() )
 		return true;
-	return false;
-}
-
-
-bool twixt::Player::hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std::vector<bool>& visited)
-{
-	if (m_color == EColor::RED) 
-			if (currentLine == m_gameBoard.getSize() - 1)
-			return true; 
-	else 	
-		if (currentLine == m_gameBoard.getSize() - 2)
-			return true; 	
-
-	if(m_color == EColor::BLACK)
-		if (currentColumn == m_gameBoard.getSize() - 1)
-			return true; 
-	else
-		if (currentColumn == m_gameBoard.getSize() - 2)
-			return true; 
-
-
-	visited[currentLine * m_gameBoard.getSize() + currentColumn] = true;
-
-	// Check all adjacent positions
-	for (int i = -2; i <= 2; ++i) {
-		for (int j = -2; j <= 2; ++j) {
-			if (std::abs(i) + std::abs(j) == 3) { // Check only diagonally connected pylons
-				uint16_t nextLine = currentLine + i;
-				uint16_t nextColumn = currentColumn + j;
-
-				if (m_gameBoard.isPositionInsideBoard(nextLine, nextColumn) &&
-					!visited[nextLine * m_gameBoard.getSize() + nextColumn] &&
-					m_gameBoard.getPylon(currentLine, currentColumn).has_value() &&
-						m_gameBoard.getPylon(nextLine, nextColumn).has_value()
-					&& m_gameBoard.existsBridgeBetweenPylons(m_gameBoard.getPylon(currentLine, currentColumn).value(), m_gameBoard.getPylon(nextLine, nextColumn).value())
-					)				
-				{
-					if (hasRoadDFS(nextLine, nextColumn, visited)) 
-						return true;
-				}
-			}
-		}
-	}
-
 	return false;
 }
 
@@ -150,10 +106,7 @@ bool twixt::Player::hasWinningRoad()
 	// Check for horizontal winning road
 	if (m_color == EColor::BLACK) {
 		for (uint16_t i = 0; i < m_gameBoard.getSize(); ++i) {
-			if (visited[i * m_gameBoard.getSize() + 0] == false && hasRoadDFS(i, 0, visited))
-				return true;
-			
-			if(visited[i * m_gameBoard.getSize() + 1] == false && hasRoadDFS(i, 1, visited))
+			if (visited[i * m_gameBoard.getSize() + 0] == false && m_gameBoard.hasRoadDFS(i, 0, visited))
 				return true;
 		}
 	}
@@ -161,11 +114,9 @@ bool twixt::Player::hasWinningRoad()
 	// Check for vertical winning road
 	if (m_color == EColor::RED) {
 		for (uint16_t j = 0; j < m_gameBoard.getSize(); ++j) {
-			if (visited[0 * m_gameBoard.getSize() + j] == false && hasRoadDFS(0, j, visited))
+			if (visited[0 * m_gameBoard.getSize() + j] == false && m_gameBoard.hasRoadDFS(0, j, visited))
 				return true;
 			
-			if(visited[1 * m_gameBoard.getSize() + j] == false && hasRoadDFS(1, j, visited))
-				return true;
 		}
 	}
 	return false;
@@ -183,18 +134,18 @@ void twixt::Player::makeMove()
 	while (answer == 'y')
 	{
 		std::cout << "Enter the line and column of the start pylon: ";
-		size_t line, column;
+		uint16_t line, column;
 		std::cin >>line>>column;
-std::cout << "Enter the line and column of the end pylon: ";
-		size_t line2, column2;
+        std::cout << "Enter the line and column of the end pylon: ";
+      uint16_t line2, column2;
 		std::cin >>line2>>column2;
 
 		if (m_gameBoard.getPylon(line, column).has_value() && m_gameBoard.getPylon(line2, column2).has_value())
 		{
-			if(m_gameBoard.existsBridgeBetweenPylons(m_gameBoard.getPylon(line, column).value(),
+			if (m_gameBoard.existsBridgeBetweenPylons(m_gameBoard.getPylon(line, column).value(),
 				m_gameBoard.getPylon(line2, column2).value()))
-				
-				placeBridge(m_gameBoard.getPylon(line, column).value(), m_gameBoard.getPylon(line2, column2).value())
+
+				placeBridge(m_gameBoard.getPylon(line, column).value(), m_gameBoard.getPylon(line2, column2).value());
 		}
 		
 		m_gameBoard.getPylon(line, column).value();
