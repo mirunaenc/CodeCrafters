@@ -1,5 +1,6 @@
 export module bridge;
 import <regex>;
+import <algorithm>;
 import pylon;
 
 namespace twixt {
@@ -23,5 +24,6 @@ namespace twixt {
 		~Bridge();
 		bool isConnectedTo(const Pylon& pylon);
 		bool operator==(const Bridge& other) const;
+		bool intersectsWith(const Bridge& other) const;
 	};
 }
