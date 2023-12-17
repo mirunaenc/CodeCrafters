@@ -34,19 +34,19 @@ int main()
 
 	//twixt::Pylon pylon3{ 2,1 }; // dont intersect 
 	//twixt::Pylon pylon4{ 0,0 }; 
+
+	twixt::Pylon p1(1, 1);
+	twixt::Pylon p2(3, 2);
+	twixt::Pylon p3(1, 2);
+	twixt::Pylon p4(3, 1);
 	
+	twixt::Bridge b1(p1, p2);
+	twixt::Bridge b2(p3, p4);
 
-	twixt::Bridge bridge1(pylon1,pylon2);
-	twixt::Bridge bridge2(pylon3,pylon4);
-
-
-	if (bridge1.intersectsWith(bridge2)) {
-		std::cout << "Bridges intersect." << std::endl;
-	}
-	else {
-		std::cout << "Bridges do not intersect." << std::endl;
-	}
-
+	if (b1.intersectsWith(b2))
+		std::cout << "Intersects";
+	else
+		std::cout << "Doesn't intersect";
 
 	return 0;
 }

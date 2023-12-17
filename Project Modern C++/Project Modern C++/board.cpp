@@ -257,7 +257,8 @@ bool twixt::Board::canPlaceBridge(twixt::Pylon& p1, twixt::Pylon& p2)
     Bridge newBridge = twixt::Bridge(p1, p2);
 
     for (const auto& existingBridge : m_boardBridges) {
-        //check if the path is blocked
+        if (newBridge.intersectsWith(existingBridge))
+            return false;
     }
 
     return true;
@@ -295,31 +296,6 @@ void twixt::Board::createBridge(twixt::Pylon& pilon)
             }
         }   
     }
-}
-
-//important
-//pozitie 1 -> \ 
-//pozitie 2 -> /
-//pozitie 3 -> -  _
-//pozitie 4 -> _  -
-
-uint16_t twixt::Board::getBridgePosition(const twixt::Pylon& p1, const twixt::Pylon& p2)
-{
-    uint16_t line1 = p1.getLine(), col1 = p1.getColumn(), line2 = p2.getLine(), col2 = p2.getColumn();
-    uint16_t lineDif = abs(line1 - line2), colDif = abs(col1 - col2);
-
-    if (lineDif == 2 && colDif == 1) {
-        if (col1 < col2) { return 1; }
-        else
-            return 2;
-    }
-    if (lineDif == 1 && colDif == 2) {
-        if (line1 < line2) { return 3; }
-        else
-            return 4;
-    }
-    
-    return -1;
 }
 
 void twixt::Board::saveBoardState(std::ofstream& file) const
