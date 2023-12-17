@@ -242,108 +242,24 @@ bool twixt::Board::existsBridgeBetweenPylons(const twixt::Pylon& p1, const twixt
     return false;
 }
 
-bool twixt::Board::canPlaceBridge(const twixt::Pylon& p1, const twixt::Pylon& p2)
+bool twixt::Board::canPlaceBridge(twixt::Pylon& p1, twixt::Pylon& p2)
 {
-    uint16_t lineDif = abs(p1.getLine() - p2.getLine());
-    uint16_t colDif = abs(p1.getColumn() - p2.getColumn());
-
-    if (!(lineDif == 1 && colDif == 2) && !(lineDif == 2 && colDif == 1))
+    if(!isPositionInsideBoard(p1.getLine(), p1.getColumn()) || 
+        !isPositionInsideBoard(p2.getLine(), p2.getColumn()) ||
+            (p1.getLine() == p2.getLine()) && p1.getColumn() == p2.getColumn()) {
         return false;
-
-    uint16_t bridgePosition = getBridgePosition(p1, p2);
-    
-    if (bridgePosition == 1) {
-        uint16_t susLinie, susColoana, josLinie, josColoana;
-
-        if (p1.getLine() > p2.getLine()) {
-            const twixt::Pylon& sus = p1;
-            const twixt::Pylon& jos = p2;
-
-            susLinie = p1.getLine();
-            susColoana = p1.getColumn();
-            josLinie = p2.getLine();
-            josColoana = p2.getColumn();
-        }
-        else
-        {
-            const twixt::Pylon& sus = p2;
-            const twixt::Pylon& jos = p1;
-
-            susLinie = p2.getLine();
-            susColoana = p2.getColumn();
-            josLinie = p1.getLine();
-            josColoana = p1.getColumn();
-        }
-           
-        if (isPositionInsideBoard(susLinie + 1, susColoana) && isPositionOccupied(susLinie + 1, susColoana)) {
-            const twixt::Pylon aux1 = Pylon(susLinie + 1, susColoana);
-            if (isPositionInsideBoard(susLinie - 1, susColoana + 1)) {
-                const twixt::Pylon aux2 = Pylon(susLinie - 1, susColoana + 1);
-
-                if (existsBridgeBetweenPylons(aux1, aux2))
-                    return false;
-            }
-
-            if (isPositionInsideBoard(susLinie, susColoana + 2) && isPositionOccupied(susLinie, susColoana + 2)) {
-                const twixt::Pylon aux2 = Pylon(susLinie, susColoana + 2);
-
-                if (existsBridgeBetweenPylons(aux1, aux2))
-                    return false;
-            }
-
-            if (isPositionInsideBoard(josLinie, josColoana + 1) && isPositionOccupied(josLinie, josColoana + 1)) {
-                const twixt::Pylon aux2 = Pylon(josLinie, josColoana + 1);
-
-                if (existsBridgeBetweenPylons(aux1, aux2))
-                    return false;
-            }
-        }
-
-        if (isPositionInsideBoard(susLinie + 2, susColoana) && isPositionOccupied(susLinie + 2, susColoana)) {
-            const twixt::Pylon aux1 = Pylon(susLinie + 2, susColoana);
-
-            if (isPositionInsideBoard(susLinie, susColoana + 1) && isPositionOccupied(susLinie, susColoana + 1)) {
-                const twixt::Pylon aux2 = Pylon(susLinie, susColoana + 1);
-
-                if (existsBridgeBetweenPylons(aux1, aux2))
-                    return false;
-            }
-
-            if (isPositionInsideBoard(josLinie - 1, josColoana + 1) && isPositionOccupied(josLinie - 1, josColoana + 1)) {
-                const twixt::Pylon aux2 = Pylon(josLinie - 1, josColoana + 1);
-
-                if (existsBridgeBetweenPylons(aux1, aux2))
-                    return false;
-            }
-        }
-
-        if (isPositionInsideBoard(josLinie - 1, josColoana) && isPositionOccupied(josLinie - 1, josColoana)) {
-            const twixt::Pylon aux1 = Pylon(josLinie - 1, josColoana);
-
-            if (isPositionInsideBoard(susLinie, susColoana - 1) && isPositionOccupied(susLinie, susColoana - 1)) {
-                const twixt::Pylon aux2 = Pylon(susLinie, susColoana - 1);
-
-                if (existsBridgeBetweenPylons(aux1, aux2))
-                    return false;
-            }
-
-            if (isPositionInsideBoard(josLinie, josColoana - 2) && isPositionOccupied(josLinie, josColoana - 2)) {
-                const twixt::Pylon aux2 = Pylon(josLinie, josColoana - 2);
-
-                if (existsBridgeBetweenPylons(aux1, aux2))
-                    return false;
-            }
-
-            if (isPositionInsideBoard(josLinie + 1, susColoana) && isPositionOccupied(josLinie + 1, susColoana)) {
-                const twixt::Pylon aux2 = Pylon(josLinie + 1, susColoana);
-
-                if (existsBridgeBetweenPylons(aux1, aux2))
-                    return false;
-            }
-        }
     }
 
-    //to be continued;
+    if (!isValidBridge(p1, p2)) {
+        return false;
+    }
+
+    Bridge newBridge = twixt::Bridge(p1, p2);
+
+    for (const auto& existingBridge : m_boardBridges) {
+        //check if the path is blocked
+    }
+
     return true;
 }
 
