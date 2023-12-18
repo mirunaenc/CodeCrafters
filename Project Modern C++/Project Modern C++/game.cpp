@@ -130,32 +130,31 @@ namespace twixt {
 		return false;
 	}
 
-	
-
-
 	void Game::run()
 	{
 	
-		//std::cout << "Do you want to load the saved game? (yes/no)" << std::endl;
-		//std::string response;
-		//std::getline(std::cin, response);
+		std::cout << "Do you want to load the saved game? (yes/no)" << std::endl;
+		std::string response;
+		std::getline(std::cin, response);
 
-		//// Convert response to lowercase for easier comparison
-		//std::transform(response.begin(), response.end(), response.begin(), ::tolower);
+		
+		std::transform(response.begin(), response.end(), response.begin(), ::tolower);
 
-		//if (response == "yes") {
-		//	twixt::GameFileManager::loadGame(*this);
-		//}
+		if (response == "yes") {
+			twixt::GameFileManager::loadGame(*this);
+		}
 
 		while (!checkWinCondition()) {
 			displayGameBoard();
 			playTurn();
-			/*std::cout << "Do you want save the game?"<<std::endl;
+			std::cout << "Do you want save the game? (yes/no)"<<std::endl;
 			std::string yes;
 			std::cin >> yes;
-			if (yes == "da") {
+			if (yes == "yes") {
 				twixt::GameFileManager::saveGame(*this);
-			}*/
+			}
+			
+			
 		}
 		std::cout << "The game ends.";
 		return ;
@@ -235,14 +234,7 @@ namespace twixt {
 			}
 			std::cout << '\n';
 		}
-		/*std::for_each(pylons.cbegin(), pylons.cend(), [size](const auto& pylon) {
-			std::for_each(pylon.cbegin(), pylon.cend(), [size](const auto& p) {
-				bool pylonExists = p.has_value();
-				char displayChar = (pylonExists && p->getColor() == EColor::RED) ? 'R' : (pylonExists ? 'B' : '-');
-				std::cout << displayChar << ' ';
-				});
-			std::cout << '\n';
-			});*/
+	
 
 		if (m_currentPlayer != nullptr) {
 			std::cout << "Turn of : ";

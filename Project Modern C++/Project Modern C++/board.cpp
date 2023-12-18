@@ -301,10 +301,7 @@ void twixt::Board::createBridge(twixt::Pylon& pilon)
 void twixt::Board::saveBoardState(std::ofstream& file) const
 {
     file << m_size << "\n";
-    // Salvarea informațiilor despre piloni și poduri în fișier
-    // Iterați prin m_boardPylons și m_boardBridges și scrieți detaliile acestora în fișier
-    // Exemplu:
-    file << m_boardPylons.size();
+
     for (const auto& pylon : m_boardPylons) {
         if (pylon.has_value()) {
             file << pylon->getLine() << " " << pylon->getColumn() << " " << static_cast<int>(pylon->getColor()) << "\n";
@@ -325,7 +322,7 @@ void twixt::Board::loadBoardState(std::ifstream& file)
         m_boardPylons.clear();
         m_boardPylons.resize(m_size * m_size);
 
-        // Load pylons' positions and colors
+
         for (size_t i = 0; i < m_size * m_size; ++i) {
             uint16_t line, column;
             int color;
@@ -335,21 +332,19 @@ void twixt::Board::loadBoardState(std::ifstream& file)
             }
         }
 
-        // Citirea liniilor rămase pentru încărcarea pozițiilor podurilor și crearea podurilor
         while (std::getline(file, line)) {
             uint16_t startLine, startColumn, endLine, endColumn;
             if (std::istringstream(line) >> startLine >> startColumn >> endLine >> endColumn) {
-                // Cautăm pilonii în lista existentă m_boardPylons
+       
                 std::optional<Pylon> startPylon = getPylon(startLine, startColumn);
                 std::optional<Pylon> endPylon = getPylon(endLine, endColumn);
 
-                // Verificăm dacă pilonii există în tablă și dacă da, creăm podul
+                
                 if (startPylon.has_value() && endPylon.has_value()) {
                     Bridge newBridge(startPylon.value(), endPylon.value());
                     addBridge(newBridge);
                 }
                 else {
-                    // Dacă pilonii nu există în tablă sau sunt invalizi, afișăm un mesaj de eroare sau gestionăm altfel cazul
                     std::cout << "Eroare: Piloni invalizi pentru crearea podului." << std::endl;
                 }
             }

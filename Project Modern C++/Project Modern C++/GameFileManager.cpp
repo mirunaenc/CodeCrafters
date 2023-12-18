@@ -5,7 +5,8 @@ namespace twixt {
     void GameFileManager::saveGame(const Game& game)
     {
         try {
-            std::ofstream file("savedGame.txt");
+            std::ofstream file("savedGame.txt", std::ios::out | std::ios::trunc);
+            /*std::ofstream file("savedGame.txt");*/
             if (file.is_open()) {
                 file << "=== Board State ===\n";
                 game.m_gameBoard.saveBoardState(file);
@@ -44,7 +45,7 @@ namespace twixt {
                     else if (line == "=== Player 2 State ===") {
                          game.m_player2.loadPlayerState(file);
                     }
-                    // Implementați logica pentru interpretarea și încărcarea stării jocului din fișier
+                  
                 }
                 file.close();
                 std::cout << "Jocul a fost incarcat cu succes! " << std::endl;
