@@ -20,7 +20,7 @@ namespace twixt {
                 std::cout << "Jocul a fost salvat cu succes! " << std::endl;
             }
             else {
-                throw std::runtime_error("Nu s-a putut deschide fișierul pentru salvare.");
+                throw std::runtime_error("Nu s-a putut deschide fisierul pentru salvare.");
             }
         }
         catch (const std::exception& e) {
@@ -36,7 +36,7 @@ namespace twixt {
                 std::string line;
                 while (std::getline(file, line)) {
                     if (line == "=== Board State ===") {
-                        // m_gameBoard.loadBoardState(file);
+                         game.m_gameBoard.loadBoardState(file);
                     }
                     else if (line == "=== Player 1 State ===") {
                         // m_player1.loadPlayerState(file);
@@ -47,10 +47,10 @@ namespace twixt {
                     // Implementați logica pentru interpretarea și încărcarea stării jocului din fișier
                 }
                 file.close();
-                std::cout << "Jocul a fost încărcat cu succes! " << std::endl;
+                std::cout << "Jocul a fost incarcat cu succes! " << std::endl;
             }
             else {
-                throw std::runtime_error("Nu s-a putut deschide fișierul pentru încărcare.");
+                throw std::runtime_error("Nu s-a putut deschide fisierul pentru incarcare.");
             }
         }
         catch (const std::exception& e) {

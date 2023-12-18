@@ -5,6 +5,7 @@ import <algorithm>;
 import <iostream>;
 import "LargePylon.h";
 import <fstream>;
+import <sstream>;
 import pylon;
 import bridge;
 import utility;
@@ -42,7 +43,10 @@ namespace twixt {
 		bool isPylonOccupied(const Pylon& p);
 		bool canPlaceBridge(Pylon& p1, Pylon& p2);
 		void createBridge(Pylon& pilon);
+
 		void saveBoardState(std::ofstream& file) const;
+		void loadBoardState(std::ifstream& file);
+
 		bool hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std::vector<bool>& visited);
 		EColor hasWinningRoad();
 	};

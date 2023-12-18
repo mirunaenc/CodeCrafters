@@ -316,6 +316,47 @@ void twixt::Board::saveBoardState(std::ofstream& file) const
     }
 }
 
+void twixt::Board::loadBoardState(std::ifstream& file)
+{
+    std::string line;
+    if (std::getline(file, line)) {
+        m_size = std::stoi(line);
+
+        m_boardPylons.clear();
+        m_boardPylons.resize(m_size * m_size);
+
+        // Load pylons' positions and colors
+        for (size_t i = 0; i < m_size * m_size; ++i) {
+            uint16_t line, column;
+            int color;
+            if (file >> line >> column >> color) {
+                m_boardPylons[i] = Pylon(line, column);
+                m_boardPylons[i]->setColor(static_cast<EColor>(color));
+            }
+        }
+
+        // Citirea liniilor rămase pentru încărcarea pozițiilor podurilor și crearea podurilor
+        while (std::getline(file, line)) {
+            uint16_t startLine, startColumn, endLine, endColumn;
+            if (std::istringstream(line) >> startLine >> startColumn >> endLine >> endColumn) {
+                // Cautăm pilonii în lista existentă m_boardPylons
+                std::optional<Pylon> startPylon = getPylon(startLine, startColumn);
+                std::optional<Pylon> endPylon = getPylon(endLine, endColumn);
+
+                // Verificăm dacă pilonii există în tablă și dacă da, creăm podul
+                if (startPylon.has_value() && endPylon.has_value()) {
+                    Bridge newBridge(startPylon.value(), endPylon.value());
+                    addBridge(newBridge);
+                }
+                else {
+                    // Dacă pilonii nu există în tablă sau sunt invalizi, afișăm un mesaj de eroare sau gestionăm altfel cazul
+                    std::cout << "Eroare: Piloni invalizi pentru crearea podului." << std::endl;
+                }
+            }
+        }
+    }
+}
+
 bool twixt::Board::hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std::vector<bool>& visited)
 {
     EColor pylonColor = EColor::NONE;
