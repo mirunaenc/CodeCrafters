@@ -54,5 +54,6 @@ namespace twixt {
 		void makeMove();
 
 		void savePlayerState(std::ofstream& file) const;
+		void loadPlayerState(std::ifstream& file);
 	};	
 }

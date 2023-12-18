@@ -140,3 +140,26 @@ void twixt::Player::savePlayerState(std::ofstream& file) const
 	file << m_nrOfAvailableBridges << "\n";
 	file << static_cast<int>(m_color) << "\n";
 }
+
+void twixt::Player::loadPlayerState(std::ifstream& file)
+{
+	try {
+		std::string line;
+
+		if (std::getline(file, line)) {
+			m_nrOfAvailablePylons = std::stoi(line);
+		}
+
+		if (std::getline(file, line)) {
+			m_nrOfAvailableBridges = std::stoi(line);
+		}
+
+		if (std::getline(file, line)) {
+			m_color = static_cast<EColor>(std::stoi(line));
+		}
+
+	}
+	catch (const std::exception& e) {
+		std::cerr << "Eroare la incarcarea starii jucatorului: " << e.what() << std::endl;
+	}
+}

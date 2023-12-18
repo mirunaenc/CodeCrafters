@@ -39,10 +39,10 @@ namespace twixt {
                          game.m_gameBoard.loadBoardState(file);
                     }
                     else if (line == "=== Player 1 State ===") {
-                        // m_player1.loadPlayerState(file);
+                         game.m_player1.loadPlayerState(file);
                     }
                     else if (line == "=== Player 2 State ===") {
-                        // m_player2.loadPlayerState(file);
+                         game.m_player2.loadPlayerState(file);
                     }
                     // Implementați logica pentru interpretarea și încărcarea stării jocului din fișier
                 }

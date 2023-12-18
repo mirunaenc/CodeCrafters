@@ -1,6 +1,8 @@
 ﻿#include "game.h"
 import "game.h";
+import "GameFileManager.h";
 import <random>;
+import <conio.h>;
 
 
 namespace twixt {
@@ -134,9 +136,26 @@ namespace twixt {
 	void Game::run()
 	{
 	
+		//std::cout << "Do you want to load the saved game? (yes/no)" << std::endl;
+		//std::string response;
+		//std::getline(std::cin, response);
+
+		//// Convert response to lowercase for easier comparison
+		//std::transform(response.begin(), response.end(), response.begin(), ::tolower);
+
+		//if (response == "yes") {
+		//	twixt::GameFileManager::loadGame(*this);
+		//}
+
 		while (!checkWinCondition()) {
 			displayGameBoard();
 			playTurn();
+			/*std::cout << "Do you want save the game?"<<std::endl;
+			std::string yes;
+			std::cin >> yes;
+			if (yes == "da") {
+				twixt::GameFileManager::saveGame(*this);
+			}*/
 		}
 		std::cout << "The game ends.";
 		return ;
