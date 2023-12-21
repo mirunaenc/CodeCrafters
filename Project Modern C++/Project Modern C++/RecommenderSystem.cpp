@@ -24,7 +24,55 @@ twixt::RecommenderSystem::RecommenderSystem(Game& game) : m_game{game}
 {
 }
 
+int twixt::RecommenderSystem::connectivity(const Bridge& move)
+{
+    int score = 0;
+    // verifica daca exista alte bridge-uri care se conecteaza la aceiasi pylons ca si bridge-ul curent.
+    for (const Bridge& otherMove : m_game.getGameBoard().getBridges()) {
+        if (otherMove != move && (otherMove.getStart() == move.getStart() || otherMove.getEnd() == move.getEnd())) {
+            score++;
+        }
+    }
+    return score;
+}
+
+int twixt::RecommenderSystem::proximityToGoal(const Bridge& move) {
+    int score = 0;
+    // daca jucatorul incearca sa ajunga de la stanga la dreapta, 
+    // atunci scorul poate fi coloana pylonului de la capatul bridge-ului.
+    score = move.getEnd().getColumn();
+    return score;
+}
+
+int twixt::RecommenderSystem::blocksOpponent(const Bridge& move)
+{
+    int score = 0;
+    //daca adversarul incearca sa ajunga de la stanga la dreapta,
+    //  atunci orice bridge care se intinde de  sus in jos ar putea bloca adversarul.
+    if (move.getStart().getColumn() == move.getEnd().getColumn()) {
+        score = 1;
+    }
+    return score;
+}
+
+
 int twixt::RecommenderSystem::evaluateMove(const Bridge& move)
+{
+    int score = 0;
+
+    // cat de aproape este bridge-ul de obiectiv
+    score += proximityToGoal(move);
+
+    // daca bridge-ul blocheaza adversarul
+    score += blocksOpponent(move);
+
+    // cat de multi pylons conecteaza bridge-ul
+    score += connectivity(move);
+
+    return score;
+}
+
+int twixt::RecommenderSystem::potentialOpponentBridges(const Bridge& move)
 {
   
 }

@@ -15,7 +15,11 @@ namespace twixt {
         std::vector<Bridge> generatePossibleBridges();
 
         // evalueaza o mutare data, returnand un scor bazat pe cat de buna este mutarea
+        int connectivity(const Bridge& move);
+        int proximityToGoal(const Bridge& move);
+        int blocksOpponent(const Bridge& move);
         int evaluateMove(const Bridge& move);
+        int potentialOpponentBridges(const Bridge& move);
 
         Bridge getBestMove();
 
