@@ -5,36 +5,20 @@
 #include <iostream>
 
 namespace twixt {
-    class HintSystem {
+    class RecommenderSystem {
     private:
         Game& m_game;
     public:
-        HintSystem(Game& game) : m_game(game) {}
+        RecommenderSystem(Game& game);
 
-        // genereaza toate mutarile posibile pentru jucatorul curent
-        std::vector<Bridge> generatePossibleMoves() {
-            std::vector<Bridge> possibleMoves;
-            return possibleMoves;
-        }
+        // genereaza toate bridge-urile posibile pentru jucatorul curent
+        std::vector<Bridge> generatePossibleBridges();
 
         // evalueaza o mutare data, returnand un scor bazat pe cat de buna este mutarea
-        int evaluateMove(const Bridge& move) {
-            int score = 0;
-            return score;
-        }
+        int evaluateMove(const Bridge& move);
 
-        Bridge getBestMove() {
-            std::vector<Bridge> possibleMoves = generatePossibleMoves();
-            return *std::max_element(possibleMoves.begin(), possibleMoves.end(), this {
-                return evaluateMove(a) < evaluateMove(b);
-            });
-        }
+        Bridge getBestMove();
 
-        void giveHint() {
-            Bridge bestMove = getBestMove();
-            std::cout << "Hint: cea mai bună mutare este " << bestMove.getCoordStart().first
-                << " " << bestMove.getCoordStart().second << std::endl << bestMove.getCoordEnd().first
-                << " " << bestMove.getCoordStart().second << std::endl;
-        }
+        void giveHint();
     };
 }

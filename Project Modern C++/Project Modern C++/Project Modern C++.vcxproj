@@ -144,6 +144,8 @@
     <ClCompile Include="Project Modern C++.cpp" />
     <ClCompile Include="pylon.cpp" />
     <ClCompile Include="pylon.cppm" />
+    <ClCompile Include="RecommenderSystem.cpp" />
+    <ClCompile Include="RecommenderSystem.h" />
     <ClCompile Include="utility.cpp" />
     <ClCompile Include="utility.cppm" />
   </ItemGroup>

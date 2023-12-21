@@ -60,6 +60,12 @@
     <ClCompile Include="GameFileManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RecommenderSystem.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RecommenderSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bulldozer.h">
