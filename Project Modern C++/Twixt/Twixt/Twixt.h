@@ -2,7 +2,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_Twixt.h"
-#include "GameInterface.h"
+#include "ui_GameInterface.h"
 class Twixt : public QMainWindow
 {
     Q_OBJECT

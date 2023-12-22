@@ -1,6 +1,8 @@
 ﻿#include "Twixt.h"
 #include <QWidget>
+#include "ui_GameInterface.h"
 #include "GameInterface.h"
+
 
 Twixt::Twixt(QWidget *parent)
     : QMainWindow(parent)
@@ -13,10 +15,7 @@ Twixt::~Twixt()
 {}
 
 void Twixt::on_pushButton_clicked() {
-    Ui::GameInterface gameInterface; // Inițializează interfața GameInterface
-    QWidget* gameWidget = new QWidget(); // Creează un nou widget
-
-    gameInterface.setupUi(gameWidget); // Setează interfața GameInterface pentru noul widget
-
-    setCentralWidget(gameWidget); // Setează noul widget ca centralWidget în fereastra principală
+    GameInterface gameInterface;
+    gameInterface.setModal(true);
+    gameInterface.exec();
 }

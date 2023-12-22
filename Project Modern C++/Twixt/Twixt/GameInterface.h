@@ -2,6 +2,7 @@
 
 #include <QMainWindow>
 #include "ui_GameInterface.h"
+#include <QDialog>
 
 class GameInterface : public QMainWindow
 {
