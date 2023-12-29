@@ -103,6 +103,7 @@ void twixt::Player::makeMove()
 {
 	uint16_t line, column;
     std::cout << "Enter the line and column of the pylon you want to place: ";
+
 	std::cin >> line >> column;
 	placePylon(line, column);
 	std::cout<<"Do you want to update the bridges? (y/n)";
@@ -162,4 +163,17 @@ void twixt::Player::loadPlayerState(std::ifstream& file)
 	catch (const std::exception& e) {
 		std::cerr << "Eroare la incarcarea starii jucatorului: " << e.what() << std::endl;
 	}
+}
+
+bool twixt::Player::positionIsNotCorner(uint16_t line, uint16_t column)
+{
+	if(line == 0 && column == 0)
+		return false;
+	if(line == 0 && column == m_gameBoard.getSize() - 1)
+		return false;
+    if(line == m_gameBoard.getSize() - 1 && column == 0)
+		return false;
+    if(line == m_gameBoard.getSize() - 1 && column == m_gameBoard.getSize() - 1)
+		return false;
+	return true;
 }

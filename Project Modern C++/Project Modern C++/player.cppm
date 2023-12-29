@@ -55,5 +55,7 @@ namespace twixt {
 
 		void savePlayerState(std::ofstream& file) const;
 		void loadPlayerState(std::ifstream& file);
+		bool positionIsNotCorner(uint16_t line, uint16_t column);
+		
 	};	
 }

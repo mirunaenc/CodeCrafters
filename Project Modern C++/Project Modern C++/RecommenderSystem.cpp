@@ -74,7 +74,7 @@ int twixt::RecommenderSystem::evaluateMove(const Bridge& move)
 
 int twixt::RecommenderSystem::potentialOpponentBridges(const Bridge& move)
 {
-  
+    return 0;
 }
 
 twixt::Bridge twixt::RecommenderSystem::getBestMove() {
