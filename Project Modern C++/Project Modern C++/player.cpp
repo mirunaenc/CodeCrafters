@@ -177,3 +177,18 @@ bool twixt::Player::positionIsNotCorner(uint16_t line, uint16_t column)
 		return false;
 	return true;
 }
+
+bool twixt::Player::positionIsEnemySide(uint16_t line, uint16_t column)
+{
+	if(m_color == EColor::RED)
+	{
+		if(column == 0 || column == m_gameBoard.getSize() - 1)
+			return true;
+	}
+	else if(m_color == EColor::BLACK)
+	{
+		  if(line == 0 || line == m_gameBoard.getSize() - 1)
+            return true;
+	}
+	return false;
+}
