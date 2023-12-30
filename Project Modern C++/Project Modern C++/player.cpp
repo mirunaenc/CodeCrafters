@@ -101,38 +101,8 @@ bool twixt::Player::isWinner()
 
 void twixt::Player::makeMove()
 {
-	uint16_t line, column;
-    std::cout << "Enter the line and column of the pylon you want to place: ";
-
-	std::cin >> line >> column;
-	placePylon(line, column);
-	std::cout<<"Do you want to update the bridges? (y/n)";
-	char answer;
-	std::cin>>answer;
-	while (answer == 'y')
-	{
-		std::cout << "Enter the line and column of the start pylon: ";
-		uint16_t line, column;
-		std::cin >>line>>column;
-        std::cout << "Enter the line and column of the end pylon: ";
-      uint16_t line2, column2;
-		std::cin >>line2>>column2;
-
-		if (m_gameBoard.getPylon(line, column).has_value() && m_gameBoard.getPylon(line2, column2).has_value())
-		{
-			if (m_gameBoard.existsBridgeBetweenPylons(m_gameBoard.getPylon(line, column).value(),
-				m_gameBoard.getPylon(line2, column2).value()))
-
-				placeBridge(m_gameBoard.getPylon(line, column).value(), m_gameBoard.getPylon(line2, column2).value());
-		}
-		
-		m_gameBoard.getPylon(line, column).value();
-		
-	   
-
-		std::cout<<"Do you still want to update the bridges? (y/n)";
-		std::cin>>answer;
-	}
+	getUserInputAndPlacePylon();
+	updateBridges();
 }
 
 void twixt::Player::savePlayerState(std::ofstream& file) const
@@ -191,4 +161,55 @@ bool twixt::Player::positionIsEnemySide(uint16_t line, uint16_t column)
             return true;
 	}
 	return false;
+}
+
+void twixt::Player::getUserInputAndPlacePylon()
+{
+	uint16_t line, column;
+
+	std::cout << "Enter the line and column of the pylon you want to place: ";
+	std::cin >> line >> column;
+
+	while (m_gameBoard.getPylon(line, column).has_value() || !positionIsNotCorner(line, column) || positionIsEnemySide(line, column)) {
+		std::cout << "Invalid position! Type the values again!" << std::endl;
+		std::cout << "Enter the line and column of the pylon you want to place: ";
+		std::cin >> line >> column;
+	}
+
+	placePylon(line, column);
+}
+
+void twixt::Player::updateBridges()
+{
+	std::cout << "Do you want to update the bridges? (y/n)";
+	char answer;
+	std::cin >> answer;
+	while (answer == 'y')
+	{
+		std::cout << "Enter the line and column of the start pylon: ";
+		uint16_t line, column;
+		std::cin >> line >> column;
+		std::cout << "Enter the line and column of the end pylon: ";
+		uint16_t line2, column2;
+		std::cin >> line2 >> column2;
+
+		if (m_gameBoard.getPylon(line, column).has_value() && m_gameBoard.getPylon(line2, column2).has_value())
+		{
+			if (m_gameBoard.existsBridgeBetweenPylons(m_gameBoard.getPylon(line, column).value(),
+				m_gameBoard.getPylon(line2, column2).value()))
+			{
+				// to do: remove bridge , primeste 2 piloni ,si da erase la bridge ul care este intre cei 2 piloni 
+			 
+			} 
+			else
+				placeBridge(m_gameBoard.getPylon(line, column).value(), m_gameBoard.getPylon(line2, column2).value());
+		
+			//Bridge* bridge = new Bridge(m_gameBoard.getPylon(line, column).value(), m_gameBoard.getPylon(line2, column2).value());
+			//m_gameBoard.addBridge(*bridge);
+
+		}
+
+		std::cout << "Do you still want to update the bridges? (y/n)";
+		std::cin >> answer;
+	}
 }
