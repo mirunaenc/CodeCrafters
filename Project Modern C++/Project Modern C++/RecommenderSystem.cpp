@@ -81,6 +81,21 @@ twixt::Bridge twixt::RecommenderSystem::predictOpponentsMove()
 {
     std::vector<twixt::Bridge> possibleOpponentBridges;
     std::vector<std::optional<twixt::Pylon>> opponentPylons = m_game.getGameBoard().getPylons();
+    EColor opponentColor = m_game.getPlayer2().getColor();
+
+    for (auto& pylon1 : opponentPylons) {
+        if (pylon1.has_value() && pylon1.getColor() == opponentColor) {
+            for (auto& pylon2 : opponentPylons) {
+                if (pylon2.has_value() && pylon2.getColor() == opponentColor && pylon1 != pylon2) {
+                    Bridge potentialBridge(*pylon1, *pylon2);
+                    if (m_game.getGameBoard().isValidBridge(*pylon1, *pylon2)) {
+                        possibleOpponentBridges.push_back(potentialBridge);
+                    }
+            }
+        }
+    }
+
+    
 }
 
 twixt::Bridge twixt::RecommenderSystem::getBestMove() {
