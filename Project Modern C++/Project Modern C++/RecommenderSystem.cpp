@@ -77,6 +77,12 @@ int twixt::RecommenderSystem::potentialOpponentBridges(const Bridge& move)
     return 0;
 }
 
+twixt::Bridge twixt::RecommenderSystem::predictOpponentsMove()
+{
+    std::vector<twixt::Bridge> possibleOpponentBridges;
+    std::vector<std::optional<twixt::Pylon>> opponentPylons = m_game.getGameBoard().getPylons();
+}
+
 twixt::Bridge twixt::RecommenderSystem::getBestMove() {
     std::vector<twixt::Bridge> possibleMoves = generatePossibleBridges();
     return *std::max_element(possibleMoves.begin(), possibleMoves.end(), [this](const twixt::Bridge& a, const twixt::Bridge& b) {

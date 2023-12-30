@@ -21,6 +21,8 @@ namespace twixt {
         int evaluateMove(const Bridge& move);
         int potentialOpponentBridges(const Bridge& move);
 
+        Bridge predictOpponentsMove();
+           
         Bridge getBestMove();
 
         void giveHint();
