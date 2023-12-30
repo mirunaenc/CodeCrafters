@@ -10,6 +10,7 @@ namespace twixt {
 		 Pylon& m_start; 
 		 Pylon& m_end; 
 	public:
+		Bridge();
 		Bridge(Pylon& m_start,Pylon& m_end);
 		Bridge(const Bridge& otherBridge);
 		Bridge(Bridge&& otherBridge) noexcept;

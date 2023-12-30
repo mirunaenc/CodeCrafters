@@ -84,9 +84,9 @@ twixt::Bridge twixt::RecommenderSystem::predictOpponentsMove()
     EColor opponentColor = m_game.getPlayer2().getColor();
 
     for (auto& pylon1 : opponentPylons) {
-        if (pylon1.has_value() && pylon1.getColor() == opponentColor) {
+        if (pylon1.has_value() && pylon1.value().getColor() == opponentColor) {
             for (auto& pylon2 : opponentPylons) {
-                if (pylon2.has_value() && pylon2.getColor() == opponentColor && pylon1 != pylon2) {
+                if (pylon2.has_value() && pylon2.value().getColor() == opponentColor && pylon1 != pylon2) {
                     Bridge potentialBridge(*pylon1, *pylon2);
                     if (m_game.getGameBoard().isValidBridge(*pylon1, *pylon2)) {
                         possibleOpponentBridges.push_back(potentialBridge);
@@ -95,7 +95,17 @@ twixt::Bridge twixt::RecommenderSystem::predictOpponentsMove()
         }
     }
 
-    
+        twixt::Bridge mostLikelyBridge;
+        int highestScore = -1;
+        for (const auto& bridge : possibleOpponentBridges) {
+            int score = evaluateMove(bridge);
+            if (score > highestScore) {
+                highestScore = score;
+                mostLikelyBridge = bridge;
+            }
+        }
+
+        return mostLikelyBridge;
 }
 
 twixt::Bridge twixt::RecommenderSystem::getBestMove() {
