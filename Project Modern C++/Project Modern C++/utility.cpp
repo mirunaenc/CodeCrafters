@@ -1,4 +1,4 @@
-module utility;
+#include "utility.h"
 
 template <typename T>
 void twixt::Utility::swap(T*& current, T*& opponent)

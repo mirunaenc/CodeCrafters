@@ -1,10 +1,10 @@
 #pragma once
-import <ctime>;
-import <cstdlib>;
-import <fstream>;
-import board;
-import player;
-import utility;
+#include <ctime>
+#include <cstdlib>
+#include <fstream>
+#include "board.h"
+#include "player.h"
+#include "utility.h"
 
 
 namespace twixt {

@@ -1,9 +1,9 @@
 #pragma once
-import <random>;
-import <vector>;
-import board;
-import pylon;
-import player;
+#include <random>
+#include <vector>
+#include "board.h"
+#include "pylon.h"
+#include "player.h"
 
 namespace twixt {
 

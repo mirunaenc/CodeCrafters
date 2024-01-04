@@ -1,17 +1,17 @@
-export module bridge;
-import <regex>;
-import <algorithm>;
-import pylon;
+#pragma once
+#include <regex>
+#include <algorithm>
+#include "pylon.h"
 
 namespace twixt {
-	export class Bridge {
+	 class Bridge {
 
 	private:
-		 Pylon& m_start; 
-		 Pylon& m_end; 
+		Pylon& m_start;
+		Pylon& m_end;
 	public:
-		Bridge();
-		Bridge(Pylon& m_start,Pylon& m_end);
+		//Bridge();
+		Bridge(Pylon& m_start, Pylon& m_end);
 		Bridge(const Bridge& otherBridge);
 		Bridge(Bridge&& otherBridge) noexcept;
 		Bridge& operator=(Bridge&& otherBridge) noexcept;
@@ -20,7 +20,7 @@ namespace twixt {
 		Pylon& getEnd() const;
 		std::pair<uint16_t, uint16_t>  getCoordStart() const;
 		std::pair<uint16_t, uint16_t> getCoordEnd() const;
-		void setStart(const Pylon& start); 
+		void setStart(const Pylon& start);
 		void setEnd(const Pylon& end);
 		~Bridge();
 		bool isConnectedTo(const Pylon& pylon);

@@ -1,4 +1,4 @@
-﻿module player;
+﻿#include "player.h"
 
 
 twixt::Player::Player(uint16_t nrPylons, uint16_t nrBridges, EColor color, Board& gameBoard)

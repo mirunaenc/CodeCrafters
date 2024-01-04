@@ -1,7 +1,7 @@
 #include "LargePylon.h"
-import <algorithm>;
-import <ranges>;
-import "LargePylon.h";
+#include <algorithm>
+#include <ranges>
+
 
 twixt::LargePylon::LargePylon(uint16_t line, uint16_t column, const std::vector<std::pair<uint16_t, uint16_t>>& shape,
     const std::vector<std::pair<uint16_t, uint16_t>>& vertices) : Pylon{line, column}, m_shape{shape}, m_vertices{ vertices } {

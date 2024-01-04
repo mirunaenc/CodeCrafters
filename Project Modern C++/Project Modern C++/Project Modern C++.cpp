@@ -1,11 +1,11 @@
-﻿import <iostream>;
-import utility;
-import "bulldozer.h";
-import "game.h";
-import pylon;
-import bridge;
-import board;
-import player;
+﻿#include <iostream>
+#include "utility.h"
+#include "bulldozer.h"
+#include "game.h"
+#include "pylon.h"
+#include "bridge.h"
+#include "board.h"
+#include "player.h"
 
 int main()
 {

@@ -1,8 +1,7 @@
 ﻿#include "game.h"
-import "game.h";
-import "GameFileManager.h";
-import <random>;
-import <conio.h>;
+#include "GameFileManager.h"
+#include <random>
+#include <conio.h>
 
 
 namespace twixt {

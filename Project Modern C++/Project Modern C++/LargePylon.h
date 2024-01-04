@@ -1,6 +1,6 @@
 #pragma once
-import <vector>;
-import pylon;
+#include <vector>
+#include "pylon.h"
 
 namespace twixt {
 	class LargePylon : public Pylon

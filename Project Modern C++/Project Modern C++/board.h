@@ -1,17 +1,17 @@
-export module board;
-import <vector>;
-import <optional>;
-import <algorithm>;
-import <iostream>;
-import "LargePylon.h";
-import <fstream>;
-import <sstream>;
-import pylon;
-import bridge;
-import utility;
+#pragma once
+#include <vector>
+#include <optional>
+#include <algorithm>
+#include <iostream>
+#include "LargePylon.h"
+#include <fstream>
+#include <sstream>
+#include "pylon.h"
+#include "bridge.h"
+#include "utility.h"
 
 namespace twixt {
-	export class Board {
+	class Board {
 
 	private:
 		uint16_t m_size;

@@ -76,48 +76,48 @@ int twixt::RecommenderSystem::potentialOpponentBridges(const Bridge& move)
 {
     return 0;
 }
-
-twixt::Bridge twixt::RecommenderSystem::predictOpponentsMove()
-{
-    std::vector<twixt::Bridge> possibleOpponentBridges;
-    std::vector<std::optional<twixt::Pylon>> opponentPylons = m_game.getGameBoard().getPylons();
-    EColor opponentColor = m_game.getPlayer2().getColor();
-
-    for (auto& pylon1 : opponentPylons) {
-        if (pylon1.has_value() && pylon1.value().getColor() == opponentColor) {
-            for (auto& pylon2 : opponentPylons) {
-                if (pylon2.has_value() && pylon2.value().getColor() == opponentColor && pylon1 != pylon2) {
-                    Bridge potentialBridge(*pylon1, *pylon2);
-                    if (m_game.getGameBoard().isValidBridge(*pylon1, *pylon2)) {
-                        possibleOpponentBridges.push_back(potentialBridge);
-                    }
-            }
-        }
-    }
-
-        twixt::Bridge mostLikelyBridge;
-        int highestScore = -1;
-        for (const auto& bridge : possibleOpponentBridges) {
-            int score = evaluateMove(bridge);
-            if (score > highestScore) {
-                highestScore = score;
-                mostLikelyBridge = bridge;
-            }
-        }
-
-        return mostLikelyBridge;
-}
-
-twixt::Bridge twixt::RecommenderSystem::getBestMove() {
-    std::vector<twixt::Bridge> possibleMoves = generatePossibleBridges();
-    return *std::max_element(possibleMoves.begin(), possibleMoves.end(), [this](const twixt::Bridge& a, const twixt::Bridge& b) {
-        return evaluateMove(a) < evaluateMove(b);
-        });
-}
-
-void twixt::RecommenderSystem::giveHint() {
-    twixt::Bridge bestMove = getBestMove();
-    std::cout << "Hint: cea mai buna mutare este " << bestMove.getCoordStart().first
-        << " " << bestMove.getCoordStart().second << std::endl << bestMove.getCoordEnd().first
-        << " " << bestMove.getCoordStart().second << std::endl;
-}
+//
+//twixt::Bridge twixt::RecommenderSystem::predictOpponentsMove()
+//{
+//    std::vector<twixt::Bridge> possibleOpponentBridges;
+//    std::vector<std::optional<twixt::Pylon>> opponentPylons = m_game.getGameBoard().getPylons();
+//    EColor opponentColor = m_game.getPlayer2().getColor();
+//
+//    for (auto& pylon1 : opponentPylons) {
+//        if (pylon1.has_value() && pylon1.value().getColor() == opponentColor) {
+//            for (auto& pylon2 : opponentPylons) {
+//                if (pylon2.has_value() && pylon2.value().getColor() == opponentColor && pylon1 != pylon2) {
+//                    Bridge potentialBridge(*pylon1, *pylon2);
+//                    if (m_game.getGameBoard().isValidBridge(*pylon1, *pylon2)) {
+//                        possibleOpponentBridges.push_back(potentialBridge);
+//                    }
+//            }
+//        }
+//    }
+//
+//        twixt::Bridge mostLikelyBridge;
+//        int highestScore = -1;
+//        for (const auto& bridge : possibleOpponentBridges) {
+//            int score = evaluateMove(bridge);
+//            if (score > highestScore) {
+//                highestScore = score;
+//                mostLikelyBridge = bridge;
+//            }
+//        }
+//
+//        return mostLikelyBridge;
+//}
+//
+//twixt::Bridge twixt::RecommenderSystem::getBestMove() {
+//    std::vector<twixt::Bridge> possibleMoves = generatePossibleBridges();
+//    return *std::max_element(possibleMoves.begin(), possibleMoves.end(), [this](const twixt::Bridge& a, const twixt::Bridge& b) {
+//        return evaluateMove(a) < evaluateMove(b);
+//        });
+//}
+//
+//void twixt::RecommenderSystem::giveHint() {
+//    twixt::Bridge bestMove = getBestMove();
+//    std::cout << "Hint: cea mai buna mutare este " << bestMove.getCoordStart().first
+//        << " " << bestMove.getCoordStart().second << std::endl << bestMove.getCoordEnd().first
+//        << " " << bestMove.getCoordStart().second << std::endl;
+//}

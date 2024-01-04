@@ -1,4 +1,5 @@
-﻿import bridge;
+﻿#pragma once
+#include "bridge.h"
 #include <vector>
 #include <algorithm>
 #include "game.h"
@@ -21,10 +22,10 @@ namespace twixt {
         int evaluateMove(const Bridge& move);
         int potentialOpponentBridges(const Bridge& move);
 
-        Bridge predictOpponentsMove();
+     /*   Bridge predictOpponentsMove();
            
         Bridge getBestMove();
 
-        void giveHint();
+        void giveHint();*/
     };
 }

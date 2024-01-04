@@ -132,28 +132,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="board.cpp" />
-    <ClCompile Include="board.cppm" />
     <ClCompile Include="bridge.cpp" />
-    <ClCompile Include="bridge.cppm" />
     <ClCompile Include="bulldozer.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameFileManager.cpp" />
     <ClCompile Include="LargePylon.cpp" />
     <ClCompile Include="player.cpp" />
-    <ClCompile Include="player.cppm" />
     <ClCompile Include="Project Modern C++.cpp" />
     <ClCompile Include="pylon.cpp" />
-    <ClCompile Include="pylon.cppm" />
     <ClCompile Include="RecommenderSystem.cpp" />
     <ClCompile Include="RecommenderSystem.h" />
     <ClCompile Include="utility.cpp" />
-    <ClCompile Include="utility.cppm" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="board.h" />
+    <ClInclude Include="bridge.h" />
     <ClInclude Include="bulldozer.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="GameFileManager.h" />
     <ClInclude Include="LargePylon.h" />
+    <ClInclude Include="player.h" />
+    <ClInclude Include="pylon.h" />
+    <ClInclude Include="utility.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="savedGame.txt" />

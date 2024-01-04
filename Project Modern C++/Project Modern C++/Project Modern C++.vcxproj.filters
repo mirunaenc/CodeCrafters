@@ -18,26 +18,14 @@
     <ClCompile Include="Project Modern C++.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="pylon.cppm">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="pylon.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="bridge.cppm">
-      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="bridge.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="board.cppm">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="board.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="player.cppm">
-      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="player.cpp">
       <Filter>Source Files</Filter>
@@ -50,9 +38,6 @@
     </ClCompile>
     <ClCompile Include="LargePylon.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="utility.cppm">
-      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="utility.cpp">
       <Filter>Source Files</Filter>
@@ -78,6 +63,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameFileManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="board.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bridge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pylon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

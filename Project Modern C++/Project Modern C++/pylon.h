@@ -1,18 +1,18 @@
-export module pylon;
-import <set>;
-import <iostream>;
-import utility;
+#pragma once
+#include <set>
+#include <iostream>
+#include "utility.h"
 
 namespace twixt {
-	export class Pylon {
-		
+	 class Pylon {
+
 	private:
 		uint16_t m_line;
 		uint16_t m_column;
 		EColor m_color;
 
 	public:
-		
+
 		Pylon(uint16_t line, uint16_t column);
 		void setLine(uint16_t line);
 		void setColumn(uint16_t column);
