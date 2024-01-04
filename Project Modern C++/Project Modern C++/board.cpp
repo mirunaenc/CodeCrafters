@@ -164,19 +164,15 @@ const std::vector<twixt::Bridge>& twixt::Board::getBridges() const
 }
 
 bool twixt::Board::isValidBridge(const Pylon& start, const Pylon& end) {
-    if (abs(start.getLine() - end.getLine()) != 1 || abs(start.getColumn() - end.getColumn()) != 2) {
-        return false;
-    }
+    uint16_t difLine{ abs(start.getLine() - end.getLine()) };
+    uint16_t difCol{ abs(end.getColumn() - end.getColumn()) };
 
-    /*for (const std::optional<Bridge>& optBridge : m_boardBridges) {
-        if (optBridge != null) {
-            const Bridge& bridge = optBridge;
-            if ((bridge.getStart() == start && bridge.getEnd() == end) ||
-                (bridge.getStart() == end && bridge.getEnd() == start)) {
-                return false;
-            }
-        }
-    }*/
+    if (difLine > 2 || difCol > 2 || difLine == 0 || difCol == 0)
+        return false;
+    if (difLine == 1 && difCol != 2)
+        return false;
+    if (difLine == 2 && difCol != 1)
+        return false;
 
     for (const Bridge& bridge : m_boardBridges) {
         if ((bridge.getStart() == start && bridge.getEnd() == end) ||
