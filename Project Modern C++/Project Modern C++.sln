@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project Modern C++", "Project Modern C++\Project Modern C++.vcxproj", "{F3037753-579E-4CA3-AF33-B1347ECFE296}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtWidgetsProject", "QtWidgetsProject\QtWidgetsProject.vcxproj", "{880D723F-7259-4EE4-ACCE-48070C3A846E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{F3037753-579E-4CA3-AF33-B1347ECFE296}.Release|x64.Build.0 = Release|x64
 		{F3037753-579E-4CA3-AF33-B1347ECFE296}.Release|x86.ActiveCfg = Release|Win32
 		{F3037753-579E-4CA3-AF33-B1347ECFE296}.Release|x86.Build.0 = Release|Win32
+		{880D723F-7259-4EE4-ACCE-48070C3A846E}.Debug|x64.ActiveCfg = Debug|x64
+		{880D723F-7259-4EE4-ACCE-48070C3A846E}.Debug|x64.Build.0 = Debug|x64
+		{880D723F-7259-4EE4-ACCE-48070C3A846E}.Debug|x86.ActiveCfg = Debug|x64
+		{880D723F-7259-4EE4-ACCE-48070C3A846E}.Debug|x86.Build.0 = Debug|x64
+		{880D723F-7259-4EE4-ACCE-48070C3A846E}.Release|x64.ActiveCfg = Release|x64
+		{880D723F-7259-4EE4-ACCE-48070C3A846E}.Release|x64.Build.0 = Release|x64
+		{880D723F-7259-4EE4-ACCE-48070C3A846E}.Release|x86.ActiveCfg = Release|x64
+		{880D723F-7259-4EE4-ACCE-48070C3A846E}.Release|x86.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
