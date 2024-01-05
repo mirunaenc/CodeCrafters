@@ -10,6 +10,10 @@
 #include "bridge.h"
 #include "utility.h"
 
+#include <QGraphicsView>
+#include <QGraphicsScene>
+#include <QWidget>
+
 namespace twixt {
 	class Board {
 
@@ -49,5 +53,10 @@ namespace twixt {
 
 		bool hasRoadDFS(uint16_t currentLine, uint16_t currentColumn, std::vector<bool>& visited);
 		EColor hasWinningRoad();
+	
+
+		QGraphicsView* createQGraphicsView(QWidget* parent);
+	
+	
 	};
 }

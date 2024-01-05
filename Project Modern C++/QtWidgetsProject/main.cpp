@@ -1,16 +1,18 @@
 #include "QtWidgetsProject.h"
 #include <QtWidgets/QApplication>
-#include "pylon.h"
+#include "board.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    twixt::Board board(10);
+
+    QGraphicsView* graphicsView = board.createQGraphicsView(nullptr);
+
     QtWidgetsProject w;
+    w.setCentralWidget(graphicsView);
     w.show();
-
-   twixt::Pylon pylon(2 , 2);
-   pylon.setColor(twixt::EColor::RED);
-
 
     return a.exec();
 }

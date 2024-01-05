@@ -412,3 +412,31 @@ twixt::EColor twixt::Board::hasWinningRoad()
         }  
     return EColor::NONE;
 }
+
+QGraphicsView* twixt::Board::createQGraphicsView(QWidget* parent)
+{
+    QGraphicsScene* scene = new QGraphicsScene(parent);
+   
+    for (uint16_t i{ 0 }; i < m_size; ++i) {
+        for (uint16_t j{ 0 }; j < m_size; ++j) {
+            QPointF position(j * 30, i * 30); // Adjust the position as needed
+
+            if (this->getPylon(i,j).has_value() ) 
+            {
+                twixt::EColor pylonColor = this->getPylon(i, j).value().getColor();
+                QBrush brush = (pylonColor == twixt::EColor::RED) ? QBrush(Qt::red) : QBrush(Qt::black);
+
+                QGraphicsEllipseItem* ellipse = scene->addEllipse(position.x(), position.y(), 20, 20, QPen(Qt::black), brush);
+            }
+            else {
+                // No pylon at this position, draw a white ellipse
+                QBrush brush(Qt::white);
+                QGraphicsEllipseItem* ellipse = scene->addEllipse(position.x(), position.y(), 20, 20, QPen(Qt::black), brush);
+            }
+        }
+    }
+    
+     QGraphicsView* view = new QGraphicsView(scene);
+    
+    return view;
+}
