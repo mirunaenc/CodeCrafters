@@ -22,10 +22,15 @@ namespace twixt {
         int evaluateMove(const Bridge& move);
         int potentialOpponentBridges(const Bridge& move);
 
-     /*   Bridge predictOpponentsMove();
+        Bridge predictOpponentsMove();
            
         Bridge getBestMove();
 
-        void giveHint();*/
+        void giveHint();
+
+        bool isGameCloseToEnd();
+
+        bool isPlayerCloseToEnd(EColor playerColor, const std::vector<std::optional<twixt::Pylon>>& pylons);
+
     };
 }

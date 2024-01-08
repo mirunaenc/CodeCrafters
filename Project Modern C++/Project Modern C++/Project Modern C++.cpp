@@ -6,48 +6,29 @@
 #include "bridge.h"
 #include "board.h"
 #include "player.h"
+#include "RecommenderSystem.h"
 
-int main()
-{
-   
-   twixt::Game twixtGame;
-   twixtGame.run();
+int main() {
+    // Inițializare Game și RecommenderSystem.
+    twixt::Game game; // Presupunem că aveți un constructor adecvat.
+    twixt::RecommenderSystem recommender(game);
 
+    // Testarea generatePossibleBridges.
+    auto possibleBridges = recommender.generatePossibleBridges();
+    std::cout << "Numărul de bridge-uri posibile: " << possibleBridges.size() << std::endl;
 
-	//twixt::Board board(10);
-	//twixt::Pylon pylon1{ 1,1 };
-	//twixt::Pylon pylon2{ 2,3 };
+    // Dacă lista este prea lungă, puteți afișa doar un număr limitat de bridge-uri sau detalii specifice.
 
-	//twixt::Pylon pylon3{ 2,1 }; //  intersect
- //   twixt::Pylon pylon4{ 1,3 };
-	//// 
-	//// 
-	////twixt::Pylon pylon3{ 0,1 }; // dont intersect
-	////twixt::Pylon pylon4{ 1,3 };
+    // Testarea evaluateMove (presupunând că aveți un bridge pentru test).
+    // twixt::Bridge testBridge = ...; // Inițializați un bridge de test.
+    // int score = recommender.evaluateMove(testBridge);
+    // std::cout << "Scorul pentru bridge-ul testat: " << score << std::endl;
 
-	////twixt::Pylon pylon3{ 2,1 };   // dont intersect
- //  // twixt::Pylon pylon4{ 0,2 };  
-	//
-	////twixt::Pylon pylon3{ 3,0 };  
-	////twixt::Pylon pylon4{ 4,2 };  // dont intersect
+    // Testarea isGameCloseToEnd.
+    bool isCloseToEnd = recommender.isGameCloseToEnd();
+    std::cout << "Jocul este aproape de final: " << (isCloseToEnd ? "Da" : "Nu") << std::endl;
 
+    // Continuați cu alte teste pentru diferite metode ale sistemului de recomandare.
 
-	////twixt::Pylon pylon3{ 2,1 }; // dont intersect 
-	////twixt::Pylon pylon4{ 0,0 }; 
-
-	/*twixt::Pylon p1(1, 1);
-	twixt::Pylon p2(3, 2);
-	twixt::Pylon p3(1, 2);
-	twixt::Pylon p4(3, 1);
-	
-	twixt::Bridge b1(p1, p2);
-	twixt::Bridge b2(p3, p4);
-
-	if (b1.intersectsWith(b2))
-		std::cout << "Intersects";
-	else
-		std::cout << "Doesn't intersect";*/
-
- 
-	return 0;
+    return 0;
 }
