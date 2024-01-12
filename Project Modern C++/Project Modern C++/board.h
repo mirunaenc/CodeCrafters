@@ -12,7 +12,8 @@
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
-#include <QWidget>
+#include <QWidget> 
+ 
 
 namespace twixt {
 	class Board {
@@ -57,6 +58,6 @@ namespace twixt {
 
 		QGraphicsView* createQGraphicsView(QWidget* parent);
 		void placePylon(uint16_t line, uint16_t column, EColor color);
-		void printBridges();
+	    void printBridges();
 	};
 }
