@@ -56,7 +56,7 @@ namespace twixt {
 	
 
 		QGraphicsView* createQGraphicsView(QWidget* parent);
-	
-	
+		void placePylon(uint16_t line, uint16_t column, EColor color);
+		void printBridges();
 	};
 }

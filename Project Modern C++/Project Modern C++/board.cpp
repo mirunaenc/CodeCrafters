@@ -165,13 +165,12 @@ const std::vector<twixt::Bridge>& twixt::Board::getBridges() const
 
 bool twixt::Board::isValidBridge(const Pylon& start, const Pylon& end) {
     int difLine{ abs(start.getLine() - end.getLine()) };
-    int difCol{ abs(end.getColumn() - end.getColumn()) };
+    int difCol{ abs(start.getColumn() - end.getColumn()) };
 
     if (difLine > 2 || difCol > 2 || difLine == 0 || difCol == 0)
         return false;
-    if (difLine == 1 && difCol != 2)
-        return false;
-    if (difLine == 2 && difCol != 1)
+
+    if (start.getColor() != end.getColor())
         return false;
 
     for (const Bridge& bridge : m_boardBridges) {
@@ -181,7 +180,10 @@ bool twixt::Board::isValidBridge(const Pylon& start, const Pylon& end) {
         }
     }
 
-    return true;
+    if (difLine == 1 && difCol == 2 || (difLine == 2 && difCol == 1))
+        return true;
+
+    return false;
 }
 
 void twixt::Board::resetBoard() {
@@ -250,12 +252,12 @@ bool twixt::Board::canPlaceBridge(twixt::Pylon& p1, twixt::Pylon& p2)
         return false;
     }
 
-    Bridge newBridge = twixt::Bridge(p1, p2);
+  /*  Bridge newBridge = twixt::Bridge(p1, p2);
 
     for (const auto& existingBridge : m_boardBridges) {
         if (newBridge.intersectsWith(existingBridge))
             return false;
-    }
+    }*/
 
     return true;
 }
@@ -280,17 +282,16 @@ bool twixt::Board::isPylonOccupied(const Pylon& p)
 
 void twixt::Board::createBridge(twixt::Pylon& pilon)
 {
-    for(const auto& p : m_boardPylons) {
-        if (p.has_value()) {
-            twixt::Pylon actualPylon = p.value();
-            if(existsBridgeBetweenPylons(pilon, actualPylon))
-                return;
+    for (auto& optionalPylon : m_boardPylons) {
+        if (optionalPylon.has_value()) {
+            twixt::Pylon& actualPylon = optionalPylon.value();
+            /* if (existsBridgeBetweenPylons(pilon, actualPylon))
+                 return;*/
 
-            if (canPlaceBridge(pilon, actualPylon)) {
-                Bridge newBridge = twixt::Bridge(pilon, actualPylon);
-                addBridge(newBridge);
+            if (canPlaceBridge(pilon, actualPylon)) {              
+                m_boardBridges.emplace_back(pilon, actualPylon);
             }
-        }   
+        }
     }
 }
 
@@ -439,4 +440,34 @@ QGraphicsView* twixt::Board::createQGraphicsView(QWidget* parent)
      QGraphicsView* view = new QGraphicsView(scene);
     
     return view;
+}
+
+void twixt::Board::placePylon(uint16_t line, uint16_t column, EColor color)
+{
+    Pylon pylon = Pylon(line, column);
+    pylon.setColor(color);
+
+    std::optional<Pylon> optionalPylon = pylon;
+
+    addPylon(line, column, optionalPylon);
+    if (optionalPylon.has_value())
+        createBridge(this->m_boardPylons[line * m_size + column].value());
+
+    this->printBridges();
+}
+
+void twixt::Board::printBridges()
+{
+    std::cout << "Bridges: ";
+    //i want to print bridges as :B1( (0,1)-(2,2) ),color:red ; B2( (2,3)-(3,5)),color:black 
+    for (int i = 0; i < m_boardBridges.size(); i++)
+    {
+        std::cout << "B" << i + 1 << "( (" << m_boardBridges[i].getStart().getLine()
+            << "," << m_boardBridges[i].getStart().getColumn() << ")-(" << m_boardBridges[i].getEnd().getLine() << "," << m_boardBridges[i].getEnd().getColumn() << ")),color:";
+        if (m_boardBridges[i].getStart().getColor() == EColor::RED)
+            std::cout << "red";
+        else
+            std::cout << "black";
+        std::cout << "\n";
+    }
 }

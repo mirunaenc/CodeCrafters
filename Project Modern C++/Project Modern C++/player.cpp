@@ -72,15 +72,7 @@ void twixt::Player::setGameBoard(const Board& gameBoard)
 
 void twixt::Player::placePylon(uint16_t line, uint16_t column)
 {
-	Pylon* pylon = new Pylon(line, column);
-	pylon->setColor(m_color);
-
-	std::optional<Pylon> optionalPylon = *pylon;
-
-	m_gameBoard.addPylon(line, column, optionalPylon);
-	if(optionalPylon.has_value())
-		m_gameBoard.createBridge(optionalPylon.value());
-
+	m_gameBoard.placePylon(line, column, m_color);
 	setNrOfAvailablePylons(m_nrOfAvailablePylons - 1);
 }
 
