@@ -16,4 +16,8 @@ private:
 public:
     explicit EllipseWidget(QWidget* parent = nullptr) : QWidget(parent), color(Qt::white) {}
   
+    void setColor(const QColor& newColor);
+
+    void mousePressEvent(QMouseEvent* event);
+
 };
