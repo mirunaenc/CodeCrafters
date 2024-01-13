@@ -20,6 +20,9 @@ public:
     QtWidgetsProject(QWidget *parent = nullptr);
     ~QtWidgetsProject();
     void setupUi();
+    void newGame();
+    void clearLayout(QLayout* layout);
+    void paintEvent(QPaintEvent* event);
 
 private:
     QGridLayout* layout;

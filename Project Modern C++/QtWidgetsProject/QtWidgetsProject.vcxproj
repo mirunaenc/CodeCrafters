@@ -37,7 +37,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>6.6.1_msvc2019_64</QtInstall>
+    <QtInstall>6.2.4_msvc2019_64</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
@@ -102,6 +102,7 @@
     <QtRcc Include="QtWidgetsProject.qrc" />
     <QtUic Include="QtWidgetsProject.ui" />
     <QtMoc Include="QtWidgetsProject.h" />
+    <ClCompile Include="EllipseWidget.cpp" />
     <ClCompile Include="QtWidgetsProject.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -109,6 +110,9 @@
     <ProjectReference Include="..\Project Modern C++\Project Modern C++.vcxproj">
       <Project>{f3037753-579e-4ca3-af33-b1347ecfe296}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="EllipseWidget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
