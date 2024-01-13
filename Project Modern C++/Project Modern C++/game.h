@@ -29,7 +29,7 @@ namespace twixt {
 		Game(const Game& game);
 		Game(Game&& game) noexcept;
 
-		Board getGameBoard() const;
+		const Board& getGameBoard() const;
 		void setGameBoard(const Board& gameBoard);
 
 		Player getPlayer1() const;
@@ -49,6 +49,7 @@ namespace twixt {
 		void displayGameBoard() const;
 		void displayCurrentPlayer() const;
 
+		Player* getCurrentPlayer() const;
 		
 	};
 

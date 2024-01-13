@@ -70,7 +70,7 @@ namespace twixt {
 		m_opponentPlayer{ &m_player2 }
 	{}
 
-	Board Game::getGameBoard() const
+	const Board& Game::getGameBoard() const
 	{
 		return m_gameBoard;
 	}
@@ -384,6 +384,11 @@ namespace twixt {
 		else {
 			std::cout << "No color!\n";
 		}
+	}
+
+	Player* Game::getCurrentPlayer() const
+	{
+		return m_currentPlayer;
 	}
 
 }
