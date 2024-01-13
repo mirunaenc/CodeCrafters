@@ -201,26 +201,25 @@ namespace twixt {
 
 	}
 
-
 	void Game::displayGameBoard() const /// still in process
 	{
-		
-		std::system("cls"); 
+
+		std::system("cls");
 
 		const auto& pylons = m_gameBoard.getPylons();
-		/*const auto& bridges = m_gameBoard.getBridges();*/
+		const auto& bridges = m_gameBoard.getBridges();
 		const uint16_t size = m_gameBoard.getSize();
 
-		for (uint16_t i = 0; i < size; ++i) {
+		/*for (uint16_t i = 0; i < size; ++i) {
 			for (uint16_t j = 0; j < size; ++j) {
 				bool pylonExists = false;
-				char displayChar = '-'; 
+				char displayChar = '-';
 
 				for (const auto& pylon : pylons) {
 					if (pylon.has_value() && pylon->getLine() == i && pylon->getColumn() == j) {
 						pylonExists = true;
 						if (pylon->getColor() == EColor::RED) { /// must to resolve this
-							displayChar = 'R'; 
+							displayChar = 'R';
 						}
 						else {
 							displayChar = 'B';
@@ -233,7 +232,130 @@ namespace twixt {
 			}
 			std::cout << '\n';
 		}
-	
+	*/
+		std::vector<std::vector<char>> gameMatrix(size * 2 - 1, std::vector<char>(size * 2 - 1, '-'));
+		for (size_t i = 0; i < size * 2 - 1; ++i) {
+			for (size_t j = 0; j < size * 2 - 1; ++j)
+			{
+				if (i % 2 == 0 && j % 2 == 0) {
+					gameMatrix[i][j] = '-';
+				}
+				else {
+					gameMatrix[i][j] = ' ';
+				}
+			}
+		}
+		// Adaugă caracterele pentru pioni
+		for (const auto& pylon : pylons) {
+			if (pylon.has_value()) {
+				uint16_t pylonX = pylon->getLine() * 2;
+				uint16_t pylonY = pylon->getColumn() * 2;
+				if (pylon->getColor() == EColor::RED) {
+					gameMatrix[pylonX][pylonY] = 'R';
+				}
+				else {
+					gameMatrix[pylonX][pylonY] = 'B';
+				}
+			}
+		}
+
+		// Adaugă caracterele pentru punți
+		for (const auto& bridge : bridges) {
+			uint16_t startX = bridge.getCoordStart().first * 2;
+			uint16_t startY = bridge.getCoordStart().second * 2;
+			uint16_t endX = bridge.getCoordEnd().first * 2;
+			uint16_t endY = bridge.getCoordEnd().second * 2;
+
+			int difLine{ abs(startX / 2 - endX / 2) };
+			int difCol{ abs(startY / 2 - endY / 2) };
+
+			if (startX > endX && startY > endY && difLine == 2 && difCol == 1) {
+				gameMatrix[endX][endY + 1] = '\\';
+				gameMatrix[endX + 1][endY + 1] = '|';
+				gameMatrix[endX + 2][endY + 1] = '|';
+				gameMatrix[endX + 3][endY + 1] = '|';
+				gameMatrix[endX + 4][endY + 1] = '\\';
+			}
+			else if (endX > startX && endY > startY && difLine == 2 && difCol == 1) {
+				gameMatrix[startX][startY + 1] = '\\';
+				gameMatrix[startX + 1][startY + 1] = '|';
+				gameMatrix[startX + 2][startY + 1] = '|';
+				gameMatrix[startX + 3][startY + 1] = '|';
+				gameMatrix[startX + 4][startY + 1] = '\\';
+			}
+			else if (startX > endX && startY < endY && difLine == 2 && difCol == 1) {
+				gameMatrix[endX][endY - 1] = '/';
+				gameMatrix[endX + 1][endY - 1] = '|';
+				gameMatrix[endX + 2][endY - 1] = '|';
+				gameMatrix[endX + 3][endY - 1] = '|';
+				gameMatrix[endX + 4][endY - 1] = '/';
+			}
+			else if (startX < endX && startY > endY && difLine == 2 && difCol == 1) {
+				gameMatrix[startX][startY - 1] = '/';
+				gameMatrix[startX + 1][startY - 1] = '|';
+				gameMatrix[startX + 2][startY - 1] = '|';
+				gameMatrix[startX + 3][startY - 1] = '|';
+				gameMatrix[startX + 4][startY - 1] = '/';
+			}
+			else if (startX > endX && startY > endY && difCol == 2 && difLine == 1) {
+				gameMatrix[endX + 1][endY] = '\\';
+				gameMatrix[endX + 1][endY + 1] = ' -';
+				gameMatrix[endX + 1][endY + 2] = ' -';
+				gameMatrix[endX + 1][endY + 3] = ' -';
+				gameMatrix[endX + 1][endY + 4] = '\\';
+			}
+			else if (startX < endX && startY < endY && difCol == 2 && difLine == 1) {
+				gameMatrix[startX + 1][startY] = '\\';
+				gameMatrix[startX + 1][startY + 1] = ' -';
+				gameMatrix[startX + 1][startY + 2] = ' -';
+				gameMatrix[startX + 1][startY + 3] = ' -';
+				gameMatrix[startX + 1][startY + 4] = '\\';
+			}
+			else if (startX > endX && startY < endY && difCol == 2 && difLine == 1) {
+				gameMatrix[endX + 1][endY] = '/';
+				gameMatrix[endX + 1][endY - 1] = ' -';
+				gameMatrix[endX + 1][endY - 2] = ' -';
+				gameMatrix[endX + 1][endY - 3] = ' -';
+				gameMatrix[endX + 1][endY - 4] = '/';
+			}
+			else if (startX < endX && startY > endY && difCol == 2 && difLine == 1)
+			{
+				gameMatrix[startX + 1][startY] = '/';
+				gameMatrix[startX + 1][startY - 1] = ' -';
+				gameMatrix[startX + 1][startY - 2] = ' -';
+				gameMatrix[startX + 1][startY - 3] = ' -';
+				gameMatrix[startX + 1][startY - 4] = '/';
+			}
+		}
+
+
+
+		const std::string redColor = "\033[31m";
+		const std::string blueColor = "\033[34m";
+		const std::string resetColor = "\033[0m";
+
+		// Afișează starea jocului cu pioni și punți
+		for (uint16_t i = 0; i < size * 2 - 1; ++i) {
+			for (uint16_t j = 0; j < size * 2 - 1; ++j) {
+				if (i == 1 || i == size * 2 - 3) {
+					std::cout << redColor << "- " << resetColor;
+				}
+				else if (j == 1 || j == size * 2 - 3) {
+					std::cout << blueColor << "|" << resetColor;
+				}
+				else if (gameMatrix[i][j] == 'R') {
+					std::cout << redColor << gameMatrix[i][j] << " " << resetColor;
+				}
+				else if (gameMatrix[i][j] == 'B') {
+					std::cout << blueColor << gameMatrix[i][j] << " " << resetColor;
+				}
+				else {
+					std::cout << gameMatrix[i][j] << ' ';
+				}
+
+			}
+			std::cout << '\n';
+		}
 
 		if (m_currentPlayer != nullptr) {
 			std::cout << "Turn of : ";
