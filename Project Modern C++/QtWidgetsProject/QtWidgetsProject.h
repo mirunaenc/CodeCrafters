@@ -1,7 +1,16 @@
 #pragma once
+#include <QMainWindow>
+#include <QGridLayout>
+#include <QLabel>
+#include <QApplication>
+#include <QWidget>
+#include <QPalette>
+#include <QPainter>
+#include <qpen.h>
+#include <QPushButton>
+#include "game.h"
+#include "EllipseWidget.h"
 
-#include <QtWidgets/QMainWindow>
-#include "ui_QtWidgetsProject.h"
 
 class QtWidgetsProject : public QMainWindow
 {
@@ -10,7 +19,9 @@ class QtWidgetsProject : public QMainWindow
 public:
     QtWidgetsProject(QWidget *parent = nullptr);
     ~QtWidgetsProject();
+    void setupUi();
 
 private:
-    Ui::QtWidgetsProjectClass ui;
+    QGridLayout* layout;
+    twixt::Game* game;
 };
