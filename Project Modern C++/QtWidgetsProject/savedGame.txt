@@ -1,0 +1,12 @@
+=== Board State ===
+10
+0 2 0
+3 2 1
+=== Player 1 State ===
+19
+40
+0
+=== Player 2 State ===
+19
+40
+1

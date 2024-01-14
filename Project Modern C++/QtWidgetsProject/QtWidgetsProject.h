@@ -8,7 +8,9 @@
 #include <QPainter>
 #include <qpen.h>
 #include <QPushButton>
+#include <QSpinBox>
 #include "game.h"
+#include "GameFileManager.h"
 #include "EllipseWidget.h"
 #include "WinnerDialog.h"
 
@@ -27,8 +29,15 @@ public:
     void onEllipseClick();
     void drawBridges(QPainter& painter);
     void checkWinner();
+    void onSaveClick();
 
 private:
     QGridLayout* layout;
     twixt::Game* game;
+    QLabel* boardSizeLabel;
+    QLabel* pylonsLabel;
+    QLabel* bridgesLabel;
+    QSpinBox* boardSizeSpinBox;
+    QSpinBox* pylonsSpinBox;
+    QSpinBox* bridgesSpinBox;
 };

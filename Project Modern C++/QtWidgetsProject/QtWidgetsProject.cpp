@@ -18,13 +18,41 @@ QtWidgetsProject::~QtWidgetsProject()
 
 void QtWidgetsProject::setupUi()
 {
+    boardSizeLabel = new QLabel("Board Size:", this);
+    layout->addWidget(boardSizeLabel, 2, 0);
+
+    boardSizeSpinBox = new QSpinBox(this);
+    layout->addWidget(boardSizeSpinBox, 2, 1);
+
+    pylonsLabel = new QLabel("Pylons per Player:", this);
+    layout->addWidget(pylonsLabel, 3, 0);
+
+    pylonsSpinBox = new QSpinBox(this);
+    layout->addWidget(pylonsSpinBox, 3, 1);
+
+    bridgesLabel = new QLabel("Bridges per Player:", this);
+    layout->addWidget(bridgesLabel, 4, 0);
+
+    bridgesSpinBox = new QSpinBox(this);
+    layout->addWidget(bridgesSpinBox, 4, 1);
+
     QPushButton* newGameButton = new QPushButton("New Game", this);
     connect(newGameButton, &QPushButton::clicked, this, &QtWidgetsProject::newGame);
-    layout->addWidget(newGameButton, 0, 0);
+    layout->addWidget(newGameButton, 5, 0);
+
+
 }
 
 void QtWidgetsProject::newGame()
 {
+
+    uint16_t boardSize = static_cast<uint16_t>(boardSizeSpinBox->value());
+    uint16_t nrPylons = static_cast<uint16_t>(pylonsSpinBox->value());
+    uint16_t nrBridges = static_cast<uint16_t>(bridgesSpinBox->value());
+
+    delete game;
+    game = new twixt::Game(boardSize, nrPylons, nrBridges);
+
     clearLayout(layout);
     update();
     QPainter painter(this);
@@ -45,6 +73,11 @@ void QtWidgetsProject::newGame()
         }
     }
     
+    QPushButton* saveButton = new QPushButton("Save");
+    connect(saveButton, &QPushButton::clicked, this, &QtWidgetsProject::onSaveClick);
+    saveButton->setFixedSize(30 * game->getGameBoard().getSize(), 30);
+    layout->addWidget(saveButton, game->getGameBoard().getSize(), 0, 1, game->getGameBoard().getSize(), Qt::AlignHCenter);
+
 
 }
 
@@ -126,4 +159,9 @@ void QtWidgetsProject::checkWinner()
         QCoreApplication::processEvents();
         update();
     }
+}
+
+void QtWidgetsProject::onSaveClick()
+{
+    twixt::GameFileManager::saveGame(*game);
 }

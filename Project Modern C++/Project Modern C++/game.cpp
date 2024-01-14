@@ -21,6 +21,15 @@ namespace twixt {
 		m_opponentPlayer{ &m_player2 }
 	{}
 
+	Game::Game(uint16_t boardSize, uint16_t nrOfAvailablePylons, uint16_t nrOfAvailableBridges)
+		: m_gameBoard{ boardSize },
+		m_player1{ nrOfAvailablePylons, nrOfAvailableBridges, EColor::RED, m_gameBoard },
+		m_player2{ nrOfAvailablePylons, nrOfAvailableBridges, EColor::BLACK, m_gameBoard },
+		m_currentPlayer{ &m_player1 },
+		m_opponentPlayer{ &m_player2 }
+	{
+	}
+
 	Game::~Game()
 	{
 	}

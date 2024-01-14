@@ -23,6 +23,7 @@ namespace twixt {
 	public:
 		Game(Board& GameBoard, Player player1, Player player2);
 		Game();
+		Game(uint16_t boardSize, uint16_t nrOfAvailablePylons, uint16_t nrOfAvailableBridges);
 		~Game();
 
 		Game& operator=(const Game& game);
