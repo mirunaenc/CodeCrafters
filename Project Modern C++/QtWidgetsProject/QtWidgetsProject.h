@@ -23,6 +23,7 @@ public:
     void newGame();
     void clearLayout(QLayout* layout);
     void paintEvent(QPaintEvent* event);
+    void onEllipseClick();
 
 private:
     QGridLayout* layout;

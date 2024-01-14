@@ -62,3 +62,30 @@ void QtWidgetsProject::paintEvent(QPaintEvent* event)
     QPainter painter(this);
     painter.eraseRect(rect());
 }
+
+void QtWidgetsProject::onEllipseClick()
+{
+    EllipseWidget* clickedCircle = qobject_cast<EllipseWidget*>(sender());
+
+    int row = clickedCircle->property("row").toInt();
+    int col = clickedCircle->property("column").toInt();
+
+    twixt::EColor color = game->getCurrentPlayer()->getColor();
+
+    QColor newColor = (color == twixt::EColor::RED) ? Qt::red : Qt::black;
+    try
+    {
+        game->getCurrentPlayer()->placePylon(row, col);
+
+        clickedCircle->setColor(newColor);
+    }
+    catch (std::invalid_argument& exception)
+    {
+        std::cerr << exception.what() << "\n";
+    }
+
+    //provizoriu , trebuie sa fac swap la playeri,trebuie inlocuit cu end turn button
+    game->swapPlayers();
+
+    update();
+}
