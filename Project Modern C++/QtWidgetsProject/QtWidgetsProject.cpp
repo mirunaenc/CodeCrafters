@@ -30,15 +30,16 @@ void QtWidgetsProject::newGame()
     QPainter painter(this);
 
     painter.setRenderHint(QPainter::Antialiasing, true);
-    for (int i = 0; i < game->getGameBoard().getSize() /*g->GetWidth()*/; i++)
+    for (int i = 0; i < game->getGameBoard().getSize(); i++)
     {
-        for (int j = 0; j < game->getGameBoard().getSize() /*g->GetWidth()*/; j++)
+        for (int j = 0; j < game->getGameBoard().getSize(); j++)
         {
             EllipseWidget* ellipseWidget = new EllipseWidget();
             ellipseWidget->setFixedSize(30, 30);
             ellipseWidget->setColor(Qt::white);
             ellipseWidget->setProperty("row", i);
             ellipseWidget->setProperty("column", j);
+            connect(ellipseWidget, &EllipseWidget::clicked, this, &QtWidgetsProject::onEllipseClick);
             
             layout->addWidget(ellipseWidget, i, j);
         }
@@ -61,6 +62,7 @@ void QtWidgetsProject::paintEvent(QPaintEvent* event)
     Q_UNUSED(event);
     QPainter painter(this);
     painter.eraseRect(rect());
+    drawBridges(painter);
 }
 
 void QtWidgetsProject::onEllipseClick()
@@ -84,6 +86,7 @@ void QtWidgetsProject::onEllipseClick()
         std::cerr << exception.what() << "\n";
     }
 
+    checkWinner();
     //provizoriu , trebuie sa fac swap la playeri,trebuie inlocuit cu end turn button
     game->swapPlayers();
 
