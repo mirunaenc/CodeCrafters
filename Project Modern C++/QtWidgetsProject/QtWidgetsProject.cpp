@@ -136,8 +136,7 @@ void QtWidgetsProject::onEllipseClick()
     }
 
     checkWinner();
-    //provizoriu , trebuie sa fac swap la playeri,trebuie inlocuit cu end turn button
-   // game->swapPlayers();
+    game->swapPlayers();
 
     update();
 }
