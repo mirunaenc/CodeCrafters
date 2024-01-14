@@ -157,6 +157,7 @@
     <ClInclude Include="player.h" />
     <ClInclude Include="pylon.h" />
     <ClInclude Include="utility.h" />
+    <ClInclude Include="WinnerDialog.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="savedGame.txt" />
