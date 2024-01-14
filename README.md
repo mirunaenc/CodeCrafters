@@ -1,5 +1,7 @@
 # CodeCrafters
 
+Video link: https://youtu.be/UInxEO8EYwk
+
 Members - Username: 
 
 Encună Miruna - mirunaenc
