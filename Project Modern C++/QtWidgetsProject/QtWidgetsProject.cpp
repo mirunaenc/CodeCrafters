@@ -102,8 +102,8 @@ void QtWidgetsProject::drawBridges(QPainter& painter)
         else
             painter.setPen(QPen(Qt::black, 3, Qt::SolidLine));
 
-        CircleWidget* startCircle = qobject_cast<CircleWidget>(layout->itemAtPosition(pStart.getLine(), pStart.getColumn() / pStart.GetPosition().first, pStart.GetPosition().second / )->widget());
-        CircleWidget endCircle = qobject_cast<CircleWidget>(layout->itemAtPosition(pEnd.getLine(), pEnd.getColumn() / pEnd.GetPosition().first, pEnd.GetPosition().second * / )->widget());
+        EllipseWidget* startCircle = qobject_cast<EllipseWidget*>(layout->itemAtPosition(pStart.getLine(), pStart.getColumn()  )->widget());
+        EllipseWidget* endCircle = qobject_cast<EllipseWidget*>(layout->itemAtPosition(pEnd.getLine(), pEnd.getColumn()  )->widget());
         QPoint startCenter = startCircle->mapToParent(startCircle->rect().center());
         QPoint endCenter = endCircle->mapToParent(endCircle->rect().center());
 

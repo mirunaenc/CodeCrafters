@@ -10,6 +10,7 @@
 #include <QPushButton>
 #include "game.h"
 #include "EllipseWidget.h"
+#include "WinnerDialog.h"
 
 
 class QtWidgetsProject : public QMainWindow
