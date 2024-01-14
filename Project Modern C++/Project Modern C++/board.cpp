@@ -458,7 +458,31 @@ void twixt::Board::placePylon(uint16_t line, uint16_t column, EColor color)
 
 void twixt::Board::placeBridge(uint16_t line1, uint16_t column1, uint16_t line2, uint16_t column2)
 {
-    
+    for (auto& optionalPylon : m_boardPylons)
+    {
+        for (auto& optionalPylon2 : m_boardPylons)
+        {
+            if (optionalPylon.has_value() && optionalPylon2.has_value())
+            {
+                if (optionalPylon.value() != optionalPylon2.value())
+                {
+                    twixt::Pylon& actualPylon = optionalPylon.value();
+                    twixt::Pylon& actualPylon2 = optionalPylon2.value();
+                    if (actualPylon.getLine() == line1 && actualPylon.getColumn() == column1 && actualPylon2.getLine() == line2 && actualPylon2.getColumn() == column2
+                        || actualPylon.getLine() == line2 && actualPylon.getColumn() == column2 && actualPylon2.getLine() == line1 && actualPylon2.getColumn() == column1)
+                    {
+                        if (canPlaceBridge(actualPylon, actualPylon2))
+                        {
+                            m_boardBridges.emplace_back(actualPylon, actualPylon2);
+                            return;
+                        }
+                    }
+
+                }
+
+            }
+        }
+    }
 }
 
 void twixt::Board::printBridges()
