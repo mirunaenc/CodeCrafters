@@ -25,6 +25,7 @@ public:
     void paintEvent(QPaintEvent* event);
     void onEllipseClick();
     void drawBridges(QPainter& painter);
+    void checkWinner();
 
 private:
     QGridLayout* layout;

@@ -111,3 +111,16 @@ void QtWidgetsProject::drawBridges(QPainter& painter)
     }
 
 }
+
+void QtWidgetsProject::checkWinner()
+{
+    if (game->checkWinCondition())
+    {
+        QColor winnerColor = (game->getCurrentPlayer()->getColor() == twixt::EColor::RED) ? Qt::red : Qt::black;
+        QString winnerMessage = (game->getCurrentPlayer()->getColor() == twixt::EColor::RED) ? "RED player won!" : "BLACK player won!";
+        WinnerDialog* winnerDialog = new WinnerDialog(winnerMessage, winnerColor, this);
+        winnerDialog->show();
+        QCoreApplication::processEvents();
+        update();
+    }
+}
