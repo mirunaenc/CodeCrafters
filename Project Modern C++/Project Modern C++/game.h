@@ -52,6 +52,7 @@ namespace twixt {
 		void displayCurrentPlayer() const;
 
 		Player* getCurrentPlayer() const;
+		Board* getBoardInstance();
 		
 	};
 

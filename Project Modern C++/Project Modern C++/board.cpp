@@ -500,3 +500,12 @@ void twixt::Board::printBridges()
         std::cout << "\n";
     }
 }
+
+void twixt::Board::removeBridgeByPositions(uint16_t line1, uint16_t column1, uint16_t line2, uint16_t column2)
+{
+    for (auto& bridge : m_boardBridges)
+    {
+        if(existsBridgeBetweenPylons(getPylon(line1, column1).value(), getPylon(line2, column2).value()))
+            removeBridge(bridge);
+    }
+}

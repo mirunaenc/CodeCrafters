@@ -60,5 +60,6 @@ namespace twixt {
 		void placePylon(uint16_t line, uint16_t column, EColor color);
 		void placeBridge(uint16_t line1, uint16_t column1, uint16_t line2, uint16_t column2);
 	    void printBridges();
+		void removeBridgeByPositions(uint16_t line1, uint16_t column1, uint16_t line2, uint16_t column2);
 	};
 }

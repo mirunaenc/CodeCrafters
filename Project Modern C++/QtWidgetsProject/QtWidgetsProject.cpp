@@ -18,23 +18,30 @@ QtWidgetsProject::~QtWidgetsProject()
 
 void QtWidgetsProject::setupUi()
 {
+    uint16_t initialBoardSize = 24;
+    uint16_t initialPylons = 50;
+    uint16_t initialBridges = 50;
+
     boardSizeLabel = new QLabel("Board Size:", this);
     layout->addWidget(boardSizeLabel, 2, 0);
 
     boardSizeSpinBox = new QSpinBox(this);
     layout->addWidget(boardSizeSpinBox, 2, 1);
+    boardSizeSpinBox->setValue(initialBoardSize);
 
     pylonsLabel = new QLabel("Pylons per Player:", this);
     layout->addWidget(pylonsLabel, 3, 0);
 
     pylonsSpinBox = new QSpinBox(this);
     layout->addWidget(pylonsSpinBox, 3, 1);
+    pylonsSpinBox->setValue(initialPylons);
 
     bridgesLabel = new QLabel("Bridges per Player:", this);
     layout->addWidget(bridgesLabel, 4, 0);
 
     bridgesSpinBox = new QSpinBox(this);
     layout->addWidget(bridgesSpinBox, 4, 1);
+    bridgesSpinBox->setValue(initialBridges);
 
     QPushButton* newGameButton = new QPushButton("New Game", this);
     connect(newGameButton, &QPushButton::clicked, this, &QtWidgetsProject::newGame);
@@ -78,6 +85,11 @@ void QtWidgetsProject::newGame()
     saveButton->setFixedSize(30 * game->getGameBoard().getSize(), 30);
     layout->addWidget(saveButton, game->getGameBoard().getSize(), 0, 1, game->getGameBoard().getSize(), Qt::AlignHCenter);
 
+    QPushButton* endTurnButton = new QPushButton("End Turn");
+    connect(endTurnButton, &QPushButton::clicked, this, &QtWidgetsProject::onEndTurnClick);
+    endTurnButton->setFixedSize(30 * game->getGameBoard().getSize(), 30);
+    layout->addWidget(endTurnButton, game->getGameBoard().getSize() + 1, 0, 1, game->getGameBoard().getSize(), Qt::AlignHCenter);
+
 
 }
 
@@ -105,6 +117,10 @@ void QtWidgetsProject::onEllipseClick()
     int row = clickedCircle->property("row").toInt();
     int col = clickedCircle->property("column").toInt();
 
+
+    if (game->getGameBoard().getPylon(row, col).has_value())
+        return;
+
     twixt::EColor color = game->getCurrentPlayer()->getColor();
 
     QColor newColor = (color == twixt::EColor::RED) ? Qt::red : Qt::black;
@@ -121,7 +137,7 @@ void QtWidgetsProject::onEllipseClick()
 
     checkWinner();
     //provizoriu , trebuie sa fac swap la playeri,trebuie inlocuit cu end turn button
-    game->swapPlayers();
+   // game->swapPlayers();
 
     update();
 }
@@ -164,4 +180,10 @@ void QtWidgetsProject::checkWinner()
 void QtWidgetsProject::onSaveClick()
 {
     twixt::GameFileManager::saveGame(*game);
+}
+
+void QtWidgetsProject::onEndTurnClick()
+{
+    game->swapPlayers();
+    update();
 }

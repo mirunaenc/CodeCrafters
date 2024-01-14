@@ -30,6 +30,7 @@ public:
     void drawBridges(QPainter& painter);
     void checkWinner();
     void onSaveClick();
+    void onEndTurnClick();
 
 private:
     QGridLayout* layout;

@@ -364,4 +364,9 @@ namespace twixt {
 		return m_currentPlayer;
 	}
 
+	Board* Game::getBoardInstance()
+	{
+		return &this->m_gameBoard;
+	}
+
 }
