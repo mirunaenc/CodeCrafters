@@ -107,7 +107,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <EnableModules>true</EnableModules>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
-      <AdditionalIncludeDirectories>D:\Facultate\6.6.1\msvc2019_64\include\QtWidgets;D:\Facultate\6.6.1\msvc2019_64\include\QtGui;D:\Facultate\6.6.1\msvc2019_64\include\QtCore;D:\Facultate\6.6.1\msvc2019_64\include\;C:\Qt2try\6.2.4\msvc2019_64\include\QtWidgets;C:\Qt2try\6.2.4\msvc2019_64\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\QT\6.6.1\msvc2019_64\include\;E:\QT\6.6.1\msvc2019_64\include\QtGui;E:\QT\6.6.1\msvc2019_64\include\QtWidgets;E:\QT\6.6.1\msvc2019_64\include\QtCore;D:\Facultate\6.6.1\msvc2019_64\include\QtWidgets;D:\Facultate\6.6.1\msvc2019_64\include\QtGui;D:\Facultate\6.6.1\msvc2019_64\include\QtCore;D:\Facultate\6.6.1\msvc2019_64\include\;C:\Qt2try\6.2.4\msvc2019_64\include\QtWidgets;C:\Qt2try\6.2.4\msvc2019_64\include\</AdditionalIncludeDirectories>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>

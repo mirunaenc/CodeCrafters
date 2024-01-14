@@ -240,7 +240,7 @@ bool twixt::Board::existsBridgeBetweenPylons(const twixt::Pylon& p1, const twixt
     return false;
 }
 
-bool twixt::Board::canPlaceBridge(twixt::Pylon& p1, twixt::Pylon& p2)
+bool twixt::Board::canPlaceBridge(const twixt::Pylon& p1, const twixt::Pylon& p2)
 {
     if(!isPositionInsideBoard(p1.getLine(), p1.getColumn()) || 
         !isPositionInsideBoard(p2.getLine(), p2.getColumn()) ||
@@ -454,6 +454,11 @@ void twixt::Board::placePylon(uint16_t line, uint16_t column, EColor color)
         createBridge(this->m_boardPylons[line * m_size + column].value());
 
     this->printBridges();
+}
+
+void twixt::Board::placeBridge(uint16_t line1, uint16_t column1, uint16_t line2, uint16_t column2)
+{
+    
 }
 
 void twixt::Board::printBridges()

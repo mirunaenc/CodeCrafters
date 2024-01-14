@@ -46,7 +46,7 @@ namespace twixt {
 		bool canPlaceLargePylon(const LargePylon& pylon);
 		bool existsBridgeBetweenPylons(const Pylon& p1, const Pylon& p2);
 		bool isPylonOccupied(const Pylon& p);
-		bool canPlaceBridge(Pylon& p1, Pylon& p2);
+		bool canPlaceBridge(const Pylon& p1, const Pylon& p2);
 		void createBridge(Pylon& pilon);
 
 		void saveBoardState(std::ofstream& file) const;
@@ -58,6 +58,7 @@ namespace twixt {
 
 		QGraphicsView* createQGraphicsView(QWidget* parent);
 		void placePylon(uint16_t line, uint16_t column, EColor color);
+		void placeBridge(uint16_t line1, uint16_t column1, uint16_t line2, uint16_t column2);
 	    void printBridges();
 	};
 }
