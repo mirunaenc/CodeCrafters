@@ -102,13 +102,6 @@ namespace twixt {
 
 	void Game::playTurn()
 	{
-		if (checkWinCondition()) {
-			std::cout << "The game has ended. We have a winner!" << std::endl;
-			std::cout << "The winner is: " << std::endl;
-			displayCurrentPlayer();
-			return;
-		}
-
 		m_currentPlayer->makeMove(); 
 
 		if (checkWinCondition()) {

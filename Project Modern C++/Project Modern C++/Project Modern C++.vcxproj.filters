@@ -39,9 +39,6 @@
     <ClCompile Include="LargePylon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utility.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameFileManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -145,7 +145,6 @@
     <ClCompile Include="pylon.cpp" />
     <ClCompile Include="RecommenderSystem.cpp" />
     <ClCompile Include="RecommenderSystem.h" />
-    <ClCompile Include="utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="board.h" />
