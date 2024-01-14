@@ -17,6 +17,7 @@ namespace twixt {
 		Player* m_currentPlayer = nullptr;
 		Player* m_opponentPlayer = nullptr;
 
+
 		friend class GameFileManager;
 
 	public:

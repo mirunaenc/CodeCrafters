@@ -94,7 +94,6 @@ void QtWidgetsProject::drawBridges(QPainter& painter)
 {
     for (const auto& bridge : game->getGameBoard().getBridges())
     {
-
         twixt::Pylon pStart = bridge.getStart();
         twixt::Pylon pEnd = bridge.getEnd();
 

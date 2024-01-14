@@ -210,35 +210,16 @@ namespace twixt {
 		const auto& bridges = m_gameBoard.getBridges();
 		const uint16_t size = m_gameBoard.getSize();
 
-		/*for (uint16_t i = 0; i < size; ++i) {
-			for (uint16_t j = 0; j < size; ++j) {
-				bool pylonExists = false;
-				char displayChar = '-';
+		auto isCorner = [](size_t i, size_t j, int size) {
+			return ((i == 0 && j == 0) || (i == 0 && j == size - 1) || (i == size - 1 && j == size - 1) || (j == 0 && i == size - 1));
+			};
 
-				for (const auto& pylon : pylons) {
-					if (pylon.has_value() && pylon->getLine() == i && pylon->getColumn() == j) {
-						pylonExists = true;
-						if (pylon->getColor() == EColor::RED) { /// must to resolve this
-							displayChar = 'R';
-						}
-						else {
-							displayChar = 'B';
-						}
-						break;
-					}
-				}
-
-				std::cout << displayChar << ' ';
-			}
-			std::cout << '\n';
-		}
-	*/
 		std::vector<std::vector<char>> gameMatrix(size * 2 - 1, std::vector<char>(size * 2 - 1, '-'));
-		for (size_t i = 0; i < size * 2 - 1; ++i) {
-			for (size_t j = 0; j < size * 2 - 1; ++j)
+		for (size_t i{ 0 }; i < size * 2 - 1; ++i) {
+			for (size_t j{ 0 }; j < size * 2 - 1; ++j)
 			{
-				if (i % 2 == 0 && j % 2 == 0) {
-					gameMatrix[i][j] = '-';
+				if (i % 2 == 0 && j % 2 == 0 && !isCorner(i, j, size * 2 - 1)) {
+					gameMatrix[i][j] = '*';
 				}
 				else {
 					gameMatrix[i][j] = ' ';
@@ -335,8 +316,8 @@ namespace twixt {
 		const std::string resetColor = "\033[0m";
 
 		// Afișează starea jocului cu pioni și punți
-		for (uint16_t i = 0; i < size * 2 - 1; ++i) {
-			for (uint16_t j = 0; j < size * 2 - 1; ++j) {
+		for (uint16_t i{ 0 }; i < size * 2 - 1; ++i) {
+			for (uint16_t j{ 0 }; j < size * 2 - 1; ++j) {
 				if (i == 1 || i == size * 2 - 3) {
 					std::cout << redColor << "- " << resetColor;
 				}
@@ -357,18 +338,8 @@ namespace twixt {
 			std::cout << '\n';
 		}
 
-		if (m_currentPlayer != nullptr) {
-			std::cout << "Turn of : ";
-			if (m_currentPlayer == &m_player1) {
-				std::cout << "Player RED\n";
-			}
-			else {
-				std::cout << "Player BLACK\n";
-			}
-		}
-		else {
-			std::cout << "No player's turn!\n";
-		}
+		std::cout << "Turn of : ";
+		displayCurrentPlayer();
 	}
 
 	void Game::displayCurrentPlayer() const
